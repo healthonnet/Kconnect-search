@@ -3,6 +3,8 @@ Kconnect-search
 
 Kconnect-search engine front-end
 
+[![Dependency Status](https://gemnasium.com/badges/github.com/healthonnet/Kconnect-search.svg)](https://gemnasium.com/github.com/healthonnet/Kconnect-search)
+
 ## Install
 
 ```
