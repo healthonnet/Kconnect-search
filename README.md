@@ -1,7 +1,7 @@
-WEB-APP-2017
-============
+Kconnect-search
+===============
 
-2017 hon-search web app
+Kconnect-search engine front-end
 
 ## Install
 
