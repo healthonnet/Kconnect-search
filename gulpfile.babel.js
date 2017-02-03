@@ -10,6 +10,7 @@ import historyApiFallback from 'connect-history-api-fallback';
 
 const $ = gulpLoadPlugins();
 const DEST = 'dist';
+const PORT = process.env.PORT || 3000;
 browserSync.create();
 
 /**
@@ -56,7 +57,7 @@ gulp.task('fonts', () => {
  * Task images
  * Apply imagemin and move it to DEST
  */
-gulp.task('images', () => {
+gulp.task('images', ['icon'], () => {
   return gulp.src('src/assets/images/**/*')
     .pipe($.if($.if.isFile, $.cache($.imagemin({
       progressive: true,
@@ -79,7 +80,7 @@ gulp.task('flags', () => {
  * Task styles
  * Apply scss transformation to css
  */
-gulp.task('styles', () => {
+gulp.task('styles', ['images', 'flags'], () => {
   return gulp.src('src/scss/*.scss')
     .pipe($.sass.sync({
       outputStyle: 'expanded',
@@ -93,7 +94,7 @@ gulp.task('styles', () => {
  * Task html
  * Apply uglify, minify to src
  */
-gulp.task('html', ['styles'], () => {
+gulp.task('html', ['bower', 'styles', 'lang'], () => {
   if (process.env.NODE_ENV === 'production') {
     return gulp.src('src/**/*.html')
       .pipe($.useref())
@@ -184,11 +185,7 @@ gulp.task('serve', ['html'], () => {
  * Task test
  * Build the project and test for it's consistency
  */
-gulp.task('test', () => {
-  return $.runSequence(
-    'jshint',
-    'jscs');
-});
+gulp.task('test', ['jshint', 'jscs']);
 
 /**
  * Task reload
@@ -199,17 +196,20 @@ gulp.task('reload', ['default'], () => {
 });
 
 /**
+ * Task serve-prod
+ * build a production server and launch it
+ */
+gulp.task('serve-prod', ['default'], () => {
+  browserSync.init({
+    server: {
+      baseDir: './' + DEST,
+      middleware: [ historyApiFallback() ],
+    }
+  });
+});
+
+/**
  * Task default
  * Apply all tasks to build project
  */
-gulp.task('default', ['clean'], () => {
-  return $.runSequence(
-    'bower',
-    'jshint',
-    'jscs',
-    'fonts',
-    'images',
-    'flags',
-    'lang',
-    'html');
-});
+gulp.task('default', ['html']);
