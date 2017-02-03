@@ -4,17 +4,19 @@
   "description": "Kconnect-search engine front-end",
   "main": "index.js",
   "scripts": {
+    "start": "gulp serve-prod",
     "test": "gulp test",
     "postinstall": "node node_modules/bower/bin/bower install"
   },
   "author": "Health On the Net",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "babel-core": "^6.21.0",
     "babel-preset-es2015": "^6.18.0",
     "bower": "^1.8.0",
     "browser-sync": "^2.18.6",
     "del": "^2.2.2",
+    "express": "^4.14.1",
     "gulp": "^3.9.1",
     "gulp-batch": "^1.0.5",
     "gulp-bower": "0.0.13",
@@ -30,14 +32,12 @@
     "gulp-minify-css": "^1.2.4",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^3.0.0",
+    "gulp-serve": "^1.4.0",
     "gulp-sourcemaps": "^2.2.3",
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.11",
     "jshint": "^2.9.4"
-  },
-  "dependencies": {
-    "express": "^4.14.1"
   }
 }

@@ -94,7 +94,7 @@ gulp.task('styles', ['images', 'flags'], () => {
  * Task html
  * Apply uglify, minify to src
  */
-gulp.task('html', ['bower', 'styles', 'lang'], () => {
+gulp.task('html', ['bower', 'fonts', 'styles', 'lang'], () => {
   if (process.env.NODE_ENV === 'production') {
     return gulp.src('src/**/*.html')
       .pipe($.useref())
@@ -199,14 +199,11 @@ gulp.task('reload', ['default'], () => {
  * Task serve-prod
  * build a production server and launch it
  */
-gulp.task('serve-prod', ['default'], () => {
-  browserSync.init({
-    server: {
-      baseDir: './' + DEST,
-      middleware: [ historyApiFallback() ],
-    }
-  });
-});
+gulp.task('serve-prod', ['default'], $.serve({
+  port: PORT,
+  root: [ './' + DEST ],
+  middleware: historyApiFallback(),
+}));
 
 /**
  * Task default
