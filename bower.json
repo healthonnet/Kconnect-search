@@ -27,8 +27,7 @@
     "flag-css": "^0.0.7",
     "angular-sanitize": "^1.6.1",
     "angular-resource": "^1.6.1",
-    "progressbar.js": "^1.0.1",
-    "angular-svg-round-progressbar": "0.4.8",
+    "angular-svg-round-progressbar": "<1.0.0",
     "angular-favicon": "^0.3.2"
   },
   "resolutions": {
