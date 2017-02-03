@@ -199,11 +199,16 @@ gulp.task('reload', ['default'], () => {
  * Task serve-prod
  * build a production server and launch it
  */
-gulp.task('serve-prod', ['default'], $.serve({
-  port: PORT,
-  root: [ './' + DEST ],
-  middleware: historyApiFallback(),
-}));
+gulp.task('serve-prod', ['default'], () => {
+  $.connect.server({
+    port: PORT,
+    root: [ './' + DEST ],
+    livereload: false,
+    middleware: (connect, opt) => {
+      return [historyApiFallback()];
+    },
+  });
+});
 
 /**
  * Task default
