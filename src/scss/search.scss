@@ -1,0 +1,67 @@
+@import 'colors';
+
+.fathead {
+  max-height: 300px;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: silver 1px solid;
+  h2 {
+    color: $primary-color;
+  }
+  p {
+    color: $primary-color;
+    text-align: justify;
+  }
+}
+
+.results {
+  p {
+    span {
+      font-weight: 900;
+    }
+    a {
+      color: green;
+    }
+  }
+  h2 {
+    font-size: 20px;
+    img {
+      margin-top: -5px;
+      height: 20px;
+    }
+  }
+}
+
+.search-details {
+  height: 100%;
+  img {
+    width: 100%;
+  }
+}
+
+.screenshot {
+  .progress-wrapper {
+    position: relative;
+    .text {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      text-align: center;
+      width: 100%;
+      z-index: 1;
+      color: $primary-color;
+    }
+  }
+  .space-bottom {
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-size: 12px;
+    text-align: center;
+  }
+  .btn-padding {
+    margin: 10px;
+  }
+}

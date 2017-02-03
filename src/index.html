@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html ng-app="App">
+  <head>
+    <title>{{ 'TITLE' | translate }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- build:css css/bundle.css -->
+    <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./lib/flag-css/dist/flag-css.min.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/navbar-left.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/search.css">
+    <link rel="stylesheet" href="./css/language.css">
+    <!-- endbuild -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+    <!-- build:js js/bundle.js -->
+    <script src="./lib/angular/angular.min.js"></script>
+    <script src="./lib/angular-route/angular-route.min.js"></script>
+    <script src="./lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="./lib/angular-translate/angular-translate.min.js"></script>
+    <script src="./lib/angular-resource/angular-resource.min.js"></script>
+    <script src="./lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script src="./lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+     <script src="./lib/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
+     <script src="./lib/angular-favicon/angular-favicon.min.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/constant.js"></script>
+    <script src="./js/services/screenshotService.js"></script>
+    <script src="./js/controllers/appController.js"></script>
+    <script src="./js/controllers/homeController.js"></script>
+    <script src="./js/controllers/staticController.js"></script>
+    <script src="./js/controllers/searchController.js"></script>
+    <script src="./js/controllers/languageController.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body ng-controller="AppController">
+
+    <div ng-include="'views/partials/navbar-left.html'"></div>
+
+    <div class="language pull-right" ng-include="'views/partials/language.html'"></div>
+
+    <div ng-view class="fill col-sm-11 col-sm-offset-1"></div>
+  </body>
+</html>

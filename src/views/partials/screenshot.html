@@ -1,0 +1,64 @@
+<div ng-if="screenshot" class="screenshot">
+  <div class="row">
+    <div class="col-xs-11">
+      <h2>{{screenshot.title}}</h2>
+    </div>
+    <div class="col-xs-1">
+      <button class="pull-right btn btn-default btn-padding" ng-click="showScreenshot()"><i class="fa fa-times" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  <div class="row space-bottom">
+    <div class="col-md-4">
+      <h3>{{ 'CERTIFIED' | translate }}</h3>
+      <img src="/images/honcode.png" ng-if="screenshot.certified">
+    </div>
+    <div class="col-md-4">
+      <h3>{{ 'TRUSTABILITY' | translate }}</h3>
+      <div class="progress-wrapper">
+      <round-progress
+        max="100"
+        current="screenshot.trustability"
+        color="{{getColor(screenshot.trustability)}}"
+        bgcolor="#eaeaea"
+        radius="100"
+        stroke="14"
+        semi="false"
+        rounded="true"
+        clockwise="true"
+        responsive="true"
+        duration="800"
+        animation="easeInOutQuart"
+        animation-delay="0"></round-progress>
+        <div class="text">
+          <i class="fa fa-2x fa-stethoscope" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3>{{ 'READABILITY' | translate }}</h3>
+      <div class="progress-wrapper">
+      <round-progress
+        max="100"
+        current="screenshot.readability"
+        color="{{getColor(screenshot.readability)}}"
+        bgcolor="#eaeaea"
+        radius="100"
+        stroke="14"
+        semi="false"
+        rounded="true"
+        clockwise="true"
+        responsive="true"
+        duration="800"
+        animation="easeInOutQuart"
+        animation-delay="0"></round-progress>
+        <div class="text">
+          <i class="fa fa-2x fa-book" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h3>{{ 'PREVIEW' | translate }}</h3>
+    <a href="{{screenshot.url}}" ng-if="screenshot.url"><img src="{{screenshot.screenshot}}"></a>
+  </div>
+</div>

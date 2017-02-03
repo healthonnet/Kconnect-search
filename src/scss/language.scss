@@ -1,0 +1,29 @@
+@import 'colors';
+
+.language {
+  .country {
+    border: none;
+    border-bottom: silver solid 1px;
+    background-color: rgb(245,245,245);
+    border-radius: 6px;
+    height: 60px;
+    padding: 10px;
+    display: block;
+    text-align: center;
+    width: 100%;
+    .block {
+      display: block;
+    }
+  }
+  .space {
+    margin-bottom: 10px;
+  }
+  button {
+    color: $primary-color;
+  }
+  button:hover {
+    text-decoration: none;
+    background-color: lightgrey;
+    transition-duration: 0.5s;
+  }
+}

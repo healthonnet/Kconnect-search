@@ -1,0 +1,40 @@
+@import 'colors';
+
+#kconnect {
+  font-variant: small-caps;
+  text-align: center;
+  font-size: 40px;
+}
+
+#kconnect:before {
+  background: url('../images/kconnect.svg') no-repeat 0 0;
+  background-size: 100%;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  content: '';
+}
+
+.search {
+  border: none;
+  border-bottom: grey solid 2px;
+  padding-bottom: 5px;
+  font-size: 38px;
+  color: rgb(65,65,65);
+  width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    margin-top: 25px;
+}
+
+.search:focus {
+  outline: none;
+}
+
+.filter-tag span {
+  color: $secondary-color;
+}

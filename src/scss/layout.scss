@@ -1,0 +1,69 @@
+@import 'colors';
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  height: 100%;
+}
+
+a {
+  color: $secondary-color;
+}
+
+@mixin v-align($position: relative) {
+  position: $position;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.fill {
+  min-height: 100%;
+  height: 100%;
+}
+
+.left-margin {
+  margin-left: 160px;
+}
+
+#logotype {
+  width: 50px;
+}
+
+.language {
+  margin: 10px;
+}
+
+.v-align-30 {
+  height: 100%;
+}
+
+.v-align-30 div {
+  position: relative;
+  top: 30%;
+  transform: translateY(-30%);
+}
+
+.navbar-fixed-bottom {
+  margin-left: 140px;
+}
+
+/**
+* Helpers
+*/
+@for $i from 0 through 12 {
+  .vert-offset-top-#{$i} {
+    margin-top: #{$i}em;
+  }
+  .vert-padding-top-#{$i} {
+    padding-top: #{$i}em;
+  }
+  .vert-offset-bottom-#{$i} {
+    margin-bottom: #{$i}em;
+  }
+  .vert-padding-bottom-#{$i} {
+    padding-bottom: #{$i}em;
+  }
+}

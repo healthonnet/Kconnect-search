@@ -1,0 +1,71 @@
+@import 'colors';
+
+$nav-min-height: 768px;
+$navbar-width-lg: 140px;
+$navbar-width-sm: 90px;
+
+.navbar-fixed-left {
+  min-height: $nav-min-height;
+  width: $navbar-width-lg;
+  @media screen and (max-width: 970px) {
+    width: $navbar-width-sm;
+  }
+  position: fixed;
+  border-radius: 0;
+  height: 100%;
+  top:0;
+  text-align: center;
+  /*Default bootstrap is set to z-index: 1030*/
+  z-index: 1031;
+  @media screen and (max-height: $nav-min-height) {
+    position: absolute;
+  }
+
+}
+
+.navbar-fixed-left .navbar-nav > li {
+  float: none;
+  margin-bottom: 20px;
+}
+
+.navbar-fixed-left .navbar-nav > li > .dropdown-menu {
+  margin-top: -50px;
+  margin-left: 140px;
+}
+
+.navbar-transparent {
+  background: rgba(215,215,215,0.1);
+  li {
+    @media screen and (max-width: 970px) {
+      width: $navbar-width-sm;
+
+      i {
+        font-size: 2em;
+      }
+    }
+    width: $navbar-width-lg;
+    a {
+      i {
+        display: block;
+        margin-bottom: 5px;
+      }
+    }
+  }
+  ul:not(:first-child) a{
+    color: $primary-color;
+    padding-left: 0;
+    padding-right: 0;
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+}
+
+.navbar-bottom {
+  position: absolute;
+  bottom: 20px;
+}
+
+.navbar-brand {
+  padding-left: 10px;
+}

@@ -1,0 +1,37 @@
+{
+  "name": "web-app-2017",
+  "description": "2017 hon-search web app",
+  "main": "index.js",
+  "authors": [
+    "Health On the Net"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "angular-bootstrap": "^2.5.0",
+    "angular-route": "^1.6.1",
+    "angular-translate": "^2.13.1",
+    "angular-translate-loader-static-files": "^2.13.1",
+    "angular": "^1.6.1",
+    "font-awesome": "^4.7.0",
+    "country-code": "country-list#^2.0.2",
+    "flag-css": "^0.0.7",
+    "angular-sanitize": "^1.6.1",
+    "angular-resource": "^1.6.1",
+    "progressbar.js": "^1.0.1",
+    "angular-svg-round-progressbar": "0.4.8",
+    "angular-favicon": "^0.3.2"
+  },
+  "resolutions": {
+    "angular": "^1.6.1"
+  }
+}
