@@ -37,11 +37,17 @@
     <!-- endbuild -->
   </head>
   <body ng-controller="AppController">
-
-    <div ng-include="'views/partials/navbar-left.html'"></div>
-
+    <div ng-include="'views/partials/navbar-left.html'" class="hidden-xs"></div>
+    <div class="m-nav-wrapper visible-xs">
+      <div class="m-navbar" ng-class="isOpen ? 'is-open' : 'is-closed'" ng-include="'views/partials/navbar-left.html'"></div>
+      <button type="button" class="hamburger" ng-click="isOpen = !isOpen" ng-class="isOpen ? 'is-open' : 'is-closed'"  data-toggle="offcanvas">
+        <span class="hamb-top"></span>
+        <span class="hamb-middle"></span>
+        <span class="hamb-bottom"></span>
+      </button>
+    </div>
     <div class="language pull-right" ng-include="'views/partials/language.html'"></div>
 
-    <div ng-view class="fill col-sm-11 col-sm-offset-1"></div>
+    <div ng-view class="fill col-sm-11" ng-class="isOpen ? 'col-xs-offset-2' : 'col-sm-offset-1'"></div>
   </body>
 </html>
