@@ -1,12 +1,13 @@
 <div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1" id="imageSearch">
   <div class="row">
-    <form action="images">
+      <h1 id="kconnect" ng-hide="images.length > 0">connect Images</h1>
+      <form action="images">
       <input type="text" class="search row" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" name="q" ng-value="param">
     </form>
   </div>
 
-  <div class="row results">
-      <p>About {{images.length}} results</p>
+  <div class="row results" ng-show="images.length > 0">
+      <p>About {{ nbResults }} results</p>
       <ul class="dynamic-grid" angular-grid="images"
           ag-options="angularGridOptions" ag-grid-id="gallery" ag-infinite-scroll="loadImages()">
         <li data-ng-repeat="image in images" class="grid">
