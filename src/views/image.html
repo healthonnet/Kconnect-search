@@ -11,7 +11,8 @@
       <ul class="dynamic-grid" angular-grid="images"
           ag-options="angularGridOptions" ag-grid-id="gallery" ag-infinite-scroll="loadImages()">
         <li data-ng-repeat="image in images" class="grid">
-          <img src="{{image.url}}" class="grid-img"
+          <img ng-src="{{ image.url }}" class="grid-img"
+               loading-src fallback-src
                data-actual-width = "{{image.actualWidth}}"
                data-actual-height="{{image.actualHeight}}" />
         </li>
