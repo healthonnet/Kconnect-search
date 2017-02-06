@@ -35,6 +35,10 @@
   outline: none;
 }
 
-.filter-tag span {
-  color: $secondary-color;
+.filter-tag {
+  padding: 5px 20px;
+  border-radius: 5px;
+  span {
+  font-weight: 600;
+  }
 }
