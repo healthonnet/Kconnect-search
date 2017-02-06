@@ -24,6 +24,15 @@
           <h2>
             <img ng-src="{{ link.url | favicon }}" alt="favicon">
             <a href="{{link.url}}" ng-mouseover="showScreenshot(link)">{{link.title}}</a>
+            <div class="visible-sm-inline-block">
+              <img src="/images/honcode.png" ng-if="link.certified">
+              <span class="m-trust" ng-show="link.trustability">
+                <i class="fa fa-stethoscope" aria-hidden="true" style="color: {{getColor(link.trustability)}}"></i>
+              </span>
+              <span class="m-read" ng-show="link.readability">
+                <i class="fa fa-book" aria-hidden="true" style="color: {{getColor(link.readability)}}"></i>
+              </span>
+            </div>
           </h2>
           <p>
             <a href="{{link.url}}" ng-bind-html="link.url | spanWord:param"></a>
