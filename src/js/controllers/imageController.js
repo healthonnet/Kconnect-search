@@ -15,6 +15,7 @@ app
       console.log('hey !');
       $imageService.getImageResults($scope.param, 'en', 10, $scope.page)
         .then(function(res) {
+          $scope.nbResults = res.data.grouped.contentMD5.ngroups;
           parseImageResults(res);
           $scope.page++;
         });
