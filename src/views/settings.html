@@ -3,14 +3,67 @@
     <h1 id="kconnect">{{ 'SETTINGS' | translate }}</h1>
     <hr>
     <div class="row">
-      <p class="container">
+      <h2>
         Show results from languages
-      </p>
+      </h2>
     </div>
     <div class="row">
-      <p class="container">
-        Apply Pro filters
-      </p>
+      <div class="col-xs-6">
+        <span class="flag flag-gb"></span>
+        {{lang.en.name}}
+      </div>
+      <div class="col-sm-1 col-sm-offset-5">
+        <toggle ng-model="searchEn" onstyle="btn-success"></toggle>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <span class="flag flag-cz"></span>
+        {{lang.cs.name}}
+      </div>
+      <div class="col-sm-1 col-sm-offset-5">
+        <toggle ng-model="searchCz" onstyle="btn-success"></toggle>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <span class="flag flag-de"></span>
+        {{lang.de.name}}
+      </div>
+      <div class="col-sm-1 col-sm-offset-5">
+        <toggle ng-model="searchDe" onstyle="btn-success"></toggle>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <span class="flag flag-fr"></span>
+        {{lang.fr.name}}
+      </div>
+      <div class="col-sm-1 col-sm-offset-5">
+        <toggle ng-model="searchFr" onstyle="btn-success"></toggle>
+      </div>
+    </div>
+    <div class="row">
+      <h2>
+        Pro filters
+      </h2>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        Advanced search
+      </div>
+      <div class="col-xs-1 col-sm-offset-5">
+        <toggle ng-model="AdvancedSearch" onstyle="btn-success"></toggle>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        Semantic search
+      </div>
+      <div class="col-xs-1 col-sm-offset-5">
+        <toggle ng-model="SemanticSearch" onstyle="btn-success"></toggle>
+      </div>
     </div>
   </div>
 </div>
+<div ng-include="'views/partials/footer.html'"></div>

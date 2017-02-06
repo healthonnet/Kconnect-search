@@ -2,6 +2,7 @@
 
 var app = angular.module('App', [
   'ui.bootstrap',
+  'ui.toggle',
   'ngRoute',
   'pascalprecht.translate',
   'ngSanitize',
@@ -54,6 +55,7 @@ var app = angular.module('App', [
       .when('/images', {
         templateUrl: 'views/image.html',
         controller: 'ImageController',
+      })
       .when('/settings', {
         templateUrl: 'views/settings.html',
         controller: 'SettingsController',
