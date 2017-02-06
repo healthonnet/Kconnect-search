@@ -9,38 +9,38 @@
     </div>
     <div class="row">
       <div class="col-xs-6">
-        <span class="flag flag-gb"></span>
+        <span class="flag flag-gb flag-2x"></span>
         {{lang.en.name}}
       </div>
       <div class="col-sm-1 col-sm-offset-5">
-        <toggle ng-model="searchEn" onstyle="btn-success"></toggle>
+        <toggle ng-model="user.searchEn" ng-change="user.saveState()" onstyle="btn-success"></toggle>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-6">
-        <span class="flag flag-cz"></span>
+        <span class="flag flag-cz flag-2x"></span>
         {{lang.cs.name}}
       </div>
       <div class="col-sm-1 col-sm-offset-5">
-        <toggle ng-model="searchCz" onstyle="btn-success"></toggle>
+        <toggle ng-model="user.searchCz" ng-change="user.saveState()" onstyle="btn-success"></toggle>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-6">
-        <span class="flag flag-de"></span>
+        <span class="flag flag-de flag-2x"></span>
         {{lang.de.name}}
       </div>
       <div class="col-sm-1 col-sm-offset-5">
-        <toggle ng-model="searchDe" onstyle="btn-success"></toggle>
+        <toggle ng-model="user.searchDe" ng-change="user.saveState()" onstyle="btn-success"></toggle>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-6">
-        <span class="flag flag-fr"></span>
+        <span class="flag flag-fr flag-2x"></span>
         {{lang.fr.name}}
       </div>
       <div class="col-sm-1 col-sm-offset-5">
-        <toggle ng-model="searchFr" onstyle="btn-success"></toggle>
+        <toggle ng-model="user.searchFr" ng-change="user.saveState()" onstyle="btn-success"></toggle>
       </div>
     </div>
     <div class="row">
@@ -53,7 +53,7 @@
         Advanced search
       </div>
       <div class="col-xs-1 col-sm-offset-5">
-        <toggle ng-model="AdvancedSearch" onstyle="btn-success"></toggle>
+        <toggle ng-model="user.advancedSearch" ng-change="user.saveState()" onstyle="btn-success"></toggle>
       </div>
     </div>
     <div class="row">
@@ -61,7 +61,7 @@
         Semantic search
       </div>
       <div class="col-xs-1 col-sm-offset-5">
-        <toggle ng-model="SemanticSearch" onstyle="btn-success"></toggle>
+        <toggle ng-model="user.semanticSearch" ng-change="user.saveState()" onstyle="btn-success"></toggle>
       </div>
     </div>
   </div>
