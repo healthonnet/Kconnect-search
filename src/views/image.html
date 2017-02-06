@@ -2,8 +2,15 @@
   <div class="row">
       <h1 id="kconnect" ng-hide="images.length > 0">connect Images</h1>
       <form action="images">
-      <input type="text" class="search row" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" name="q" ng-value="param">
-    </form>
+          <div class="input-group stylish-input-group">
+              <input type="text" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" name="q" ng-value="param">
+              <span class="input-group-addon search-icon">
+                  <button type="submit" class="btn">
+                      <i class="fa fa-2x fa-search" aria-hidden="true"></i>
+                  </button>
+              </span>
+          </div>
+      </form>
   </div>
 
   <div class="row results" ng-show="images.length > 0">

@@ -3,11 +3,15 @@
     <div class="col-sm-9 col-sm-offset-2 col-xs-10 col-xs-offset-2">
       <h1 id="kconnect">connect search</h1>
       <form action="search">
-        <input type="text" class="search row" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" name="q">
+        <div class="input-group stylish-input-group">
+          <input type="text" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" name="q" ng-value="param">
+          <span class="input-group-addon search-icon">
+                  <button type="submit" class="btn">
+                      <i class="fa fa-2x fa-search" aria-hidden="true"></i>
+                  </button>
+              </span>
+        </div>
       </form>
-      <a href="#" class="search-icon">
-          <i class="fa fa-2x fa-search"></i>
-      </a>
     </div>
   </div>
   <div class="row">

@@ -4,6 +4,7 @@
   font-variant: small-caps;
   text-align: center;
   font-size: 40px;
+  margin-bottom: 20px;
 }
 
 #kconnect:before {
@@ -25,10 +26,12 @@
 }
 
 .search-icon {
-    position: absolute;
-    top: 50%;
-    right: 25px;
-    margin-top: 25px;
+  border:none;
+  border-bottom: grey solid 2px;
+  background-color: transparentize($secondary-color, 0.5 );
+  button {
+    background-color: transparent;
+  }
 }
 
 .search:focus {
