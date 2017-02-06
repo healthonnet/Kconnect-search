@@ -6,4 +6,7 @@ app.controller('AppController', ['$scope', '$translate', 'LANGUAGES',
     $scope.$on('switchLang', function(event, args) {
       $scope.lang = lang[args];
     });
+    $scope.$on('$routeChangeSuccess', function(evt, absNewUrl, absOldUrl) {
+      $scope.previous = absOldUrl;
+    });
   },]);
