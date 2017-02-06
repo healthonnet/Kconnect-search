@@ -9,6 +9,7 @@ var app = angular.module('App', [
   'angular-svg-round-progressbar',
   'favicon',
   'angularGrid',
+  'dcbImgFallback',
 ])
   .config(function($routeProvider, $translateProvider, $locationProvider) {
 

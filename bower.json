@@ -29,7 +29,8 @@
     "angular-resource": "^1.6.1",
     "angular-svg-round-progressbar": "<1.0.0",
     "angular-favicon": "^0.3.2",
-    "angulargrid": "^0.6.3"
+    "angulargrid": "^0.6.3",
+    "angular-img-fallback": "^0.2.0"
   },
   "resolutions": {
     "angular": "^1.6.1"
