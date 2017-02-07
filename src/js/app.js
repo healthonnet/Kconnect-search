@@ -8,6 +8,8 @@ var app = angular.module('App', [
   'ngResource',
   'angular-svg-round-progressbar',
   'favicon',
+  'angularGrid',
+  'dcbImgFallback',
 ])
   .config(function($routeProvider, $translateProvider, $locationProvider) {
 
@@ -48,6 +50,10 @@ var app = angular.module('App', [
       .when('/search', {
         templateUrl: 'views/search.html',
         controller: 'SearchController',
+      })
+      .when('/images', {
+        templateUrl: 'views/image.html',
+        controller: 'ImageController',
       })
       .when('/language', {
         templateUrl: 'views/language.html',

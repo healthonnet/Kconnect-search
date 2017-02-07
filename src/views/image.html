@@ -1,0 +1,33 @@
+<div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1" id="imageSearch">
+  <div class="row">
+      <h1 id="kconnect" ng-hide="images.length > 0">connect Images</h1>
+      <form action="images">
+          <div class="input-group stylish-input-group">
+              <input type="text" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" name="q" ng-value="param">
+              <span class="input-group-addon search-icon">
+                  <button type="submit" class="btn">
+                      <i class="fa fa-2x fa-search" aria-hidden="true"></i>
+                  </button>
+              </span>
+          </div>
+      </form>
+  </div>
+
+  <div class="row results" ng-show="images.length > 0">
+      <p>About {{ nbResults }} results</p>
+      <ul class="dynamic-grid" angular-grid="images"
+          ag-options="angularGridOptions" ag-grid-id="gallery" ag-infinite-scroll="loadImages()">
+        <li data-ng-repeat="image in images" class="grid">
+          <img ng-src="{{ image.url }}" class="grid-img"
+               loading-src fallback-src
+               data-actual-width = "{{image.actualWidth}}"
+               data-actual-height="{{image.actualHeight}}" />
+        </li>
+      </ul>
+      <div class="col-md-4 text-center">
+        <button type="submit" ng-click="loadImages()" class="btn btn-lg btn-default">{{ 'LOAD_MORE' | translate }}</button>
+      </div>
+      <br>
+  </div>
+</div>
+<div ng-include="'views/partials/footer.html'"></div>

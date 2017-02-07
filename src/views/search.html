@@ -1,7 +1,14 @@
 <div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
   <div class="row">
     <form action="search">
-      <input type="text" class="search row" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" name="q" ng-value="param">
+      <div class="input-group stylish-input-group">
+        <input type="text" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" name="q" ng-value="param">
+        <span class="input-group-addon search-icon">
+          <button type="submit" class="btn">
+              <i class="fa fa-2x fa-search" aria-hidden="true"></i>
+          </button>
+        </span>
+      </div>
     </form>
   </div>
 
