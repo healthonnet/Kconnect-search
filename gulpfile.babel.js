@@ -9,18 +9,16 @@ import decompress from 'gulp-decompress';
 import historyApiFallback from 'connect-history-api-fallback';
 import proxy from 'http-proxy-middleware';
 
-
 const $ = gulpLoadPlugins();
 const DEST = 'dist';
 const PORT = process.env.PORT || 3000;
 browserSync.create();
 
-const acceptCors = (req, res, next) => {
-  res.setHeader(
-    'Access-Control-Allow-Origin',
-    'X-Requested-With, Authorization');
-  next();
-};
+const selectServiceProxy = proxy('/select', {
+  target: 'http://everyone.khresmoi.eu/hon-search/',
+  changeOrigin: true,
+  logLevel: 'debug',
+});
 
 /**
  * Task jshint
@@ -175,18 +173,12 @@ gulp.task('watch-html', ['jshint', 'jscs', 'html'], () => {
  * every change reloading the browser
  */
 gulp.task('serve', ['html'], () => {
-  const selectServiceProxy = proxy('/select', {
-      target: 'http://everyone.khresmoi.eu/hon-search/',
-      changeOrigin: true,             // for vhosted sites, changes host header to match to target's host
-      logLevel: 'debug'
-  });
-
   browserSync.init({
     cors: true,
     server: {
       baseDir: './' + DEST,
       middleware: [ selectServiceProxy, historyApiFallback() ],
-    }
+    },
   });
   $.watch([
     'src/scss/*.scss',
@@ -221,7 +213,7 @@ gulp.task('serve-prod', ['default'], () => {
     root: [ './' + DEST ],
     livereload: false,
     middleware: (connect, opt) => {
-      return [historyApiFallback(), acceptCors];
+      return [ selectServiceProxy, historyApiFallback() ];
     },
   });
 });
