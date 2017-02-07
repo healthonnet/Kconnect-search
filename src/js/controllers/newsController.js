@@ -1,6 +1,9 @@
 'use strict';
 
 app
-  .controller('NewsController', function($scope, $location, spanWord) {
+  .controller('NewsController',
+    ['$scope', '$location', '$sce', 'spanWordFilter',
+    function($scope, $location, spanWord) {
+    $scope.pageTitle = 'News';
     // TODO: fill with news controller
-  });
+  },]);

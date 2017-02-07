@@ -1,0 +1,55 @@
+<div class="col-xs-11 col-xs-offset-1">
+  <div class="row">
+    <form action="search">
+      <div class="input-group stylish-input-group">
+        <input type="text" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" name="q" ng-value="param">
+        <span class="input-group-addon search-icon">
+          <button type="submit" class="btn">
+              <i class="fa fa-2x fa-search" aria-hidden="true"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <div class="row fathead" ng-if="fathead">
+    <div class="col-xs-12">
+      <div class="container-fluid">
+        <h2>{{fathead.title}}</h2>
+        <p>
+          {{fathead.content}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 results">
+      <p>About {{results.size}} results</p>
+      <div class="row" ng-repeat="link in results.links track by $index">
+        <div class="col-xs-12">
+          <h2>
+            <img ng-src="{{ link.url | favicon }}" alt="favicon">
+            <a href="{{link.url}}" ng-mouseover="showScreenshot($index)">{{link.title}}</a>
+            <div class="visible-sm-inline-block">
+              <img src="/images/honcode.png" ng-if="link.certified">
+              <span class="m-trust" ng-show="link.trustability">
+                <i class="fa fa-stethoscope" aria-hidden="true" style="color: {{getColor(link.trustability)}}"></i>
+              </span>
+              <span class="m-read" ng-show="link.readability">
+                <i class="fa fa-book" aria-hidden="true" style="color: {{getColor(link.readability)}}"></i>
+              </span>
+            </div>
+          </h2>
+          <p>
+            <a href="{{link.url}}" ng-bind-html="link.url | spanWord:param"></a>
+          </p>
+          <p ng-bind-html="link.content | spanWord:param">
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 search-details hidden-sm" ng-include="'views/partials/screenshot.html'">
+    </div>
+  </div>
+</div>

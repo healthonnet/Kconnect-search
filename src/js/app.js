@@ -28,8 +28,8 @@ var app = angular.module('App', [
 
     $routeProvider
       .when('/', {
-        templateUrl: 'views/home.html',
-        controller: 'HomeController',
+        templateUrl: 'views/search.html',
+        controller: 'SearchController',
       })
       .when('/about', {
         templateUrl: 'views/static.html',
@@ -46,10 +46,6 @@ var app = angular.module('App', [
       .when('/help', {
         templateUrl: 'views/static.html',
         controller: 'StaticController',
-      })
-      .when('/search', {
-        templateUrl: 'views/search.html',
-        controller: 'SearchController',
       })
       .when('/images', {
         templateUrl: 'views/image.html',
