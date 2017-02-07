@@ -13,11 +13,11 @@ const DEST = 'dist';
 const PORT = process.env.PORT || 3000;
 browserSync.create();
 
-const acceptCors = function() {
-  return function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    return next();
-  };
+const acceptCors = (req, res, next) => {
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'X-Requested-With, Authorization');
+  next();
 };
 
 /**
@@ -176,7 +176,7 @@ gulp.task('serve', ['html'], () => {
   browserSync.init({
     server: {
       baseDir: './' + DEST,
-      middleware: [ historyApiFallback(), acceptCors()],
+      middleware: [ historyApiFallback(), acceptCors],
     }
   });
   $.watch([
