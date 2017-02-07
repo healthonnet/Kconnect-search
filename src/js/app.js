@@ -55,6 +55,14 @@ var app = angular.module('App', [
         templateUrl: 'views/image.html',
         controller: 'ImageController',
       })
+      .when('/news', {
+        templateUrl: 'views/search.html',
+        controller: 'NewsController',
+      })
+      .when('/pro', {
+        templateUrl: 'views/search.html',
+        controller: 'ProController',
+      })
       .when('/language', {
         templateUrl: 'views/language.html',
         controller: 'LanguageController',

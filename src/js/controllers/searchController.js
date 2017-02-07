@@ -1,16 +1,8 @@
 'use strict';
 
-app
-  .filter('spanWord', function($sce) {
-    return function(input, word) {
-      var regex = new RegExp('((' + word + ')($|[ ]))', 'gi');
-      input = input.replace(regex, '<span>$1</span>');
-      return $sce.trustAsHtml(input);
-    };
-  })
-  .controller('SearchController',
-  ['$scope', '$location', '$sce', 'TrustabilityService', 'spanWordFilter',
-  function($scope, $location, $sce, trustabilityService, spanWord) {
+app.controller('SearchController',
+    ['$scope', '$location', '$sce', 'TrustabilityService', 'spanWordFilter',
+        function($scope, $location, $sce, trustabilityService, spanWord) {
     $scope.pageTitle = 'SEARCH';
     $scope.param = $location.search().q;
     $scope.showScreenshot = function(index) {
