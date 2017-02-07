@@ -15,6 +15,13 @@ const DEST = 'dist';
 const PORT = process.env.PORT || 3000;
 browserSync.create();
 
+const acceptCors = (req, res, next) => {
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'X-Requested-With, Authorization');
+  next();
+};
+
 /**
  * Task jshint
  * Use js lint
@@ -214,7 +221,7 @@ gulp.task('serve-prod', ['default'], () => {
     root: [ './' + DEST ],
     livereload: false,
     middleware: (connect, opt) => {
-      return [historyApiFallback()];
+      return [historyApiFallback(), acceptCors];
     },
   });
 });
