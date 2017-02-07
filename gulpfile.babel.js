@@ -7,6 +7,8 @@ import browserSync from 'browser-sync';
 import download from 'gulp-download';
 import decompress from 'gulp-decompress';
 import historyApiFallback from 'connect-history-api-fallback';
+import proxy from 'http-proxy-middleware';
+
 
 const $ = gulpLoadPlugins();
 const DEST = 'dist';
@@ -166,10 +168,17 @@ gulp.task('watch-html', ['jshint', 'jscs', 'html'], () => {
  * every change reloading the browser
  */
 gulp.task('serve', ['html'], () => {
+  const selectServiceProxy = proxy('/select', {
+      target: 'http://everyone.khresmoi.eu/hon-search/',
+      changeOrigin: true,             // for vhosted sites, changes host header to match to target's host
+      logLevel: 'debug'
+  });
+
   browserSync.init({
+    cors: true,
     server: {
       baseDir: './' + DEST,
-      middleware: [ historyApiFallback() ],
+      middleware: [ selectServiceProxy, historyApiFallback() ],
     }
   });
   $.watch([
