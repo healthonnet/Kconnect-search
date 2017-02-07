@@ -105,7 +105,6 @@ gulp.task('html', ['bower', 'fonts', 'styles', 'lang'], () => {
   if (process.env.NODE_ENV === 'production') {
     return gulp.src('src/**/*.html')
       .pipe($.useref())
-      .pipe($.if('*.js', $.uglify()))
       .pipe($.if('*.css', $.minifyCss()))
       .pipe(gulp.dest(DEST));
   }
