@@ -28,8 +28,8 @@ var app = angular.module('App', [
 
     $routeProvider
       .when('/', {
-        templateUrl: 'views/home.html',
-        controller: 'HomeController',
+        templateUrl: 'views/search.html',
+        controller: 'SearchController',
       })
       .when('/about', {
         templateUrl: 'views/static.html',
@@ -47,13 +47,17 @@ var app = angular.module('App', [
         templateUrl: 'views/static.html',
         controller: 'StaticController',
       })
-      .when('/search', {
-        templateUrl: 'views/search.html',
-        controller: 'SearchController',
-      })
       .when('/images', {
         templateUrl: 'views/image.html',
         controller: 'ImageController',
+      })
+      .when('/news', {
+        templateUrl: 'views/search.html',
+        controller: 'NewsController',
+      })
+      .when('/pro', {
+        templateUrl: 'views/search.html',
+        controller: 'ProController',
       })
       .when('/language', {
         templateUrl: 'views/language.html',
