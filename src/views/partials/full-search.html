@@ -1,6 +1,6 @@
 <div class="col-xs-11 col-xs-offset-1">
   <div class="row">
-    <form action="search">
+    <form action="{{$location.path()}}">
       <div class="input-group stylish-input-group">
         <input type="text" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" name="q" ng-value="param">
         <span class="input-group-addon search-icon">
