@@ -5,9 +5,22 @@ app
     ['$scope', '$location', '$sce', 'spanWordFilter',
     function($scope, $location, $sce, spanWord) {
     $scope.pageTitle = 'Pro';
+    $scope.form = {};
+
+    $scope.submit = function() {
+      if ($scope.form.param !== undefined) {
+        // Prevent useless submit (same request)
+        if ($scope.form.param === $location.search().q) {
+          return;
+        }
+        $location.search('q', $scope.form.param);
+      }
+    };
 
     var q = $location.search().q;
+
     if (q) {
+      $scope.form.param = q;
       $scope.param = q;
       $scope.showScreenshot = function(link) {
         $scope.screenshot = link;

@@ -4,9 +4,23 @@ app.controller('SearchController',
   ['$scope', '$location', '$sce', 'TrustabilityService', 'spanWordFilter',
   function($scope, $location, $sce, trustabilityService, spanWord) {
     $scope.pageTitle = 'Search';
+    $scope.form = {};
+
+    $scope.submit = function() {
+      if ($scope.form.param !== undefined) {
+        // Prevent useless submit (same request)
+        if ($scope.form.param === $location.search().q) {
+          return;
+        }
+        console.log($scope.form.param, $location.search().q);
+        $location.search('q', $scope.form.param);
+      }
+    };
 
     var q = $location.search().q;
+
     if (q) {
+      $scope.form.param = q;
       $scope.param = q;
       $scope.showScreenshot = function(index) {
         $scope.screenshot = $scope.results.links[index];
