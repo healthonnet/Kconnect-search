@@ -14,7 +14,6 @@ app
     }
 
     $scope.loadImages = function() {
-      console.log('hey !');
       $imageService.getImageResults($scope.param, 'en', 10, $scope.page)
         .then(function(res) {
           $scope.nbResults = res.data.grouped.contentMD5.ngroups;
@@ -22,18 +21,6 @@ app
           $scope.page++;
         });
     };
-
-    $scope.page = 0;
-    $scope.pageTitle = 'IMAGE';
-    $scope.images = [];
-
-    var q = $location.search().q;
-    if (q) {
-      $scope.param = q;
-      $scope.loadImages();
-    } else {
-      $scope.card = mockImageCard;
-    }
 
     $scope.angularGridOptions = {
       gridWidth: 250,
@@ -47,6 +34,30 @@ app
     $scope.refresh = function() {
       angularGridInstance.gallery.refresh();
     };
+
+    $scope.submit = function() {
+      if ($scope.form.param !== undefined) {
+        // Prevent useless submit (same request)
+        if ($scope.form.param === $location.search().q) {
+          return;
+        }
+        $location.search('q', $scope.form.param);
+      }
+    };
+
+    $scope.page = 0;
+    $scope.pageTitle = 'IMAGE';
+    $scope.images = [];
+    $scope.form = {};
+
+    var q = $location.search().q;
+    if (q) {
+      $scope.param = q;
+      $scope.form.param = q;
+      $scope.loadImages();
+    } else {
+      $scope.card = mockImageCard;
+    }
   },]);
 
 var mockImageCard = {
