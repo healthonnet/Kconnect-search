@@ -9,12 +9,12 @@ app
     };
   })
   .controller('SearchController',
-  ['$scope', '$location', '$sce', 'spanWordFilter',
-  function($scope, $location, spanWord) {
+  ['$scope', '$location', '$sce', 'TrustabilityService', 'spanWordFilter',
+  function($scope, $location, $sce, trustabilityService, spanWord) {
     $scope.pageTitle = 'SEARCH';
     $scope.param = $location.search().q;
-    $scope.showScreenshot = function(link) {
-      $scope.screenshot = link;
+    $scope.showScreenshot = function(index) {
+      $scope.screenshot = $scope.results.links[index];
     };
     $scope.getColor = function(value) {
       if (value < 33) {
@@ -47,13 +47,13 @@ app
       size: 2,
       links: [
         {
+          groupValue: 'www.nhs.uk',
           url: 'https://www.nhs.uk/Conditions/Cancer/Pages/Introduction.aspx',
           screenshot: 'http://everyone.khresmoi.eu:3000/' +
           '?url=http%3A%2F%2Fwww.paho.org%2Ftierra%2Findex.php' +
           '%3Foption%3Dcom_multicategories%26view%3Dcategory' +
           '%26id%3D30%26Itemid%3D114%26lang%3Den',
           readability: '32',
-          trustability: '47',
           certified: false,
           title: 'Cancer - NHS Choices',
           content: 'Cancer is a condition where cells in a ' +
@@ -61,12 +61,12 @@ app
           'The cancerous cells can invade and destroy surrounding healthy ...',
         },
         {
+          groupValue: 'wikipedia.org',
           url: 'https://en.wikipedia.org/wiki/Cancer',
           screenshot: 'http://everyone.khresmoi.eu:3000/' +
           '?url=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGenetics_of_cancer',
           title: 'Cancer - Wikipedia',
           readability: '92',
-          trustability: '100',
           certified: true,
           content: 'Cancer is a group of diseases involving ' +
           'abnormal cell growth with the potential to invade or spread to ' +
@@ -74,4 +74,13 @@ app
         },
       ],
     };
+
+    // Trustability Requests
+    $scope.results.links.forEach(function(link) {
+      trustabilityService.getTrustabilityValueFromHost(link.groupValue)
+        .then(function(data) {
+          link.trustability = data;
+        });
+    });
+
   },]);
