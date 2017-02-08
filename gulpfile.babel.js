@@ -20,6 +20,12 @@ const selectServiceProxy = proxy('/select', {
   logLevel: 'debug',
 });
 
+const trustServiceProxy = proxy('/trustability', {
+  target: 'http://everyone.khresmoi.eu/hon-search/',
+  changeOrigin: true,
+  logLevel: 'debug',
+});
+
 /**
  * Task jshint
  * Use js lint
@@ -176,7 +182,7 @@ gulp.task('serve', ['html'], () => {
     cors: true,
     server: {
       baseDir: './' + DEST,
-      middleware: [ selectServiceProxy, historyApiFallback() ],
+      middleware: [ selectServiceProxy, trustServiceProxy, historyApiFallback() ],
     },
   });
   $.watch([
@@ -212,7 +218,7 @@ gulp.task('serve-prod', ['default'], () => {
     root: [ './' + DEST ],
     livereload: false,
     middleware: (connect, opt) => {
-      return [ selectServiceProxy, historyApiFallback() ];
+      return [ selectServiceProxy, trustServiceProxy, historyApiFallback() ];
     },
   });
 });
