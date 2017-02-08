@@ -1,6 +1,7 @@
 app.constant('SELECT_SERVICE_URL', '/select');
 app.constant('TRUST_SERVICE_URL', '/trustability');
 app.constant('SCREENSHOT_SERVICE_URL', 'http://everyone.khresmoi.eu:3000');
+app.constant('VERSION', '0.1.0-master');
 app.constant('LANGUAGES', {
   bg: {
     name: 'български',
@@ -95,4 +96,3 @@ app.constant('LANGUAGES', {
     flag: 'se',
   },
 });
-
