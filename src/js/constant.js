@@ -1,5 +1,5 @@
-app.constant('SELECT_SERVICE_URL',
-    '/select');
+app.constant('SELECT_SERVICE_URL', '/select');
+app.constant('TRUST_SERVICE_URL', '/trustability');
 app.constant('SCREENSHOT_SERVICE_URL', 'http://everyone.khresmoi.eu:3000');
 app.constant('LANGUAGES', {
   bg: {
