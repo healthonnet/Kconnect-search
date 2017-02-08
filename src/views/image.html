@@ -1,8 +1,7 @@
 <ng-include ng-if="!param" src="'views/partials/middle-search.html'"></ng-include>
 
-<div class="col-xs-11 col-xs-offset-1" id="imageSearch">
+<div class="col-xs-11 col-xs-offset-1" id="imageSearch" ng-show="param">
   <div class="row">
-      <h1 id="kconnect" ng-hide="images.length > 0">connect Images</h1>
       <form action="{{$location.path()}}">
           <div class="input-group stylish-input-group">
               <input type="text" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" name="q" ng-value="param">
