@@ -4,6 +4,7 @@ app
   .controller('ImageController',
   ['$scope', '$location', 'ImageService', 'angularGridInstance',
   function($scope, $location, $imageService, angularGridInstance) {
+
     function parseImageResults(res) {
       res.data.grouped.contentMD5.groups.forEach(function(group) {
         group.doclist.docs[0].actualHeight  = group.doclist.docs[0].height;
@@ -22,7 +23,7 @@ app
     };
 
     $scope.page = 0;
-    $scope.pageTitle = 'SEARCH';
+    $scope.pageTitle = 'IMAGE';
     $scope.images = [];
     $scope.param = $location.search().q;
     if ($scope.param) {
