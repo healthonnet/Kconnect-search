@@ -11,7 +11,8 @@ app.controller('AppController',
       $scope.previous = absOldUrl;
     });
     $scope.$on('$locationChangeSuccess', function() {
-      $scope.currentQuery = $location.search().q;
+      $scope.currentQuery =
+          $location.search().q ? '?q=' + $location.search().q : '';
     });
     $scope.version = version;
   },]);
