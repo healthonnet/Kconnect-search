@@ -1,8 +1,10 @@
 'use strict';
 
 app.controller('SearchController',
-  ['$scope', '$location', '$sce', 'TrustabilityService', 'spanWordFilter',
-  function($scope, $location, $sce, trustabilityService, spanWord) {
+  ['$scope', '$location', '$sce', 'TrustabilityService',
+  'DisambiguatorService', 'spanWordFilter',
+  function($scope, $location, $sce,
+    trustabilityService, disambiguatorService, spanWord) {
     $scope.pageTitle = 'Search';
     $scope.form = {};
 
@@ -26,7 +28,14 @@ app.controller('SearchController',
         $scope.screenshot = $scope.results.links[index];
       };
       $scope.getColor = getColor;
-      $scope.fathead = mockFathead;
+      disambiguatorService.getFatheadContent(q)
+        .then(function(res) {
+          $scope.fathead = {
+            type: 'definition',
+            title: 'Definition of ' + q,
+            content: res.data.results[0].definition,
+          };
+        });
       $scope.results = mockResults;
 
       // Trustability Requests
