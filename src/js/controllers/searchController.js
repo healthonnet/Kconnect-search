@@ -2,9 +2,9 @@
 
 app.controller('SearchController',
   ['$scope', '$location', '$sce', 'ResultsService',
-  'TrustabilityService', 'spanWordFilter',
+  'TrustabilityService', 'ScreenshotService', 'spanWordFilter',
   function($scope, $location, $sce, resultsService,
-    trustabilityService, spanWord) {
+    trustabilityService, screenshotService, spanWord) {
     $scope.pageTitle = 'Search';
     $scope.form = {};
 
@@ -14,7 +14,6 @@ app.controller('SearchController',
         if ($scope.form.param === $location.search().q) {
           return;
         }
-        console.log($scope.form.param, $location.search().q);
         $location.search('q', $scope.form.param);
       }
     };
@@ -24,24 +23,21 @@ app.controller('SearchController',
     if (q) {
       $scope.form.param = q;
       $scope.param = q;
-      $scope.showScreenshot = function(index) {
-        $scope.screenshot = $scope.results.links[index];
+      $scope.showScreenshot = function(url) {
+        $scope.screenshot = screenshotService.getScreenFromUrl(url);
       };
       $scope.getColor = getColor;
       $scope.fathead = mockFathead;
       resultsService.getResults(q, 'en', 10, $scope.page)
         .then(function(res) {
-          $scope.results = res.data.grouped.domain.groups;
-          console.log(res.data);
+          $scope.results = res.data.grouped.domain;
+          $scope.results.groups.forEach(function(link) {
+            trustabilityService.getTrustabilityValueFromHost(link.groupValue)
+              .then(function(data) {
+                link.trustability = data;
+              });
+          });
         });
-
-      // Trustability Requests
-      // $scope.results.links.forEach(function(link) {
-      //   trustabilityService.getTrustabilityValueFromHost(link.groupValue)
-      //     .then(function(data) {
-      //       link.trustability = data;
-      //     });
-      // });
     } else {
       $scope.card = mockCard;
     }
@@ -81,36 +77,4 @@ var mockFathead = {
     'Lymphoma and multiple myeloma are malignancies that begin in the ' +
     'cells of the immune system. Central nervous system cancers are ' +
     'malignancies that begin in the tissues of the brain and spinal cord.',
-};
-
-var mockResults = {
-  size: 2,
-  links: [
-    {
-      groupValue: 'www.nhs.uk',
-      url: 'https://www.nhs.uk/Conditions/Cancer/Pages/Introduction.aspx',
-      screenshot: 'http://everyone.khresmoi.eu:3000/' +
-      '?url=http%3A%2F%2Fwww.paho.org%2Ftierra%2Findex.php' +
-      '%3Foption%3Dcom_multicategories%26view%3Dcategory' +
-      '%26id%3D30%26Itemid%3D114%26lang%3Den',
-      readability: '32',
-      certified: false,
-      title: 'Cancer - NHS Choices',
-      content: 'Cancer is a condition where cells in a ' +
-      'specific part of the body grow and reproduce uncontrollably. ' +
-      'The cancerous cells can invade and destroy surrounding healthy ...',
-    },
-    {
-      groupValue: 'wikipedia.org',
-      url: 'https://en.wikipedia.org/wiki/Cancer',
-      screenshot: 'http://everyone.khresmoi.eu:3000/' +
-      '?url=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGenetics_of_cancer',
-      title: 'Cancer - Wikipedia',
-      readability: '92',
-      certified: true,
-      content: 'Cancer is a group of diseases involving ' +
-      'abnormal cell growth with the potential to invade or spread to ' +
-      'other parts of the body. Not all tumors are ...',
-    },
-  ],
 };
