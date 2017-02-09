@@ -4,7 +4,6 @@ var app = angular.module('App', [
   'ui.bootstrap',
   'ngRoute',
   'pascalprecht.translate',
-  'ngSanitize',
   'ngResource',
   'angular-svg-round-progressbar',
   'favicon',
@@ -18,7 +17,7 @@ var app = angular.module('App', [
       suffix: '.json',
     });
 
-    $translateProvider.useSanitizeValueStrategy('sanitize');
+    $translateProvider.useSanitizeValueStrategy('sce');
     $translateProvider.preferredLanguage('en');
 
     $locationProvider.html5Mode({
