@@ -2,6 +2,7 @@
 
 var app = angular.module('App', [
   'ui.bootstrap',
+  'angular-loading-bar',
   'ngRoute',
   'pascalprecht.translate',
   'ngSanitize',

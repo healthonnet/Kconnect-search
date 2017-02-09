@@ -25,7 +25,7 @@
 
   <div class="row">
     <div class="col-md-8 results">
-      <p>About {{results.matches}} results</p>
+      <p>{{ 'ABOUT' | translate }} {{results.matches}} {{ 'RESULTS' | translate }}</p>
       <div class="row" ng-repeat="link in results.groups track by $index">
         <div class="col-xs-12">
           <h2>
