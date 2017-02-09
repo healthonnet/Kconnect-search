@@ -47,7 +47,7 @@ app
     };
 
     $scope.page = 0;
-    $scope.pageTitle = 'IMAGE';
+    $scope.pageTitle = 'Images';
     $scope.images = [];
     $scope.form = {};
 
