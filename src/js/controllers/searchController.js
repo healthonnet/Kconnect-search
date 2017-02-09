@@ -1,8 +1,10 @@
 'use strict';
 
 app.controller('SearchController',
-  ['$scope', '$location', '$sce', 'TrustabilityService', 'spanWordFilter',
-  function($scope, $location, $sce, trustabilityService, spanWord) {
+  ['$scope', '$location', '$sce', 'ResultsService',
+  'TrustabilityService', 'spanWordFilter',
+  function($scope, $location, $sce, resultsService,
+    trustabilityService, spanWord) {
     $scope.pageTitle = 'Search';
     $scope.form = {};
 
@@ -27,15 +29,19 @@ app.controller('SearchController',
       };
       $scope.getColor = getColor;
       $scope.fathead = mockFathead;
-      $scope.results = mockResults;
+      resultsService.getResults(q, 'en', 10, $scope.page)
+        .then(function(res) {
+          $scope.results = res.data.grouped.domain.groups;
+          console.log(res.data);
+        });
 
       // Trustability Requests
-      $scope.results.links.forEach(function(link) {
-        trustabilityService.getTrustabilityValueFromHost(link.groupValue)
-          .then(function(data) {
-            link.trustability = data;
-          });
-      });
+      // $scope.results.links.forEach(function(link) {
+      //   trustabilityService.getTrustabilityValueFromHost(link.groupValue)
+      //     .then(function(data) {
+      //       link.trustability = data;
+      //     });
+      // });
     } else {
       $scope.card = mockCard;
     }
