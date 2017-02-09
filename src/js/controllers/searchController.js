@@ -38,6 +38,7 @@ app.controller('SearchController',
       });
     } else {
       $scope.card = mockCard;
+      $scope.card.text = $sce.trustAsHtml(mockCard.text);
     }
   },]);
 
