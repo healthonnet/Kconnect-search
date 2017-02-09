@@ -6,7 +6,11 @@ app.controller('LanguageController',
     $scope.changeTo = function(lang) {
       $translate.use(lang);
       $scope.$emit('switchLang', lang);
-      $location.path($scope.previous.$$route.originalPath);
+      if ($scope.previous) {
+        $location.path($scope.previous.$$route.originalPath);
+      } else {
+        $location.path('/');
+      }
     };
-    $scope.lang = languages;
+    $scope.languages = languages;
   },]);

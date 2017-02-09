@@ -14,9 +14,10 @@ app
     }
 
     $scope.loadImages = function() {
-      $imageService.getImageResults($scope.param, 'en', 10, $scope.page)
+      $imageService.getImageResults(
+          $scope.param, $scope.lang.key, 10, $scope.page)
         .then(function(res) {
-          $scope.nbResults = res.data.grouped.contentMD5.ngroups;
+          $scope.nbResults = res.data.grouped.contentMD5.groups.length;
           parseImageResults(res);
           $scope.page++;
         });
