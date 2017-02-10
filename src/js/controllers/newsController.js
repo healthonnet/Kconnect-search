@@ -5,5 +5,6 @@ app
     ['$scope', '$location', '$sce', 'spanWordFilter',
     function($scope, $location, spanWord) {
     $scope.pageTitle = 'News';
+    $scope.$emit('newsActive');
     // TODO: fill with news controller
   },]);

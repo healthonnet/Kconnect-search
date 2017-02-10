@@ -5,6 +5,8 @@ app.controller('SearchController',
   function($scope, $location, trustabilityService) {
     $scope.pageTitle = 'Search';
     $scope.form = {};
+    $scope.searchActive = true;
+    $scope.$emit('searchActive');
 
     $scope.submit = function() {
       if ($scope.form.param !== undefined) {

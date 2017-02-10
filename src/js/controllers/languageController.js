@@ -3,6 +3,7 @@
 app.controller('LanguageController',
   ['$scope', '$translate', '$location', 'LANGUAGES',
   function($scope, $translate, $location, languages) {
+    $scope.$emit('noneActive');
     $scope.changeTo = function(lang) {
       $translate.use(lang);
       $scope.$emit('switchLang', lang);

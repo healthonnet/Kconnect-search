@@ -6,6 +6,7 @@ app
     function($scope, $location, $sce, spanWord) {
     $scope.pageTitle = 'Pro';
     $scope.form = {};
+    $scope.$emit('proActive');
 
     $scope.submit = function() {
       if ($scope.form.param !== undefined) {
