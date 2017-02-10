@@ -4,6 +4,7 @@ app.controller('SearchController',
   ['$scope', '$location', 'TrustabilityService',
   function($scope, $location, trustabilityService) {
     $scope.pageTitle = 'Search';
+    $scope.pageIcon = 'fa-globe';
     $scope.form = {};
 
     $scope.submit = function() {
