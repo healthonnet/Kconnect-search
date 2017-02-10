@@ -12,7 +12,6 @@ app.controller('SearchController',
         if ($scope.form.param === $location.search().q) {
           return;
         }
-        console.log($scope.form.param, $location.search().q);
         $location.search('q', $scope.form.param);
       }
     };
