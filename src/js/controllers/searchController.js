@@ -1,8 +1,8 @@
 'use strict';
 
 app.controller('SearchController',
-  ['$scope', '$location', '$sce', 'TrustabilityService', 'spanWordFilter',
-  function($scope, $location, $sce, trustabilityService, spanWord) {
+  ['$scope', '$location', 'TrustabilityService',
+  function($scope, $location, trustabilityService) {
     $scope.pageTitle = 'Search';
     $scope.form = {};
 
@@ -38,7 +38,6 @@ app.controller('SearchController',
       });
     } else {
       $scope.card = mockCard;
-      $scope.card.text = $sce.trustAsHtml(mockCard.text);
     }
   },]);
 
