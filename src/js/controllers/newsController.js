@@ -24,7 +24,6 @@ app
       newsService.getNews(q)
         .then(function(res) {
           $scope.results = res.data.results;
-          console.log(res.data);
         });
     }
   },]);
