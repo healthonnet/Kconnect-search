@@ -1,14 +1,20 @@
-<div class="col-xs-12">
-  <h2>
-    <a href="{{link.website}}">{{link.title}}</a>
-  </h2>
-  <p>
-    <a href="{{link.website}}" ng-if="link.website" ng-bind-html="link.website | spanWord:param"></a>
-  </p>
-  <p ng-bind-html="link.description | spanWord:param" ng-if="link.description">
-  </p>
-  <p>
-    <i class="fa fa-clock-o" aria-hidden="true"></i>
-    {{ link.lastUpdated | date:'' }}
-  </p>
+<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+  <div class="row">
+    <img src="{{link.coverUrl}}" class="img-responsive">
+  </div>
+  <div class="row">
+    <h2>
+      <a href="{{link.website}}">{{link.title}}</a>
+    </h2>
+    <p>
+      <a href="{{link.website}}" ng-if="link.website" ng-bind-html="link.website | spanWord:param"></a>
+    </p>
+    <p ng-bind-html="link.description | spanWord:param" ng-if="link.description">
+    </p>
+    <p>
+      <i class="fa fa-clock-o" aria-hidden="true"></i>
+      {{ link.lastUpdated | date:'' }}
+    </p>
+  </div>
+  <hr />
 </div>
