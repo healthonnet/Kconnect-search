@@ -51,7 +51,7 @@ var app = angular.module('App', [
         controller: 'ImageController',
       })
       .when('/news', {
-        templateUrl: 'views/search.html',
+        templateUrl: 'views/news.html',
         controller: 'NewsController',
       })
       .when('/pro', {
