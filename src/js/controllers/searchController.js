@@ -2,7 +2,7 @@
 
 app.controller('SearchController',
   ['$scope', '$location', 'ResultsService',
-  'TrustabilityService', 'ScreenshotService', 'DisambiguatorService'
+  'TrustabilityService', 'ScreenshotService', 'DisambiguatorService',
   function($scope, $location, resultsService,
     trustabilityService, screenshotService, disambiguatorService) {
     $scope.pageTitle = 'Search';

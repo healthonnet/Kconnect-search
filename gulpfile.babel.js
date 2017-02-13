@@ -28,10 +28,14 @@ const trustServiceProxy = proxy('/trustability', {
 
 const disambiguatorServiceProxy = proxy('/khresmoiDisambiguator', {
   target: 'http://everyone.khresmoi.eu/hon-search/',
-const newsServiceProxy = proxy('/feeds', {
-  target: 'https://cloud.feedly.com/v3/search/',
   changeOrigin: true,
   logLevel: 'debug',
+});
+
+const newsServiceProxy = proxy('/feeds', {
+    target: 'https://cloud.feedly.com/v3/search/',
+    changeOrigin: true,
+    logLevel: 'debug',
 });
 
 /**
