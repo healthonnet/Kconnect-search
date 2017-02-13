@@ -37,6 +37,15 @@ app.controller('SearchController',
         .then(function(res) {
           $scope.results = res.data.grouped.domain;
           $scope.results.groups.forEach(function(link) {
+            // Handle extra datas and mutators
+            // HonCode certification
+            link.doclist.docs[0].isCertified = false;
+            if (link.doclist.docs[0].is_certified_facet) {
+              if (link.doclist.docs[0].is_certified_facet[0] === 'true') {
+                link.doclist.docs[0].certified = true;
+              }
+            }
+            // Trustability
             trustabilityService.getTrustabilityValueFromHost(link.groupValue)
               .then(function(data) {
                 link.doclist.docs[0].trustability = data;
