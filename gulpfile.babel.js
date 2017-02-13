@@ -235,7 +235,7 @@ gulp.task('serve-prod', ['default'], () => {
     port: PORT,
     root: [ './' + DEST ],
     livereload: false,
-    middleware: (connect, opt) => 
+    middleware: (connect, opt) => {
       return [
         selectServiceProxy,
         disambiguatorServiceProxy,
