@@ -5,7 +5,6 @@ var app = angular.module('App', [
   'angular-loading-bar',
   'ngRoute',
   'pascalprecht.translate',
-  'ngSanitize',
   'ngResource',
   'angular-svg-round-progressbar',
   'favicon',
@@ -19,7 +18,7 @@ var app = angular.module('App', [
       suffix: '.json',
     });
 
-    $translateProvider.useSanitizeValueStrategy('sanitize');
+    $translateProvider.useSanitizeValueStrategy('sce');
     $translateProvider.preferredLanguage('en');
 
     $locationProvider.html5Mode({
@@ -53,7 +52,7 @@ var app = angular.module('App', [
         controller: 'ImageController',
       })
       .when('/news', {
-        templateUrl: 'views/search.html',
+        templateUrl: 'views/news.html',
         controller: 'NewsController',
       })
       .when('/pro', {

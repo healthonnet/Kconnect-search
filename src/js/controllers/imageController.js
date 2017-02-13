@@ -4,6 +4,8 @@ app
   .controller('ImageController',
   ['$scope', '$location', 'ImageService', 'angularGridInstance',
   function($scope, $location, $imageService, angularGridInstance) {
+    $scope.$emit('picturesActive');
+    $scope.pageIcon = 'fa-picture-o';
 
     function parseImageResults(res) {
       res.data.grouped.contentMD5.groups.forEach(function(group) {
@@ -14,9 +16,10 @@ app
     }
 
     $scope.loadImages = function() {
-      $imageService.getImageResults($scope.param, 'en', 10, $scope.page)
+      $imageService.getImageResults(
+          $scope.param, $scope.lang.key, 10, $scope.page)
         .then(function(res) {
-          $scope.nbResults = res.data.grouped.contentMD5.ngroups;
+          $scope.nbResults = res.data.grouped.contentMD5.groups.length;
           parseImageResults(res);
           $scope.page++;
         });
@@ -46,7 +49,7 @@ app
     };
 
     $scope.page = 0;
-    $scope.pageTitle = 'IMAGE';
+    $scope.pageTitle = 'Images';
     $scope.images = [];
     $scope.form = {};
 

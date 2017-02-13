@@ -1,12 +1,15 @@
 'use strict';
 
 app.controller('SearchController',
-  ['$scope', '$location', '$sce', 'ResultsService',
-  'TrustabilityService', 'ScreenshotService', 'spanWordFilter',
-  function($scope, $location, $sce, resultsService,
-    trustabilityService, screenshotService, spanWord) {
+  ['$scope', '$location', 'ResultsService',
+  'TrustabilityService', 'ScreenshotService',
+  function($scope, $location, resultsService,
+    trustabilityService, screenshotService) {
     $scope.pageTitle = 'Search';
+    $scope.pageIcon = 'fa-globe';
     $scope.form = {};
+    $scope.searchActive = true;
+    $scope.$emit('searchActive');
 
     $scope.submit = function() {
       if ($scope.form.param !== undefined) {
