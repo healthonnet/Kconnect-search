@@ -7,6 +7,7 @@ app
     $scope.pageTitle = 'News';
     $scope.$emit('newsActive');
     $scope.pageIcon = 'fa-newspaper-o';
+    $scope.pageTitleColor = 'text-dark-orange';
     $scope.form = {};
 
     $scope.submit = function() {

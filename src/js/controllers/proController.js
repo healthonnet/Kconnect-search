@@ -8,6 +8,7 @@ app
     $scope.form = {};
     $scope.$emit('proActive');
     $scope.pageIcon = 'fa-user-md';
+    $scope.pageTitleColor = 'text-dark-green';
 
     $scope.submit = function() {
       if ($scope.form.param !== undefined) {
