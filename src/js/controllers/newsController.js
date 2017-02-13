@@ -5,6 +5,7 @@ app
     ['$scope', '$location', 'NewsService', 'spanWordFilter',
     function($scope, $location, newsService, spanWord) {
     $scope.pageTitle = 'News';
+    $scope.pageIcon = 'fa-newspaper-o';
     $scope.form = {};
 
     $scope.submit = function() {
