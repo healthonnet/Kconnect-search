@@ -14,16 +14,12 @@
       </form>
   </div>
 
-  <div class="row">
+  <div class="row news">
     <div class="col-md-8 results">
       <p>About {{results.length}} results</p>
       <div class="row" ng-repeat="link in results track by $index">
-        <div class="col-sm-4">
-          <img src="{{link.coverUrl}}" style="width: 100%;" ng-if="link.coverUrl">
-        </div>
-        <div class="col-sm-8">
+        <div class="col-xs-12">
           <h2>
-            <!-- <img ng-src="{{ link.url | favicon }}" alt="favicon"> -->
             <a href="{{link.website}}">{{link.title}}</a>
           </h2>
           <p>
@@ -36,6 +32,8 @@
             {{ link.lastUpdated | date:'' }}
           </p>
         </div>
+        <!-- <ng-include src="views/partials/news-item-simple.html"></ng-include>
+        <ng-include ng-if="link.coverUrl" src="views/partials/news-item-complex.html"></ng-include> -->
       </div>
     </div>
   </div>
