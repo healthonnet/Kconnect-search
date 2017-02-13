@@ -5,6 +5,7 @@ app.controller('SearchController',
   function($scope, $location, trustabilityService) {
     $scope.pageTitle = 'Search';
     $scope.pageIcon = 'fa-globe';
+    $scope.pageTitleColor = 'text-dark-blue';
     $scope.form = {};
     $scope.searchActive = true;
     $scope.$emit('searchActive');
