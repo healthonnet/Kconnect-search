@@ -26,10 +26,16 @@ const trustServiceProxy = proxy('/trustability', {
   logLevel: 'debug',
 });
 
-const newsServiceProxy = proxy('/feeds', {
-  target: 'https://cloud.feedly.com/v3/search/',
+const disambiguatorServiceProxy = proxy('/khresmoiDisambiguator', {
+  target: 'http://everyone.khresmoi.eu/hon-search/',
   changeOrigin: true,
   logLevel: 'debug',
+});
+
+const newsServiceProxy = proxy('/feeds', {
+    target: 'https://cloud.feedly.com/v3/search/',
+    changeOrigin: true,
+    logLevel: 'debug',
 });
 
 /**
@@ -190,6 +196,7 @@ gulp.task('serve', ['html'], () => {
       baseDir: './' + DEST,
       middleware: [
         selectServiceProxy,
+        disambiguatorServiceProxy,
         trustServiceProxy,
         newsServiceProxy,
         historyApiFallback(),
@@ -231,6 +238,7 @@ gulp.task('serve-prod', ['default'], () => {
     middleware: (connect, opt) => {
       return [
         selectServiceProxy,
+        disambiguatorServiceProxy,
         trustServiceProxy,
         newsServiceProxy,
         historyApiFallback(),
