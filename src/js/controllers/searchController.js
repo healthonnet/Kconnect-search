@@ -33,6 +33,8 @@ app.controller('SearchController',
       };
       $scope.getColor = getColor;
       $scope.fathead = mockFathead;
+
+      // TODO Pagination + lang
       resultsService.getResults(q, 'en', 10, $scope.page)
         .then(function(res) {
           $scope.results = res.data.grouped.domain;
@@ -45,6 +47,20 @@ app.controller('SearchController',
                 link.doclist.docs[0].certified = true;
               }
             }
+
+            // Readability
+            var diff = link.doclist.docs[0].readability_difficult_facet;
+            var easy = link.doclist.docs[0].readability_easy_facet;
+            if (easy && diff) {
+              link.doclist.docs[0].readability = 60;
+            } else if (easy) {
+              link.doclist.docs[0].readability = 90;
+            } else if (diff) {
+              link.doclist.docs[0].readability = 30;
+            } else {
+              link.doclist.docs[0].readability = 0;
+            }
+
             // Trustability
             trustabilityService.getTrustabilityValueFromHost(link.groupValue)
               .then(function(data) {
