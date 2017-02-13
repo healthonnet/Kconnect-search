@@ -26,8 +26,10 @@ app.controller('SearchController',
     if (q) {
       $scope.form.param = q;
       $scope.param = q;
-      $scope.showScreenshot = function(url) {
-        $scope.screenshot = screenshotService.getScreenFromUrl(url);
+      $scope.showScreenshot = function($index) {
+        $scope.screenshot = $scope.results.groups[$index].doclist.docs[0];
+        $scope.screenshot.preview =
+            screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
       };
       $scope.getColor = getColor;
       $scope.fathead = mockFathead;

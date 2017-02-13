@@ -30,7 +30,7 @@
         <div class="col-xs-12">
           <h2>
             <img ng-src="{{ link.doclist.docs[0].url | favicon }}" alt="favicon">
-            <a href="{{ link.doclist.docs[0].url }}" ng-mouseover="showScreenshot(link.doclist.docs[0].url)">{{ link.doclist.docs[0].title_en }}</a>
+            <a href="{{ link.doclist.docs[0].url }}" ng-mouseover="showScreenshot($index)">{{ link.doclist.docs[0].title_en }}</a>
             <div class="visible-sm-inline-block">
               <img src="/images/honcode.png" ng-if="link.certified">
               <span class="m-trust" ng-show="link.trustability">
