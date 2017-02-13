@@ -4,6 +4,7 @@ app.controller('SearchController',
   ['$scope', '$location', 'TrustabilityService',
   function($scope, $location, trustabilityService) {
     $scope.pageTitle = 'Search';
+    $scope.pageIcon = 'fa-globe';
     $scope.form = {};
     $scope.searchActive = true;
     $scope.$emit('searchActive');
@@ -14,7 +15,6 @@ app.controller('SearchController',
         if ($scope.form.param === $location.search().q) {
           return;
         }
-        console.log($scope.form.param, $location.search().q);
         $location.search('q', $scope.form.param);
       }
     };

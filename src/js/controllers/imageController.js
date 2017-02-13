@@ -5,7 +5,8 @@ app
   ['$scope', '$location', 'ImageService', 'angularGridInstance',
   function($scope, $location, $imageService, angularGridInstance) {
     $scope.$emit('picturesActive');
-
+    $scope.pageIcon = 'fa-picture-o';
+    
     function parseImageResults(res) {
       res.data.grouped.contentMD5.groups.forEach(function(group) {
         group.doclist.docs[0].actualHeight  = group.doclist.docs[0].height;

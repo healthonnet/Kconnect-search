@@ -7,6 +7,7 @@ app
     $scope.pageTitle = 'Pro';
     $scope.form = {};
     $scope.$emit('proActive');
+    $scope.pageIcon = 'fa-user-md';
 
     $scope.submit = function() {
       if ($scope.form.param !== undefined) {
