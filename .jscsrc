@@ -1,5 +1,8 @@
 {
   "preset": "node-style-guide",
+  "requireCamelCaseOrUpperCaseIdentifiers": {
+    "ignoreProperties": true
+  },
   "requireTrailingComma": {
     "ignoreSingleValue": true,
     "ignoreSingleLine": true

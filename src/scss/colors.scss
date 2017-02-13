@@ -1,7 +1,37 @@
 $primary-color: rgb(85,85,85);
 $secondary-color: #1cb6f1;
+$dark-blue: rgb(12,142,192);
 $orange: rgb(255,143,43);
+$dark-orange: rgb(204,96,0);
 $red: rgb(255,43,42);
+$dark-red: rgb(204,1,0);
 $purple: rgb(205,43,144);
+$deep-purple: rgb(126,27,89);
 $green: rgb(51,201,94);
+$dark-green: rgb(31,122,57);
 $yellow: rgb(250,251,62);
+$dark-yellow: rgb(199,200,4);
+
+.text-dark-blue {
+  color: $dark-blue !important;
+}
+
+.text-orange {
+  color: $orange !important;
+}
+
+.text-dark-orange {
+  color: $dark-orange !important;
+}
+
+.text-purple {
+  color: $purple !important;
+}
+
+.text-dark-purple {
+  color: $deep-purple !important;
+}
+
+.text-dark-green {
+  color: $dark-green !important;
+}
