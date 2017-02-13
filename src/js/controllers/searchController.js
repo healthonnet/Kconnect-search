@@ -1,8 +1,10 @@
 'use strict';
 
 app.controller('SearchController',
-  ['$scope', '$location', 'TrustabilityService',
-  function($scope, $location, trustabilityService) {
+  ['$scope', '$location', 'ResultsService',
+  'TrustabilityService', 'ScreenshotService',
+  function($scope, $location, resultsService,
+    trustabilityService, screenshotService) {
     $scope.pageTitle = 'Search';
     $scope.pageIcon = 'fa-globe';
     $scope.form = {};
@@ -24,20 +26,48 @@ app.controller('SearchController',
     if (q) {
       $scope.form.param = q;
       $scope.param = q;
-      $scope.showScreenshot = function(index) {
-        $scope.screenshot = $scope.results.links[index];
+      $scope.showScreenshot = function($index) {
+        $scope.screenshot = $scope.results.groups[$index].doclist.docs[0];
+        $scope.screenshot.preview =
+            screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
       };
       $scope.getColor = getColor;
       $scope.fathead = mockFathead;
-      $scope.results = mockResults;
 
-      // Trustability Requests
-      $scope.results.links.forEach(function(link) {
-        trustabilityService.getTrustabilityValueFromHost(link.groupValue)
-          .then(function(data) {
-            link.trustability = data;
+      // TODO Pagination + lang
+      resultsService.getResults(q, 'en', 10, $scope.page)
+        .then(function(res) {
+          $scope.results = res.data.grouped.domain;
+          $scope.results.groups.forEach(function(link) {
+            // Handle extra datas and mutators
+            // HonCode certification
+            link.doclist.docs[0].isCertified = false;
+            if (link.doclist.docs[0].is_certified_facet) {
+              if (link.doclist.docs[0].is_certified_facet[0] === 'true') {
+                link.doclist.docs[0].certified = true;
+              }
+            }
+
+            // Readability
+            var diff = link.doclist.docs[0].readability_difficult_facet;
+            var easy = link.doclist.docs[0].readability_easy_facet;
+            if (easy && diff) {
+              link.doclist.docs[0].readability = 60;
+            } else if (easy) {
+              link.doclist.docs[0].readability = 90;
+            } else if (diff) {
+              link.doclist.docs[0].readability = 30;
+            } else {
+              link.doclist.docs[0].readability = 0;
+            }
+
+            // Trustability
+            trustabilityService.getTrustabilityValueFromHost(link.groupValue)
+              .then(function(data) {
+                link.doclist.docs[0].trustability = data;
+              });
           });
-      });
+        });
     } else {
       $scope.card = mockCard;
     }
@@ -77,36 +107,4 @@ var mockFathead = {
     'Lymphoma and multiple myeloma are malignancies that begin in the ' +
     'cells of the immune system. Central nervous system cancers are ' +
     'malignancies that begin in the tissues of the brain and spinal cord.',
-};
-
-var mockResults = {
-  size: 2,
-  links: [
-    {
-      groupValue: 'www.nhs.uk',
-      url: 'https://www.nhs.uk/Conditions/Cancer/Pages/Introduction.aspx',
-      screenshot: 'http://everyone.khresmoi.eu:3000/' +
-      '?url=http%3A%2F%2Fwww.paho.org%2Ftierra%2Findex.php' +
-      '%3Foption%3Dcom_multicategories%26view%3Dcategory' +
-      '%26id%3D30%26Itemid%3D114%26lang%3Den',
-      readability: '32',
-      certified: false,
-      title: 'Cancer - NHS Choices',
-      content: 'Cancer is a condition where cells in a ' +
-      'specific part of the body grow and reproduce uncontrollably. ' +
-      'The cancerous cells can invade and destroy surrounding healthy ...',
-    },
-    {
-      groupValue: 'wikipedia.org',
-      url: 'https://en.wikipedia.org/wiki/Cancer',
-      screenshot: 'http://everyone.khresmoi.eu:3000/' +
-      '?url=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGenetics_of_cancer',
-      title: 'Cancer - Wikipedia',
-      readability: '92',
-      certified: true,
-      content: 'Cancer is a group of diseases involving ' +
-      'abnormal cell growth with the potential to invade or spread to ' +
-      'other parts of the body. Not all tumors are ...',
-    },
-  ],
 };

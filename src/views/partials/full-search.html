@@ -25,12 +25,12 @@
 
   <div class="row">
     <div class="col-md-8 results">
-      <p>About {{results.size}} results</p>
-      <div class="row" ng-repeat="link in results.links track by $index">
+      <p>{{ 'ABOUT' | translate }} {{results.matches}} {{ 'RESULTS' | translate }}</p>
+      <div class="row" ng-repeat="link in results.groups track by $index">
         <div class="col-xs-12">
           <h2>
-            <img ng-src="{{ link.url | favicon }}" alt="favicon">
-            <a href="{{link.url}}" ng-mouseover="showScreenshot($index)">{{link.title}}</a>
+            <img ng-src="{{ link.doclist.docs[0].url | favicon }}" alt="favicon">
+            <a href="{{ link.doclist.docs[0].url }}" ng-mouseover="showScreenshot($index)">{{ link.doclist.docs[0].title_en }}</a>
             <div class="visible-sm-inline-block">
               <img src="/images/honcode.png" ng-if="link.certified">
               <span class="m-trust" ng-show="link.trustability">
@@ -42,9 +42,9 @@
             </div>
           </h2>
           <p>
-            <a href="{{link.url}}" ng-bind-html="link.url | spanWord:param"></a>
+            <a href="{{ link.doclist.docs[0].url }}" ng-bind-html="link.doclist.docs[0].url | cut:true:60:' ...' | spanWord:param"></a>
           </p>
-          <p ng-bind-html="link.content | spanWord:param">
+          <p ng-bind-html="link.doclist.docs[0].snippet | spanWord:param">
           </p>
         </div>
       </div>
