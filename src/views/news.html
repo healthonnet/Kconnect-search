@@ -18,7 +18,10 @@
     <div class="col-md-8 results">
       <p>About {{results.length}} results</p>
       <div class="row" ng-repeat="link in results track by $index">
-        <div class="col-xs-12">
+        <div class="col-sm-4">
+          <img src="{{link.coverUrl}}" style="width: 100%;" ng-if="link.coverUrl">
+        </div>
+        <div class="col-sm-8">
           <h2>
             <!-- <img ng-src="{{ link.url | favicon }}" alt="favicon"> -->
             <a href="{{link.website}}">{{link.title}}</a>
@@ -27,6 +30,10 @@
             <a href="{{link.website}}" ng-if="link.website" ng-bind-html="link.website | spanWord:param"></a>
           </p>
           <p ng-bind-html="link.description | spanWord:param" ng-if="link.description">
+          </p>
+          <p>
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+            {{ link.lastUpdated | date:'' }}
           </p>
         </div>
       </div>
