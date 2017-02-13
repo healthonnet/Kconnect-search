@@ -2,9 +2,9 @@
 
 app.controller('SearchController',
   ['$scope', '$location', 'ResultsService',
-  'TrustabilityService', 'ScreenshotService',
+  'TrustabilityService', 'ScreenshotService', 'DisambiguatorService',
   function($scope, $location, resultsService,
-    trustabilityService, screenshotService) {
+    trustabilityService, screenshotService, disambiguatorService) {
     $scope.pageTitle = 'Search';
     $scope.pageIcon = 'fa-globe';
     $scope.pageTitleColor = 'text-dark-blue';
@@ -33,7 +33,14 @@ app.controller('SearchController',
             screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
       };
       $scope.getColor = getColor;
-      $scope.fathead = mockFathead;
+      disambiguatorService.getFatheadContent(q)
+        .then(function(res) {
+          $scope.fathead = {
+            type: 'definition',
+            title: 'Definition of ' + q,
+            content: res.data.results[0].definition,
+          };
+        });
 
       // TODO Pagination + lang
       resultsService.getResults(q, 'en', 10, $scope.page)
