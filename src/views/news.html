@@ -1,37 +1,41 @@
 <ng-include ng-if="!param" src="'views/partials/middle-search.html'"></ng-include>
 
-<div class="col-xs-11 col-xs-offset-1" id="imageSearch" ng-show="param">
-  <div class="row">
-      <form ng-submit="submit()">
-          <div class="input-group stylish-input-group">
-              <input type="text" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" ng-model="form.param">
-              <span class="input-group-addon search-icon">
-                  <button type="submit" class="btn">
-                      <i class="fa fa-2x fa-search" aria-hidden="true"></i>
-                  </button>
-              </span>
-          </div>
-      </form>
-  </div>
+<div class="row">
+  <div class="col-sm-9 col-xs-11 col-xs-offset-1" id="newsSearch" ng-show="param">
+    <div class="row">
+        <form ng-submit="submit()">
+            <div class="input-group stylish-input-group">
+                <input type="text" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" ng-model="form.param">
+                <span class="input-group-addon search-icon">
+                    <button type="submit" class="btn">
+                        <i class="fa fa-2x fa-search" aria-hidden="true"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+    </div>
 
-  <div class="row">
-    <div class="col-md-8 results">
-      <p>About {{results.length}} results</p>
-      <div class="row" ng-repeat="link in results track by $index">
-        <div class="col-xs-12">
-          <h2>
-            <!-- <img ng-src="{{ link.url | favicon }}" alt="favicon"> -->
-            <a href="{{link.website}}">{{link.title}}</a>
-          </h2>
-          <p>
-            <a href="{{link.website}}" ng-if="link.website" ng-bind-html="link.website | spanWord:param"></a>
-          </p>
-          <p ng-bind-html="link.description | spanWord:param" ng-if="link.description">
-          </p>
+    <div class="row">
+      <div class="col-md-8 results">
+        <p>About {{results.length}} results</p>
+        <div class="row" ng-repeat="link in results track by $index">
+          <div class="col-xs-12">
+            <h2>
+              <!-- <img ng-src="{{ link.url | favicon }}" alt="favicon"> -->
+              <a href="{{link.website}}">{{link.title}}</a>
+            </h2>
+            <p>
+              <a href="{{link.website}}" ng-if="link.website" ng-bind-html="link.website | spanWord:param"></a>
+            </p>
+            <p ng-bind-html="link.description | spanWord:param" ng-if="link.description">
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div ng-include="'views/partials/footer.html'"></div>
+<div class="row">
+  <div ng-include="'views/partials/footer.html'"></div>
+</div>

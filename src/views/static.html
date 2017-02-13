@@ -1,12 +1,14 @@
 <div class="vert-padding-top-4">
-  <div class="col-sm-9 col-sm-offset-2 col-xs-11 col-xs-offset-1">
-    <h1 id="kconnect">{{ pageTitle | translate }}</h1>
-    <hr>
-    <div ng-bind-html=" pageContent | translate"></div>
-    <p>
-      version: {{version}}
-    </p>
+  <div class="row">
+    <div class="col-sm-9 col-sm-offset-2 col-xs-11 col-xs-offset-1">
+      <h1 id="kconnect">{{ pageTitle | translate }}</h1>
+      <hr>
+      <div ng-bind-html=" pageContent | translate"></div>
+      <p>
+        version: {{version}}
+      </p>
+    </div>
   </div>
 </div>
 
-<div ng-include="'views/partials/footer.html'"></div>
+<footer ng-include="'views/partials/footer.html'"></footer>
