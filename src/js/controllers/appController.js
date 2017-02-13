@@ -15,4 +15,34 @@ app.controller('AppController',
           $location.search().q ? '?q=' + $location.search().q : '';
     });
     $scope.version = version;
+    $scope.$on('newsActive', function(event, args) {
+      $scope.newsActive = true;
+      $scope.searchActive = false;
+      $scope.picturesActive = false;
+      $scope.proActive = false;
+    });
+    $scope.$on('searchActive', function(event, args) {
+      $scope.searchActive = true;
+      $scope.newsActive = false;
+      $scope.picturesActive = false;
+      $scope.proActive = false;
+    });
+    $scope.$on('picturesActive', function(event, args) {
+      $scope.picturesActive = true;
+      $scope.searchActive = false;
+      $scope.newsActive = false;
+      $scope.proActive = false;
+    });
+    $scope.$on('proActive', function(event, args) {
+      $scope.searchActive = false;
+      $scope.newsActive = false;
+      $scope.picturesActive = false;
+      $scope.proActive = true;
+    });
+    $scope.$on('noneActive', function(event, args) {
+      $scope.searchActive = false;
+      $scope.newsActive = false;
+      $scope.picturesActive = false;
+      $scope.proActive = false;
+    });
   },]);

@@ -6,6 +6,8 @@ app.controller('SearchController',
     $scope.pageTitle = 'Search';
     $scope.pageIcon = 'fa-globe';
     $scope.form = {};
+    $scope.searchActive = true;
+    $scope.$emit('searchActive');
 
     $scope.submit = function() {
       if ($scope.form.param !== undefined) {

@@ -11,4 +11,5 @@ app.controller('StaticController', function($scope, $location) {
 
     $scope.pageTitle = title;
     $scope.pageContent = content;
+    $scope.$emit('noneActive');
   });
