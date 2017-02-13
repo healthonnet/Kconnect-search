@@ -24,13 +24,13 @@ app.factory('ResultsService', function($http, SELECT_SERVICE_URL) {
           // 'facet.field': 'readability_difficult_facet',
           // 'facet.field': 'readability_easy_facet',
           'group.field': 'domain',
-          facetsToFetch: '%20khresmoi_sections_cleanedBody_facet' +
-          '%20khresmoi_sections_cleanedTitle_facet' +
-          '%20khresmoi_sections_internalLink_facet' +
-          '%20khresmoi_sections_sectionType_facet' +
-          '%20readability_difficult_facet' +
-          '%20readability_easy_facet' +
-          '%20is_certified_facet',
+          facetsToFetch: ' khresmoi_sections_cleanedBody_facet' +
+          ' khresmoi_sections_cleanedTitle_facet' +
+          ' khresmoi_sections_internalLink_facet' +
+          ' khresmoi_sections_sectionType_facet' +
+          ' readability_difficult_facet' +
+          ' readability_easy_facet' +
+          ' is_certified_facet',
           q: query,
           searchLanguage: 'en',
           wt: 'json',
