@@ -42,7 +42,7 @@
             </div>
           </h2>
           <p>
-            <a href="{{ link.doclist.docs[0].url }}" ng-bind-html="link.doclist.docs[0].url | crop | spanWord:param"></a>
+            <a href="{{ link.doclist.docs[0].url }}" ng-bind-html="link.doclist.docs[0].url | cut:true:60:' ...' | spanWord:param"></a>
           </p>
           <p ng-bind-html="link.doclist.docs[0].snippet | spanWord:param">
           </p>

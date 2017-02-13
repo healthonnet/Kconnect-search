@@ -1,7 +1,7 @@
 <div ng-if="screenshot" class="screenshot">
   <div class="row">
     <div class="col-xs-11">
-      <h2>{{screenshot.title}}</h2>
+      <h2>{{screenshot.site | cut:true:15:' ...'}}</h2>
     </div>
     <div class="col-xs-1">
       <button class="pull-right btn btn-default btn-padding" ng-click="showScreenshot()"><i class="fa fa-times" aria-hidden="true"></i></button>
