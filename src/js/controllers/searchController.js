@@ -39,7 +39,7 @@ app.controller('SearchController',
           $scope.results.groups.forEach(function(link) {
             trustabilityService.getTrustabilityValueFromHost(link.groupValue)
               .then(function(data) {
-                link.trustability = data;
+                link.doclist.docs[0].trustability = data;
               });
           });
         });
