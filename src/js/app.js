@@ -10,6 +10,7 @@ var app = angular.module('App', [
   'favicon',
   'angularGrid',
   'dcbImgFallback',
+  'angularMoment',
 ])
   .config(function($routeProvider, $translateProvider, $locationProvider) {
 
