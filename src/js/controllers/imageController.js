@@ -31,8 +31,6 @@ app
       gutterSize: 10,
       pageSize: 3,
       infiniteScrollDistance: 80,
-      scrollContainer: '.results',
-      performantScroll: true,
     };
 
     $scope.refresh = function() {

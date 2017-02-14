@@ -53,12 +53,18 @@ body:after{
 }
 
 .language {
-  margin: 10px;
-  color: #333;
-  background-color: #f8f8f8;
-  border-color: #e7e7e7;
-  p {
-    margin: 0;
+  z-index: 100000;
+  a {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+  }
+}
+
+@media (min-width: 768px) {
+  .language {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 }
 
