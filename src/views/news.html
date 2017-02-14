@@ -1,20 +1,7 @@
 <ng-include ng-if="!param" src="'views/partials/middle-search.html'"></ng-include>
+<ng-include ng-if="param" src="'views/partials/top-search.html'"></ng-include>
 
-<div class="row">
-  <div class="col-sm-9 col-xs-11 col-xs-offset-1" id="newsSearch" ng-show="param">
-    <div class="row">
-        <form ng-submit="submit()">
-            <div class="input-group stylish-input-group">
-                <input type="text" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" ng-model="form.param">
-                <span class="input-group-addon search-icon">
-                    <button type="submit" class="btn">
-                        <i class="fa fa-2x fa-search" aria-hidden="true"></i>
-                    </button>
-                </span>
-            </div>
-        </form>
-    </div>
-
+<div class="row col-sm-11 col-xs-11 col-xs-offset-1" id="newsSearch" ng-show="param">
   <div class="row news">
     <div ng-repeat="link in results track by $index">
       <ng-include src="'views/partials/news-item-simple.html'"></ng-include>
