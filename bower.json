@@ -30,7 +30,9 @@
     "angular-favicon": "^0.3.2",
     "angulargrid": "^0.6.3",
     "angular-img-fallback": "^0.2.0",
-    "angular-loading-bar": "^0.9.0"
+    "angular-loading-bar": "^0.9.0",
+    "angular-moment": "^1.0.1",
+    "moment": "^2.17.1"
   },
   "resolutions": {
     "angular": "^1.6.1"
