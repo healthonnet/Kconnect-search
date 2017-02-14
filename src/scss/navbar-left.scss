@@ -30,7 +30,6 @@ $navbar-width-sm: 90px;
 
 .navbar-fixed-left .navbar-nav > li {
   float: none;
-  margin-bottom: 20px;
 }
 
 .navbar-fixed-left .navbar-nav > li > .dropdown-menu {
@@ -63,6 +62,24 @@ $navbar-width-sm: 90px;
     &:hover {
       color: $secondary-color;
     }
+  }
+}
+
+.navbar-middle {
+  .search-web:hover {
+    color: $dark-blue !important;
+  }
+  .search-images:hover {
+    color: $deep-purple !important;
+  }
+  .search-news:hover {
+    color: $dark-orange !important;
+  }
+  .search-pro:hover {
+    color: $dark-green !important;
+  }
+  .search-apps:hover {
+    color: $dark-red !important;
   }
 }
 
