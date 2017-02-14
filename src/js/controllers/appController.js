@@ -3,6 +3,10 @@
 app.controller('AppController',
   ['$scope', '$translate', 'LANGUAGES', 'VERSION', '$location',
   function($scope, $translate, lang, version, $location) {
+    $scope.filters = false;
+    $scope.foo = function() {
+      $scope.filters = !$scope.filters;
+    };
     $scope.lang = lang[$translate.proposedLanguage()];
     $scope.$on('switchLang', function(event, args) {
       $scope.lang = lang[args];
