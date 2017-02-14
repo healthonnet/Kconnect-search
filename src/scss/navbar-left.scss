@@ -66,6 +66,21 @@ $navbar-width-sm: 90px;
   }
 }
 
+.navbar-middle {
+  .search-web:hover {
+    color: $dark-blue !important;
+  }
+  .search-images:hover {
+    color: $deep-purple !important;
+  }
+  .search-news:hover {
+    color: $dark-orange !important;
+  }
+  .search-pro:hover {
+    color: $dark-green !important;
+  }
+}
+
 .navbar-bottom {
   position: absolute;
   bottom: 20px;
