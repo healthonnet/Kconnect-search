@@ -30,6 +30,23 @@
       height: 20px;
     }
   }
+  .filter-tabs {
+    margin-top: 10px;
+    li {
+      a {
+        color: $primary-color;
+      }
+      span {
+        color: $secondary-color;
+      }
+    }
+    li.active {
+      span {
+        font-weight: 900;
+        color: $primary-color;
+      }
+    }
+  }
 }
 
 .search-details {

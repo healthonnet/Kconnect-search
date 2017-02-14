@@ -20,7 +20,8 @@ app.factory('ResultsService', function($http, SELECT_SERVICE_URL) {
           'f.khresmoi_sections_sectionType_facet.facet.mincount': 1,
           'facet.field': 'khresmoi_sections_sectionType_facet',
           // TODO: what?
-          // 'facet.field': 'health_topics_facet',
+          // TODO: 'facet.field': 'health_topics_facet',
+          // TODO:
           // 'facet.field': 'readability_difficult_facet',
           // 'facet.field': 'readability_easy_facet',
           'group.field': 'domain',

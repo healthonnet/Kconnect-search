@@ -45,7 +45,10 @@ app.controller('SearchController',
       // TODO Pagination + lang
       resultsService.getResults(q, 'en', 10, $scope.page)
         .then(function(res) {
+          console.log(res.data);
           $scope.results = res.data.grouped.domain;
+          $scope.sections = res.data.facet_counts
+            .facet_fields.khresmoi_sections_sectionType_facet;
           $scope.results.groups.forEach(function(link) {
             // Handle extra datas and mutators
             // HonCode certification
