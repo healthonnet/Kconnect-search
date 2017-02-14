@@ -1,6 +1,5 @@
 #imageSearch {
   position: relative;
-  height: 100%;
 
   .results {
     top: 80px;
@@ -9,4 +8,8 @@
     position: absolute;
     bottom: 0;
   }
+}
+
+.v-fill {
+  height: 100%;
 }
