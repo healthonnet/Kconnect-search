@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('LanguageController',
+app.controller('SettingsController',
   ['$scope', '$translate', '$location', 'LANGUAGES',
   function($scope, $translate, $location, languages) {
     $scope.$emit('noneActive');

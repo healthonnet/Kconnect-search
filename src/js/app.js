@@ -2,6 +2,7 @@
 
 var app = angular.module('App', [
   'ui.bootstrap',
+  'ui.toggle',
   'angular-loading-bar',
   'ngRoute',
   'pascalprecht.translate',
@@ -11,16 +12,18 @@ var app = angular.module('App', [
   'angularGrid',
   'dcbImgFallback',
   'angularMoment',
+  'LocalStorageModule',
 ])
-  .config(function($routeProvider, $translateProvider, $locationProvider) {
+  .config(function($routeProvider, $translateProvider,
+                   $locationProvider, localStorageServiceProvider) {
 
-    $translateProvider.useStaticFilesLoader({
-      prefix: 'locales/locale-',
-      suffix: '.json',
-    });
-
-    $translateProvider.useSanitizeValueStrategy('sce');
-    $translateProvider.preferredLanguage('en');
+    $translateProvider
+      .useStaticFilesLoader({
+        prefix: 'locales/locale-',
+        suffix: '.json',
+      })
+      .useSanitizeValueStrategy('sce')
+      .preferredLanguage('en');
 
     $locationProvider.html5Mode({
       enabled: true,
@@ -60,8 +63,16 @@ var app = angular.module('App', [
         templateUrl: 'views/search.html',
         controller: 'ProController',
       })
+      .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsController',
+      })
       .when('/language', {
         templateUrl: 'views/language.html',
         controller: 'LanguageController',
       });
+
+    localStorageServiceProvider
+        .setPrefix('kcon')
+        .setDefaultToCookie(false);
   });
