@@ -9,6 +9,7 @@ app
     $scope.pageIcon = 'fa-newspaper-o';
     $scope.pageTitleColor = 'text-dark-orange';
     $scope.form = {};
+    $scope.showFilters = false;
 
     $scope.submit = function() {
       if ($scope.form.param !== undefined) {

@@ -10,6 +10,8 @@ app.controller('SearchController',
     $scope.pageTitleColor = 'text-dark-blue';
     $scope.form = {};
     $scope.searchActive = true;
+    $scope.filters = $scope.filters || {};
+    $scope.filters = deserialize($location.search().filters);
     $scope.$emit('searchActive');
 
     $scope.submit = function() {
@@ -22,7 +24,22 @@ app.controller('SearchController',
       }
     };
 
+    $scope.activateFilter = function(filter) {
+      $scope.filters[filter] = !$scope.filters[filter];
+      $location.search('filters', serialize($scope.filters));
+    };
+
+    $scope.searchSection = function(param) {
+      if (param) {
+        $location.search('section', param.toLowerCase());
+      } else {
+        $location.search('section', null);
+      }
+    };
+
     var q = $location.search().q;
+    var section = $location.search().section;
+    var filters = $location.search().filters;
 
     if (q) {
       $scope.form.param = q;
@@ -43,9 +60,27 @@ app.controller('SearchController',
         });
 
       // TODO Pagination + lang
-      resultsService.getResults(q, 'en', 10, $scope.page)
+      resultsService.getResults({
+        query: q,
+        lang: 'en',
+        rows: 10,
+        page: $scope.page,
+        section: section,
+        filters: filters,
+      })
         .then(function(res) {
+          // Sections
+          $scope.all = 'all';
+          if (section) {
+            $scope.all = section.toUpperCase();
+          }
+          $scope.sections = res.data.facet_counts
+            .facet_fields.khresmoi_sections_sectionType_facet;
+
+          // Results
           $scope.results = res.data.grouped.domain;
+
+          // Certification
           $scope.results.groups.forEach(function(link) {
             // Handle extra datas and mutators
             // HonCode certification
@@ -81,6 +116,32 @@ app.controller('SearchController',
     }
   },]);
 
+function serialize(obj) {
+  var results = '';
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key) && obj[key]) {
+      results += key + ' ';
+    }
+  }
+  results = results.trim();
+  if (results === '') {
+    results = null;
+  }
+  return results;
+}
+
+function deserialize(text) {
+  var results = {};
+  if (!text) {
+    return results;
+  }
+  var array = text.split(' ');
+  for (var i = 0; i < array.length; i++) {
+    results[array[i]] = true;
+  }
+  return results;
+}
+
 var getColor = function(normalizedValue) {
   if (normalizedValue < 33) {
     return '#fd0000';
@@ -97,22 +158,4 @@ var mockCard = {
   text: 'Not for profit | No <span>ads</span> | ' +
     'No <span>cookies</span><br />' +
     'Lookup our <a href="/privacy">Privacy Policies</a>',
-};
-
-var mockFathead = {
-  type: 'definition',
-  title: 'Definition of Cancer',
-  content: 'A term for diseases in which abnormal cells divide without ' +
-    'control and can invade nearby tissues. Malignant cells can also ' +
-    'spread to other parts of the body through the blood and lymph ' +
-    'systems. There are several main types of malignancy. Carcinoma is ' +
-    'a malignancy that begins in the skin or in tissues that line or ' +
-    'cover internal organs. Sarcoma is a malignancy that begins in bone, ' +
-    'cartilage, fat, muscle, blood vessels, or other connective or ' +
-    'supportive tissue. Leukemia is a malignancy that starts in ' +
-    'blood-forming tissue such as the bone marrow, and causes large ' +
-    'numbers of abnormal blood cells to be produced and enter the blood. ' +
-    'Lymphoma and multiple myeloma are malignancies that begin in the ' +
-    'cells of the immune system. Central nervous system cancers are ' +
-    'malignancies that begin in the tissues of the brain and spinal cord.',
 };

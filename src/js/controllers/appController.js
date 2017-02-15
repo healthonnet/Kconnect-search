@@ -6,6 +6,11 @@ app.controller('AppController',
   function($scope, $translate, lang, version,
            defaultPreferences, $location, localStorageService) {
     $scope.init = function() {
+      
+      $scope.showFilters = false;
+      $scope.toggleFilters = function() {
+        $scope.showFilters = !$scope.showFilters;
+      };
 
       // App values & settings
       $scope.kConfig = defaultPreferences;
