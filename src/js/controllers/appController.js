@@ -6,7 +6,6 @@ app.controller('AppController',
   function($scope, $translate, lang, version,
            defaultPreferences, $location, localStorageService) {
     $scope.init = function() {
-      
       $scope.showFilters = false;
       $scope.toggleFilters = function() {
         $scope.showFilters = !$scope.showFilters;
@@ -107,4 +106,3 @@ app.controller('AppController',
 
     $scope.init();
   },]);
-
