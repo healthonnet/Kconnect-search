@@ -68,18 +68,13 @@ body:after{
   }
 }
 
-.v-align-30 {
-  height: 100%;
-}
-
-.v-align-30 div {
-  position: relative;
-  top: 30%;
-  transform: translateY(-30%);
-}
-
 .navbar-fixed-bottom {
   margin-left: 140px;
+}
+
+.middle-search {
+  margin-top: 10%;
+  margin-bottom: 50px;
 }
 
 /**
