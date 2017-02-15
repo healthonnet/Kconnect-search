@@ -19,12 +19,8 @@
         </div>
         <br>
     </div>
-      <div class="row" ng-hide="images.length > 0">
+      <div class="row" ng-hide="images.length > 0 || !param">
         <p>No Images found.</p>
       </div>
   </div>
-</div>
-
-<div class="row">
-  <footer ng-include="'views/partials/footer.html'" ng-if="param"></footer>
 </div>
