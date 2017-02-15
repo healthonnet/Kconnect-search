@@ -6,7 +6,7 @@ app.filter('cut', function() {
       return '';
     }
 
-    max = parseInt(max, 10);
+    max = parseInt(max, 14);
     if (!max) {
       return value;
     }

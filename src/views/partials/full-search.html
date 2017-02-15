@@ -18,9 +18,16 @@
   <div class="row results">
     <div class="col-xs-12">
       <ul class="nav nav-tabs filter-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">all <span>{{results.matches}}</span></a></li>
-        <li role="presentation" ng-repeat="(key, value) in sections">
-          <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">{{ key | translate }} <span>{{ value }}</span></a></li>
+        <li role="presentation" ng-class="{true: 'active'}[all == 'all']">
+          <a href="#" ng-click="searchSection()" role="tab" data-toggle="tab">
+            all <span>{{results.matches}}</span>
+          </a>
+        </li>
+        <li role="presentation" ng-repeat="(key, value) in sections" ng-class="{true: 'active'}[all == key]">
+          <a href="#" ng-click="searchSection(key)" role="tab" data-toggle="tab">
+            {{ key | translate }} <span>{{ value }}</span>
+          </a>
+        </li>
         </li>
       </ul>
     </div>
