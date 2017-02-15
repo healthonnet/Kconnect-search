@@ -4,6 +4,10 @@ app.constant('DISAMBIGUATOR_SERVICE_URL', '/khresmoiDisambiguator');
 app.constant('NEWS_SERVICE_URL', '/feeds');
 app.constant('SCREENSHOT_SERVICE_URL', 'http://everyone.khresmoi.eu:3000');
 app.constant('VERSION', '0.1.0-fix-style');
+app.constant('DEFAULT_PREFERENCES', {
+  hello: 'world',
+  test: true,
+});
 app.constant('LANGUAGES', {
   bg: {
     name: 'български',
