@@ -10,6 +10,7 @@ app.factory('ResultsService', function($http, SELECT_SERVICE_URL) {
         section: options.section ?
           'khresmoi_sections_sectionType_facet:' +
           options.section.toUpperCase() : '',
+        filters: parseFilters(options.filters),
       };
       return $http.get(SELECT_SERVICE_URL, {
         params: {
@@ -37,6 +38,7 @@ app.factory('ResultsService', function($http, SELECT_SERVICE_URL) {
           fq: [
             'docType:html',
             options.section,
+            options.filters,
           ],
           searchLanguage: options.lang,
           wt: 'json',
@@ -45,3 +47,15 @@ app.factory('ResultsService', function($http, SELECT_SERVICE_URL) {
     },
   };
 });
+
+function parseFilters(filters) {
+  if (typeof filters !== 'string') {
+    return '';
+  }
+  var filtersArray = filters.split(' ');
+  filtersArray = filtersArray.map(function(s) {
+    return '(hon_label_' + s + '_facet:true)';
+  });
+  filters = filtersArray.join(' OR ');
+  return filters;
+}

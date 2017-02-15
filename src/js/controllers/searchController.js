@@ -10,6 +10,8 @@ app.controller('SearchController',
     $scope.pageTitleColor = 'text-dark-blue';
     $scope.form = {};
     $scope.searchActive = true;
+    $scope.filters = $scope.filters || {};
+    $scope.filters = deserialize($location.search().filters);
     $scope.$emit('searchActive');
 
     $scope.submit = function() {
@@ -22,16 +24,22 @@ app.controller('SearchController',
       }
     };
 
+    $scope.activateFilter = function(filter) {
+      $scope.filters[filter] = !$scope.filters[filter];
+      $location.search('filters', serialize($scope.filters));
+    };
+
     $scope.searchSection = function(param) {
       if (param) {
         $location.search('section', param.toLowerCase());
       } else {
-        $location.search('section', '');
+        $location.search('section', null);
       }
     };
 
     var q = $location.search().q;
     var section = $location.search().section;
+    var filters = $location.search().filters;
 
     if (q) {
       $scope.form.param = q;
@@ -58,6 +66,7 @@ app.controller('SearchController',
         rows: 10,
         page: $scope.page,
         section: section,
+        filters: filters,
       })
         .then(function(res) {
           // Sections
@@ -106,6 +115,32 @@ app.controller('SearchController',
       $scope.card = mockCard;
     }
   },]);
+
+function serialize(obj) {
+  var results = '';
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key) && obj[key]) {
+      results += key + ' ';
+    }
+  }
+  results = results.trim();
+  if (results === '') {
+    results = null;
+  }
+  return results;
+}
+
+function deserialize(text) {
+  var results = {};
+  if (!text) {
+    return results;
+  }
+  var array = text.split(' ');
+  for (var i = 0; i < array.length; i++) {
+    results[array[i]] = true;
+  }
+  return results;
+}
 
 var getColor = function(normalizedValue) {
   if (normalizedValue < 33) {

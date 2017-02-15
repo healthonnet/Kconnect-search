@@ -1,14 +1,14 @@
-<div class="col-sm-8 col-sm-offset-2">
-  <button class="btn btn-default">Seniors</button>
-  <button class="btn btn-default">Men</button>
-  <button class="btn btn-info">Women</button>
-  <button class="btn btn-default">Kids</button>
-  <button class="btn btn-default">Forums</button>
-  <button class="btn btn-default">Governmental organizations</button>
-  <button class="btn btn-default">Association / Foundation</button>
-  <button class="btn btn-default">Health and medical info</button>
-  <button class="btn btn-default">Healthcare providers</button>
-  <button class="btn btn-default">Pages with video</button>
-  <button class="btn btn-default">Products and services</button>
-  <button class="btn btn-default">Research</button>
+<div class="col-sm-12" class="filters">
+  <button class="btn" ng-class="{ 'btn-info': filters.seniors, 'btn-default': !filters.seniors }" ng-click="activateFilter('seniors')">Seniors</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.men, 'btn-default': !filters.men }" ng-click="activateFilter('men')">Men</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.women, 'btn-default': !filters.women }" ng-click="activateFilter('women')">Women</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.kids, 'btn-default': !filters.kids }" ng-click="activateFilter('kids')">Kids</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.forum, 'btn-default': !filters.forum }" ng-click="activateFilter('forum')">Forums</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.gov, 'btn-default': !filters.gov }" ng-click="activateFilter('gov')">Governmental organizations</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.assoc, 'btn-default': !filters.assoc }" ng-click="activateFilter('assoc')">Association / Foundation</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.info, 'btn-default': !filters.info }" ng-click="activateFilter('info')">Health and medical info</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.clinic, 'btn-default': !filters.clinic }" ng-click="activateFilter('clinic')">Healthcare providers</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.video, 'btn-default': !filters.video }" ng-click="activateFilter('video')">Pages with video</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.services, 'btn-default': !filters.services }" ng-click="activateFilter('services')">Products and services</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.research, 'btn-default': !filters.researcg }" ng-click="activateFilter('research')">Research</button>
 </div>
