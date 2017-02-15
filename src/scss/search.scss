@@ -30,6 +30,28 @@
       height: 20px;
     }
   }
+  .filter-tabs {
+    margin-top: 10px;
+    border: none;
+    li {
+      a {
+        color: $primary-color;
+      }
+      span {
+        color: $secondary-color;
+      }
+    }
+    li.active {
+      a {
+        border: none;
+        border-bottom: solid $secondary-color 3px;
+      }
+      span {
+        font-weight: 900;
+        color: $primary-color;
+      }
+    }
+  }
 }
 
 .search-details {
@@ -63,5 +85,11 @@
   }
   .btn-padding {
     margin: 10px;
+  }
+}
+
+.filters {
+  .btn {
+    margin: 5px;
   }
 }

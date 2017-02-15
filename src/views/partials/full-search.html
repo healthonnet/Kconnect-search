@@ -2,44 +2,62 @@
 
 <div class="row col-sm-11 col-xs-11 col-xs-offset-1">
 
-     <div class="row fathead" ng-if="fathead">
-      <div class="col-xs-12">
-        <div class="container-fluid">
-          <h2>{{fathead.title}}</h2>
+   <div class="row fathead" ng-if="fathead">
+    <div class="col-xs-12">
+      <div class="container-fluid">
+        <h2>{{fathead.title}}</h2>
+        <p>
+          {{fathead.content}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div ng-include="'views/partials/filters.html'" ng-if="showFilters" class="row"></div>
+
+  <div class="row results">
+    <div class="col-xs-12">
+      <ul class="nav nav-tabs filter-tabs" role="tablist">
+        <li role="presentation" ng-class="{true: 'active'}[all == 'all']">
+          <a href="#" ng-click="searchSection()" role="tab" data-toggle="tab">
+            all <span>{{results.matches}}</span>
+          </a>
+        </li>
+        <li role="presentation" ng-repeat="(key, value) in sections" ng-class="{true: 'active'}[all == key]">
+          <a href="#" ng-click="searchSection(key)" role="tab" data-toggle="tab">
+            {{ key | translate }} <span>{{ value }}</span>
+          </a>
+        </li>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-7 results">
+      <div class="row" ng-repeat="link in results.groups track by $index">
+        <div class="col-xs-12">
+          <h2>
+            <img ng-src="{{ link.doclist.docs[0].url | favicon }}" alt="favicon">
+            <a href="{{ link.doclist.docs[0].url }}" ng-mouseover="showScreenshot($index)">{{ link.doclist.docs[0].title_en }}</a>
+            <div class="visible-sm-inline-block">
+              <img src="/images/honcode.png" ng-if="link.certified">
+              <span class="m-trust" ng-show="link.trustability">
+                <i class="fa fa-stethoscope" aria-hidden="true" style="color: {{getColor(link.trustability)}}"></i>
+              </span>
+              <span class="m-read" ng-show="link.readability">
+                <i class="fa fa-book" aria-hidden="true" style="color: {{getColor(link.readability)}}"></i>
+              </span>
+            </div>
+          </h2>
           <p>
-            {{fathead.content}}
+            <a href="{{ link.doclist.docs[0].url }}" ng-bind-html="link.doclist.docs[0].url | cut:true:60:' ...' | spanWord:param"></a>
+          </p>
+          <p ng-bind-html="link.doclist.docs[0].snippet | spanWord:param">
           </p>
         </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-md-8 results">
-        <p>{{ 'ABOUT' | translate }} {{results.matches}} {{ 'RESULTS' | translate }}</p>
-        <div class="row" ng-repeat="link in results.groups track by $index">
-          <div class="col-xs-12">
-            <h2>
-              <img ng-src="{{ link.doclist.docs[0].url | favicon }}" alt="favicon">
-              <a href="{{ link.doclist.docs[0].url }}" ng-mouseover="showScreenshot($index)">{{ link.doclist.docs[0].title_en }}</a>
-              <div class="visible-sm-inline-block">
-                <img src="/images/honcode.png" ng-if="link.certified">
-                <span class="m-trust" ng-show="link.trustability">
-                  <i class="fa fa-stethoscope" aria-hidden="true" style="color: {{getColor(link.trustability)}}"></i>
-                </span>
-                <span class="m-read" ng-show="link.readability">
-                  <i class="fa fa-book" aria-hidden="true" style="color: {{getColor(link.readability)}}"></i>
-                </span>
-              </div>
-            </h2>
-            <p>
-              <a href="{{ link.doclist.docs[0].url }}" ng-bind-html="link.doclist.docs[0].url | cut:true:60:' ...' | spanWord:param"></a>
-            </p>
-            <p ng-bind-html="link.doclist.docs[0].snippet | spanWord:param">
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 search-details hidden-sm" ng-include="'views/partials/screenshot.html'">
-      </div>
+    <div class="col-md-5 search-details hidden-sm" ng-include="'views/partials/screenshot.html'">
     </div>
 </div>

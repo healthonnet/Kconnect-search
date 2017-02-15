@@ -3,7 +3,7 @@ app.constant('TRUST_SERVICE_URL', '/trustability');
 app.constant('DISAMBIGUATOR_SERVICE_URL', '/khresmoiDisambiguator');
 app.constant('NEWS_SERVICE_URL', '/feeds');
 app.constant('SCREENSHOT_SERVICE_URL', 'http://everyone.khresmoi.eu:3000');
-app.constant('VERSION', '0.1.0-fix-style');
+app.constant('VERSION', '0.1.0-filters');
 app.constant('LANGUAGES', {
   bg: {
     name: 'български',

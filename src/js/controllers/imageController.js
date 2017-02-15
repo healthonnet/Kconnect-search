@@ -7,6 +7,7 @@ app
     $scope.$emit('picturesActive');
     $scope.pageIcon = 'fa-picture-o';
     $scope.pageTitleColor = 'text-dark-purple';
+    $scope.showFilters = false;
 
     function parseImageResults(res) {
       res.data.grouped.contentMD5.groups.forEach(function(group) {
