@@ -76,12 +76,11 @@ app.controller('AppController',
         // Init localstorage values
         for (var prop in $scope.kConfig) {
           if ($scope.kConfig.hasOwnProperty(prop)) {
-            if (!localStorageService.get(prop)) {
+            if (localStorageService.get(prop) === null) {
               localStorageService.set(prop, $scope.kConfig[prop]);
-            } else {
-              localStorageService.bind($scope, 'kConfig.' + prop,
-              localStorageService.get(prop), prop);
             }
+            localStorageService.bind($scope, 'kConfig.' + prop,
+              localStorageService.get(prop), prop);
           }
         }
 

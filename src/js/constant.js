@@ -7,6 +7,8 @@ app.constant('VERSION', '0.1.0-fix-style');
 app.constant('DEFAULT_PREFERENCES', {
   hello: 'world',
   test: true,
+  advancedSearch: true,
+  advancedNews: false,
 });
 app.constant('LANGUAGES', {
   bg: {
