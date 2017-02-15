@@ -1,0 +1,25 @@
+<ng-include ng-if="!param" src="'views/partials/middle-search.html'"></ng-include>
+<ng-include ng-if="param" src="'views/partials/top-search.html'"></ng-include>
+
+<div class="row apps">
+  <div class="col-xs-9 col-xs-offset-2">
+    <div class="row">
+      <div class="col-md-4" ng-repeat="app in apps">
+        <div class="app">
+          <img src="{{app.icon}}">
+          <h5>{{app.title}}</h5>
+          <div class="row">
+            <div class="col-xs-6" ng-if="app.android">
+              <i class="fa fa-android" aria-hidden="true"></i>
+              android
+            </div>
+            <div class="col-xs-6" ng-if="app.ios">
+              <i class="fa fa-apple" aria-hidden="true"></i>
+              ios
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
