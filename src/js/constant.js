@@ -1,5 +1,6 @@
 app.constant('SELECT_SERVICE_URL', '/select');
 app.constant('TRUST_SERVICE_URL', '/trustability');
+app.constant('TRANSLATION_SERVICE_URL', '/translation');
 app.constant('DISAMBIGUATOR_SERVICE_URL', '/khresmoiDisambiguator');
 app.constant('NEWS_SERVICE_URL', '/feeds');
 app.constant('SUGGEST_SERVICE_URL', '/suggest');
