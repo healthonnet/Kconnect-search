@@ -33,9 +33,15 @@ const disambiguatorServiceProxy = proxy('/khresmoiDisambiguator', {
 });
 
 const newsServiceProxy = proxy('/feeds', {
-    target: 'https://cloud.feedly.com/v3/search/',
-    changeOrigin: true,
-    logLevel: 'debug',
+  target: 'https://cloud.feedly.com/v3/search/',
+  changeOrigin: true,
+  logLevel: 'debug',
+});
+
+const suggestServiceProxy = proxy('/suggest', {
+  target: 'http://everyone.khresmoi.eu/hon-terms-dictionary/',
+  changeOrigin: true,
+  logLevel: 'debug',
 });
 
 /**
@@ -199,6 +205,7 @@ gulp.task('serve', ['html'], () => {
         disambiguatorServiceProxy,
         trustServiceProxy,
         newsServiceProxy,
+        suggestServiceProxy,
         historyApiFallback(),
       ],
     },
@@ -241,6 +248,7 @@ gulp.task('serve-prod', ['default'], () => {
         disambiguatorServiceProxy,
         trustServiceProxy,
         newsServiceProxy,
+        suggestServiceProxy,
         historyApiFallback(),
       ];
     },

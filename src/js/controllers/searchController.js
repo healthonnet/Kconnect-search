@@ -1,9 +1,9 @@
 'use strict';
 
 app.controller('SearchController',
-  ['$scope', '$location', 'ResultsService',
+  ['$scope', '$location', 'ResultsService', 'SuggestionService',
   'TrustabilityService', 'ScreenshotService', 'DisambiguatorService',
-  function($scope, $location, resultsService,
+  function($scope, $location, resultsService, suggestionService,
     trustabilityService, screenshotService, disambiguatorService) {
     $scope.pageTitle = 'Search';
     $scope.pageIcon = 'fa-globe';
@@ -45,6 +45,14 @@ app.controller('SearchController',
       $scope.screenshot = $scope.results.groups[$index].doclist.docs[0];
       $scope.screenshot.preview =
         screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
+    };
+
+    $scope.getSuggestion = function(val) {
+      if (val.length < 3) {return;}
+      return suggestionService.getSuggestion(val)
+      .then(function(res) {
+        return res.data.suggestions;
+      });
     };
 
     var q = $location.search().q;
