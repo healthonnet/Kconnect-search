@@ -8,7 +8,7 @@ app.factory('TranslationService', function($http, TRANSLATION_SERVICE_URL) {
           text: text,
           sourceLang: sourceLang,
           targetLang: targetLang,
-          alignmentInfo:true,
+          alignmentInfo: true,
         },
       });
     },
