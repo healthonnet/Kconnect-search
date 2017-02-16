@@ -1,17 +1,45 @@
 'use strict';
 
 app.controller('AppController',
-  ['$scope', '$translate', 'LANGUAGES', 'VERSION', '$location',
-  function($scope, $translate, lang, version, $location) {
-    $scope.lang = lang[$translate.proposedLanguage()];
-    $scope.$on('switchLang', function(event, args) {
-      $scope.lang = lang[args];
-    });
-    $scope.$on('$routeChangeSuccess', function(evt, absNewUrl, absOldUrl) {
-      $scope.previous = absOldUrl;
-    });
-    $scope.$on('$locationChangeSuccess', function() {
-      $scope.currentQuery =
+  ['$scope', '$translate', 'LANGUAGES', 'VERSION',
+      'DEFAULT_PREFERENCES', '$location', 'localStorageService',
+  function($scope, $translate, lang, version,
+           defaultPreferences, $location, localStorageService) {
+    $scope.init = function() {
+      $scope.showFilters = false;
+      $scope.toggleFilters = function() {
+        $scope.showFilters = !$scope.showFilters;
+      };
+
+      // App values & settings
+      $scope.kConfig = defaultPreferences;
+      $scope.kConfig.lang = $translate.proposedLanguage();
+      $scope.version = version;
+
+      // Register Events
+      registerEvents();
+
+      // Init localStorage
+      initLocalStorage();
+
+      // Init Lang
+      $scope.switchLang($scope.kConfig.lang);
+    };
+
+    // Private functions & Utils
+    $scope.switchLang = function(newlang) {
+      $translate.use(newlang);
+      $scope.lang = lang[newlang];
+      $scope.kConfig.lang = $scope.lang.key;
+    };
+
+    function registerEvents() {
+      // Events
+      $scope.$on('$routeChangeSuccess', function(evt, absNewUrl, absOldUrl) {
+        $scope.previous = absOldUrl;
+      });
+      $scope.$on('$locationChangeSuccess', function() {
+        $scope.currentQuery =
           $location.search().q ? '?q=' + $location.search().q : '';
     });
     $scope.version = version;
@@ -57,4 +85,36 @@ app.controller('AppController',
       $scope.proActive = false;
       $scope.appsActive = false;
     });
+
+    function initLocalStorage() {
+      if (localStorageService.isSupported) {
+
+        // Init localstorage values
+        for (var prop in $scope.kConfig) {
+          if ($scope.kConfig.hasOwnProperty(prop)) {
+            if (localStorageService.get(prop) === null) {
+              localStorageService.set(prop, $scope.kConfig[prop]);
+            }
+            localStorageService.bind($scope, 'kConfig.' + prop,
+              localStorageService.get(prop), prop);
+          }
+        }
+
+        var kconKeys = localStorageService.keys();
+        if (kconKeys.length > 0) {
+          // Clean unused keys from localStorage
+          kconKeys.forEach(function(kconKey) {
+            if (!$scope.kConfig.hasOwnProperty(kconKey)) {
+              localStorageService.remove(kconKey);
+            }
+          });
+        } else {
+          console.error('enable to init localStorage');
+        }
+      } else {
+        console.error('localStorage is not supported');
+      }
+    }
+
+    $scope.init();
   },]);
