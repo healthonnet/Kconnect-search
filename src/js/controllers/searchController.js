@@ -2,9 +2,11 @@
 
 app.controller('SearchController',
   ['$scope', '$location', 'ResultsService', 'SuggestionService',
-  'TrustabilityService', 'ScreenshotService', 'DisambiguatorService',
+  'TrustabilityService', 'ScreenshotService',
+  'DisambiguatorService', 'QuestionsService',
   function($scope, $location, resultsService, suggestionService,
-    trustabilityService, screenshotService, disambiguatorService) {
+    trustabilityService, screenshotService,
+    disambiguatorService, questionsService) {
     $scope.pageTitle = 'Search';
     $scope.pageIcon = 'fa-globe';
     $scope.pageTitleColor = 'text-dark-blue';
@@ -47,11 +49,18 @@ app.controller('SearchController',
         screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
     };
 
-    $scope.getSuggestion = function(val) {
+    $scope.getSuggestion = function(val, lang = 'en') {
       if (val.length < 3) {return;}
+
+      var array = [];
       return suggestionService.getSuggestion(val)
       .then(function(res) {
-        return res.data.suggestions;
+        array = array.concat(res.data.suggestions);
+        return questionsService.getQuestions(val, 'en');
+      })
+      .then(function(res) {
+        array = array.concat(res.data);
+        return array;
       });
     };
 
