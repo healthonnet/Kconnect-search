@@ -1,0 +1,344 @@
+$cyan: rgb(210, 239, 233);
+
+body.provisu-black {
+  color: white;
+  background-color: black;
+
+  input,
+  select {
+    background-color: black;
+    color: rgb(255,254,251);
+  }
+
+  a:link,
+  a:visited {
+    color: rgb(255,255,25);
+  }
+
+  a:hover {
+    color: rgb(250,25,25);
+  }
+
+  input[type=submit],
+  input[type=button],
+  button[type=submit] {
+    background-color: rgb(255,255,25);
+    color: black;
+  }
+
+  input[type=submit]:hover,
+  input[type=button]:hover,
+  button[type=submit]:hover {
+    background-color: rgb(250,25,25);
+    color: black;
+  }
+
+  .bg-info {
+    background-color: black;
+    border: yellow solid 1px;
+  }
+
+  .navbar-default {
+    border: none;
+    hr {
+      border: darkslategrey solid 1px;
+    }
+  }
+
+  .btn-default,
+  .country {
+    background-color: black;
+    color: white;
+    border: darkslategrey solid 1px;
+  }
+
+  .btn-info {
+    background-color: yellow;
+    color: black;
+  }
+
+  .search-icon {
+    background-color: yellow;
+  }
+
+  .text-dark-blue,
+  .text-dark-green,
+  .text-dark-orange,
+  .text-dark-red,
+  .text-dark-purple {
+    color: yellow !important;
+  }
+
+  #kconnect:before {
+    background: url('../images/kconnect-yellow.svg') no-repeat 0 0;
+    background-size: 100%;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    content: '';
+  }
+
+  .filter-tabs {
+    li {
+      a:hover {
+        background-color: black;
+      }
+      span {
+        color: white;
+      }
+    }
+    li.active {
+      a {
+        border: none;
+        border-bottom: solid yellow 3px;
+        background-color: black;
+      }
+      span {
+        color: white;
+      }
+    }
+  }
+
+  .navbar-transparent {
+    ul:not(:first-child) a{
+      &:hover {
+        color: white !important;
+      }
+    }
+  }
+}
+
+body.provisu-black:after {
+  background: yellow;
+  color: black;
+}
+
+
+body.provisu-blue {
+  color: yellow;
+  background-color: blue;
+
+  input,
+  select {
+    background-color: blue;
+    color: rgb(255,254,251);
+  }
+
+  a:link,
+  a:visited {
+    color: white;
+  }
+
+  a:hover {
+    color: rgb(250,25,25);
+  }
+
+  input[type=submit],
+  input[type=button],
+  button[type=submit] {
+    background-color: white;
+    color: black;
+  }
+
+  input[type=submit]:hover,
+  input[type=button]:hover,
+  button[type=submit]:hover {
+    background-color: rgb(250,25,25);
+    color: black;
+  }
+
+  .bg-info {
+    background-color: blue;
+    border: white solid 1px;
+  }
+
+  .navbar-default {
+    border: none;
+    hr {
+      border: deepskyblue solid 1px;
+    }
+  }
+
+  .btn-default,
+  .country {
+    background-color: blue;
+    color: white;
+    border: deepskyblue solid 1px;
+  }
+
+  .btn-info {
+    background-color: white;
+    color: black;
+  }
+
+  .search-icon {
+    background-color: white;
+  }
+
+  .text-dark-blue,
+  .text-dark-green,
+  .text-dark-orange,
+  .text-dark-red,
+  .text-dark-purple {
+    color: yellow !important;
+  }
+
+  .filter-tabs {
+    li {
+      a:hover {
+        background-color: blue;
+      }
+      span {
+        color: white;
+      }
+    }
+    li.active {
+      a {
+        border: none;
+        border-bottom: solid yellow 3px;
+        background-color: blue;
+      }
+      span {
+        color: white;
+      }
+    }
+  }
+
+  .navbar-transparent {
+    ul:not(:first-child) a{
+      &:hover {
+        color: yellow !important;
+      }
+    }
+  }
+}
+
+body.provisu-blue:after {
+  background: white;
+  color: blue;
+}
+
+
+body.provisu-cyan {
+  color: black;
+  background-color: $cyan;
+
+  input,
+  select {
+    background-color: $cyan;
+    color: rgb(55,54,51);
+  }
+
+  a:link,
+  a:visited {
+    color: red;
+  }
+
+  a:hover {
+    color: rgb(250,25,25);
+  }
+
+  input[type=submit],
+  input[type=button],
+  button[type=submit] {
+    background-color: red;
+    color: black;
+  }
+
+  input[type=submit]:hover,
+  input[type=button]:hover,
+  button[type=submit]:hover {
+    background-color: rgb(250,25,25);
+    color: black;
+  }
+
+  .bg-info {
+    background-color: $cyan;
+    border: red solid 1px;
+  }
+
+  .navbar-default {
+    border: none;
+    hr {
+      border: lightgrey solid 1px;
+    }
+  }
+
+  .btn-default,
+  .country {
+    background-color: $cyan;
+    color: black;
+    border: lightgrey solid 1px;
+  }
+
+  .btn-info {
+    background-color: red;
+    color: black;
+  }
+
+  .search-icon {
+    background-color: red;
+  }
+
+  .text-dark-blue,
+  .text-dark-green,
+  .text-dark-orange,
+  .text-dark-red,
+  .text-dark-purple {
+    color: red !important;
+  }
+
+  .filter-tabs {
+    li {
+      a:hover {
+        background-color: $cyan;
+      }
+      span {
+        color: black;
+      }
+    }
+    li.active {
+      a {
+        border: none;
+        border-bottom: solid red 3px;
+        background-color: $cyan;
+      }
+      span {
+        color: black;
+      }
+    }
+  }
+
+  .navbar-transparent {
+    ul:not(:first-child) a{
+      &:hover {
+        color: red !important;
+      }
+    }
+  }
+}
+
+body.provisu-cyan:after {
+  background: red;
+  color: black;
+}
+
+
+.provisu {
+  .tooltip-wt {
+    background: white !important;
+    color: black !important;
+  }
+  .tooltip-bk {
+    background: black !important;
+    color: white !important;
+  }
+  .tooltip-bl {
+    background: blue !important;
+    color: yellow !important;
+  }
+  .tooltip-cy {
+    background: $cyan !important;
+    color: black !important;
+  }
+}

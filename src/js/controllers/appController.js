@@ -2,13 +2,45 @@
 
 app.controller('AppController',
   ['$scope', '$translate', 'LANGUAGES', 'VERSION',
-      'DEFAULT_PREFERENCES', '$location', 'localStorageService',
+      'DEFAULT_PREFERENCES', '$location',
+      'localStorageService', 'ProvisuService',
   function($scope, $translate, lang, version,
-           defaultPreferences, $location, localStorageService) {
+           defaultPreferences, $location,
+           localStorageService, provisuService) {
     $scope.init = function() {
+      // Filters
       $scope.showFilters = false;
       $scope.toggleFilters = function() {
         $scope.showFilters = !$scope.showFilters;
+      };
+
+      // Pro Visu Service
+      $scope.logotypeProvisu = $scope.logotypeProvisu || 'images/kconnect.svg';
+      $scope.lowVision = false;
+      $scope.provisu = function() {
+        $scope.lowVision = !$scope.lowVision;
+      };
+      $scope.showWhite = function() {
+        provisuService.showWhite();
+        $scope.logotypeProvisu = 'images/kconnect.svg';
+      };
+      $scope.showBlack = function() {
+        provisuService.showBlack();
+        $scope.logotypeProvisu = 'images/kconnect-yellow.svg';
+      };
+      $scope.showBlue = function() {
+        provisuService.showBlue();
+        $scope.logotypeProvisu = 'images/kconnect-blue.svg';
+      };
+      $scope.showCyan = function() {
+        provisuService.showCyan();
+        $scope.logotypeProvisu = 'images/kconnect-cyan.svg';
+      };
+      $scope.bigger = function() {
+        $scope.fontSize = provisuService.showBigger($scope.fontSize);
+      };
+      $scope.smaller = function() {
+        $scope.fontSize = provisuService.showSmaller($scope.fontSize);
       };
 
       // App values & settings
