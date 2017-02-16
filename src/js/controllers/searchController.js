@@ -60,6 +60,9 @@ app.controller('SearchController',
     var filters = $location.search().filters;
 
     if (q) {
+      // By default use User language.
+      var queryLanguage = $scope.kConfig.lang;
+      
       $scope.form.param = q;
       $scope.param = q;
       $scope.getColor = getColor;
@@ -72,10 +75,10 @@ app.controller('SearchController',
           };
         });
 
-      // TODO Pagination + lang
+      // TODO Pagination
       resultsService.getResults({
         query: q,
-        lang: 'en',
+        lang: queryLanguage,
         rows: 10,
         page: $scope.page,
         section: section,
