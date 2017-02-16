@@ -37,6 +37,16 @@ app.controller('SearchController',
       }
     };
 
+    $scope.showScreenshot = function($index) {
+      if ($index === undefined) {
+        $scope.screenshot = undefined;
+        return;
+      }
+      $scope.screenshot = $scope.results.groups[$index].doclist.docs[0];
+      $scope.screenshot.preview =
+        screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
+    };
+
     var q = $location.search().q;
     var section = $location.search().section;
     var filters = $location.search().filters;
@@ -44,11 +54,6 @@ app.controller('SearchController',
     if (q) {
       $scope.form.param = q;
       $scope.param = q;
-      $scope.showScreenshot = function($index) {
-        $scope.screenshot = $scope.results.groups[$index].doclist.docs[0];
-        $scope.screenshot.preview =
-            screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
-      };
       $scope.getColor = getColor;
       disambiguatorService.getFatheadContent(q)
         .then(function(res) {
