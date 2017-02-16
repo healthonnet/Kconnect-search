@@ -70,6 +70,10 @@ var app = angular.module('App', [
       .when('/language', {
         templateUrl: 'views/language.html',
         controller: 'LanguageController',
+      })
+      .when('/apps', {
+        templateUrl: 'views/apps.html',
+        controller: 'ApplicationsController',
       });
 
     localStorageServiceProvider

@@ -42,37 +42,51 @@ app.controller('AppController',
         $scope.currentQuery =
           $location.search().q ? '?q=' + $location.search().q : '';
       });
-      $scope.$on('newsActive', function(event, args) {
-        $scope.newsActive = true;
-        $scope.searchActive = false;
-        $scope.picturesActive = false;
-        $scope.proActive = false;
-      });
-      $scope.$on('searchActive', function(event, args) {
-        $scope.searchActive = true;
-        $scope.newsActive = false;
-        $scope.picturesActive = false;
-        $scope.proActive = false;
-      });
-      $scope.$on('picturesActive', function(event, args) {
-        $scope.picturesActive = true;
-        $scope.searchActive = false;
-        $scope.newsActive = false;
-        $scope.proActive = false;
-      });
-      $scope.$on('proActive', function(event, args) {
-        $scope.searchActive = false;
-        $scope.newsActive = false;
-        $scope.picturesActive = false;
-        $scope.proActive = true;
-      });
-      $scope.$on('noneActive', function(event, args) {
-        $scope.searchActive = false;
-        $scope.newsActive = false;
-        $scope.picturesActive = false;
-        $scope.proActive = false;
-      });
     }
+
+    $scope.version = version;
+    $scope.$on('newsActive', function(event, args) {
+      $scope.newsActive = true;
+      $scope.searchActive = false;
+      $scope.picturesActive = false;
+      $scope.proActive = false;
+      $scope.appsActive = false;
+    });
+    $scope.$on('searchActive', function(event, args) {
+      $scope.searchActive = true;
+      $scope.newsActive = false;
+      $scope.picturesActive = false;
+      $scope.proActive = false;
+      $scope.appsActive = false;
+    });
+    $scope.$on('picturesActive', function(event, args) {
+      $scope.picturesActive = true;
+      $scope.searchActive = false;
+      $scope.newsActive = false;
+      $scope.proActive = false;
+      $scope.appsActive = false;
+    });
+    $scope.$on('proActive', function(event, args) {
+      $scope.searchActive = false;
+      $scope.newsActive = false;
+      $scope.picturesActive = false;
+      $scope.proActive = true;
+      $scope.appsActive = false;
+    });
+    $scope.$on('appsActive', function(event, args) {
+      $scope.searchActive = false;
+      $scope.newsActive = false;
+      $scope.picturesActive = false;
+      $scope.proActive = false;
+      $scope.appsActive = true;
+    });
+    $scope.$on('noneActive', function(event, args) {
+      $scope.searchActive = false;
+      $scope.newsActive = false;
+      $scope.picturesActive = false;
+      $scope.proActive = false;
+      $scope.appsActive = false;
+    });
 
     function initLocalStorage() {
       if (localStorageService.isSupported) {
@@ -103,6 +117,6 @@ app.controller('AppController',
         console.error('localStorage is not supported');
       }
     }
-
     $scope.init();
+
   },]);
