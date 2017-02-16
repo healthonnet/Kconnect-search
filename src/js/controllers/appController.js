@@ -41,7 +41,9 @@ app.controller('AppController',
       $scope.$on('$locationChangeSuccess', function() {
         $scope.currentQuery =
           $location.search().q ? '?q=' + $location.search().q : '';
-    });
+      });
+    }
+
     $scope.version = version;
     $scope.$on('newsActive', function(event, args) {
       $scope.newsActive = true;
@@ -115,6 +117,6 @@ app.controller('AppController',
         console.error('localStorage is not supported');
       }
     }
-
     $scope.init();
+
   },]);
