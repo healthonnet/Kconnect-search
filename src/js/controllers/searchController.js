@@ -48,6 +48,7 @@ app.controller('SearchController',
     };
 
     $scope.getSuggestion = function(val) {
+      if (val.length < 3) {return;}
       return suggestionService.getSuggestion(val)
       .then(function(res) {
         return res.data.suggestions;
