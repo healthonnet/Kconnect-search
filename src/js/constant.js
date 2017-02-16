@@ -22,6 +22,7 @@ app.constant('LANGUAGES', {
     name: 'čeština',
     flag: 'cz',
     key: 'cs',
+    translatableTargets: ['en'],
   },
   da: {
     name: 'dansk',
@@ -32,6 +33,7 @@ app.constant('LANGUAGES', {
     name: 'Deutsch',
     flag: 'de',
     key: 'de',
+    translatableTargets: ['en'],
   },
   el: {
     name: 'ελληνικά',
@@ -47,6 +49,7 @@ app.constant('LANGUAGES', {
     name: 'English',
     flag: 'gb',
     key: 'en',
+    translatableTargets: ['cs', 'de', 'fr'],
   },
   es: {
     name: 'español',
@@ -62,6 +65,7 @@ app.constant('LANGUAGES', {
     name: 'français',
     flag: 'fr',
     key: 'fr',
+    translatableTargets: ['en'],
   },
   it: {
     name: 'italiano',
