@@ -33,13 +33,39 @@
     </div>
   </div>
 
+  <div class="row results">
+    <div class="col-xs-12">
+      <ul class="nav nav-tabs filter-tabs" role="tablist">
+        <li role="presentation" ng-class="{true: 'active'}[ !targetLang ]">
+          <a href="#" ng-click="submit(kConfig.lang)" role="tab" data-toggle="tab">
+            <span class="flag flag-{{ lang.flag }}"></span>
+            <span ng-class="{false: 'hidden'}[targetLang == key]">{{ param }}</span>
+          </a>
+        </li>
+        <li role="presentation" ng-repeat="(key, value) in translatedQueries" ng-class="{true: 'active'}[targetLang == key]">
+          <a href="#" ng-click="submit(key)" role="tab" data-toggle="tab">
+            <span class="flag flag-{{ languages[key].flag }}"></span>
+            <span ng-class="{false: 'hidden'}[targetLang == key]">{{ value }}</span>
+          </a>
+        </li>
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-7 results">
       <div class="row" ng-repeat="link in results.groups track by $index">
         <div class="col-xs-12">
           <h2>
+            <div ng-if="targetLang" class="translations-flags inline">
+              <a href="http://translate.google.com/translate?hl={{lang.key}}&sl={{targetLang}}&tl={{lang.key}}&u={{link.doclist.docs[0].url}}">
+                <span class="flag flag-{{ languages[targetLang].flag }}"></span>
+                <span class="flag flag-{{ lang.flag }} userLang"></span>
+              </a>
+            </div>
             <img ng-src="{{ link.doclist.docs[0].url | favicon }}" alt="favicon">
-            <a href="{{ link.doclist.docs[0].url }}" ng-mouseover="showScreenshot($index)">{{ link.doclist.docs[0].title_en }}</a>
+            <a href="{{ link.doclist.docs[0].url }}" ng-mouseover="showScreenshot($index)">{{ link.doclist.docs[0].title }}</a>
             <div class="visible-sm-inline-block">
               <img src="/images/honcode.png" ng-if="link.doclist.docs[0].certified">
               <span class="m-trust" ng-show="link.doclist.docs[0].trustability">
@@ -51,9 +77,9 @@
             </div>
           </h2>
           <p>
-            <a href="{{ link.doclist.docs[0].url }}" ng-bind-html="link.doclist.docs[0].url | cut:true:60:' ...' | spanWord:param"></a>
+            <a href="{{ link.doclist.docs[0].url }}" ng-bind-html="link.doclist.docs[0].url | cut:true:60:' ...' | spanWord:highlight"></a>
           </p>
-          <p ng-bind-html="link.doclist.docs[0].snippet | spanWord:param">
+          <p ng-bind-html="link.doclist.docs[0].snippet | spanWord:highlight">
           </p>
         </div>
       </div>
