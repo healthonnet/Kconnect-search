@@ -101,7 +101,6 @@ app.controller('SearchController',
                 langTargetResponse.data.translation[0].translated[0].text;
               $scope.translatedQueries[key] = translation;
             });
-            console.log($scope.translatedQueries);
           });
       }
 
