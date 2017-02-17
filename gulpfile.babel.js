@@ -26,6 +26,12 @@ const trustServiceProxy = proxy('/trustability', {
   logLevel: 'debug',
 });
 
+const translateServiceProxy = proxy('/translation', {
+    target: 'http://everyone.khresmoi.eu/hon-search/',
+    changeOrigin: true,
+    logLevel: 'debug',
+});
+
 const disambiguatorServiceProxy = proxy('/khresmoiDisambiguator', {
   target: 'http://everyone.khresmoi.eu/hon-search/',
   changeOrigin: true,
@@ -33,9 +39,21 @@ const disambiguatorServiceProxy = proxy('/khresmoiDisambiguator', {
 });
 
 const newsServiceProxy = proxy('/feeds', {
-    target: 'https://cloud.feedly.com/v3/search/',
-    changeOrigin: true,
-    logLevel: 'debug',
+  target: 'https://cloud.feedly.com/v3/search/',
+  changeOrigin: true,
+  logLevel: 'debug',
+});
+
+const suggestServiceProxy = proxy('/suggest', {
+  target: 'http://everyone.khresmoi.eu/hon-terms-dictionary/',
+  changeOrigin: true,
+  logLevel: 'debug',
+});
+
+const questionsServiceProxy = proxy('/questions', {
+  target: 'http://everyone.khresmoi.eu/people-also-ask/',
+  changeOrigin: true,
+  logLevel: 'debug',
 });
 
 /**
@@ -199,6 +217,9 @@ gulp.task('serve', ['html'], () => {
         disambiguatorServiceProxy,
         trustServiceProxy,
         newsServiceProxy,
+        suggestServiceProxy,
+        translateServiceProxy,
+        questionsServiceProxy,
         historyApiFallback(),
       ],
     },
@@ -241,6 +262,9 @@ gulp.task('serve-prod', ['default'], () => {
         disambiguatorServiceProxy,
         trustServiceProxy,
         newsServiceProxy,
+        suggestServiceProxy,
+        translateServiceProxy,
+        questionsServiceProxy,
         historyApiFallback(),
       ];
     },

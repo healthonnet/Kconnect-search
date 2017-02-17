@@ -1,7 +1,10 @@
 app.constant('SELECT_SERVICE_URL', '/select');
 app.constant('TRUST_SERVICE_URL', '/trustability');
+app.constant('TRANSLATION_SERVICE_URL', '/translation');
 app.constant('DISAMBIGUATOR_SERVICE_URL', '/khresmoiDisambiguator');
 app.constant('NEWS_SERVICE_URL', '/feeds');
+app.constant('SUGGEST_SERVICE_URL', '/suggest');
+app.constant('QUESTIONS_SERVICE_URL', '/questions');
 app.constant('SCREENSHOT_SERVICE_URL', 'http://everyone.khresmoi.eu:3000');
 app.constant('VERSION', '0.1.0-provisu');
 app.constant('DEFAULT_PREFERENCES', {
@@ -20,6 +23,7 @@ app.constant('LANGUAGES', {
     name: 'čeština',
     flag: 'cz',
     key: 'cs',
+    translatableTargets: ['en'],
   },
   da: {
     name: 'dansk',
@@ -30,6 +34,7 @@ app.constant('LANGUAGES', {
     name: 'Deutsch',
     flag: 'de',
     key: 'de',
+    translatableTargets: ['en'],
   },
   el: {
     name: 'ελληνικά',
@@ -45,6 +50,7 @@ app.constant('LANGUAGES', {
     name: 'English',
     flag: 'gb',
     key: 'en',
+    translatableTargets: ['cs', 'de', 'fr'],
   },
   es: {
     name: 'español',
@@ -60,6 +66,7 @@ app.constant('LANGUAGES', {
     name: 'français',
     flag: 'fr',
     key: 'fr',
+    translatableTargets: ['en'],
   },
   it: {
     name: 'italiano',

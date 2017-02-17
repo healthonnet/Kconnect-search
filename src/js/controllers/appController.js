@@ -9,6 +9,7 @@ app.controller('AppController',
            localStorageService, provisuService) {
     $scope.init = function() {
       // Filters
+      $scope.languages = lang;
       $scope.showFilters = false;
       $scope.toggleFilters = function() {
         $scope.showFilters = !$scope.showFilters;

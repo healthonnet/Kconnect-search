@@ -22,9 +22,13 @@ app.factory('ImageService', function($http, SELECT_SERVICE_URL) {
           searchLanguage: lang,
           rows: rows,
           start: page * rows,
-          q: query,
+          q: parseMore(query),
         },
       });
     }
   };
 });
+
+function parseMore(query) {
+  return query.replace(/\?/g, '\\?');
+}
