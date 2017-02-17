@@ -23,6 +23,18 @@
       color: green;
     }
   }
+  .translations-flags {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    position: relative;
+    .userLang {
+      position: absolute;
+      bottom: 12px;
+      left: 10px;
+    }
+  }
+
   h2 {
     font-size: 20px;
     img {

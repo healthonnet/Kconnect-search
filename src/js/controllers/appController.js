@@ -6,6 +6,7 @@ app.controller('AppController',
   function($scope, $translate, lang, version,
            defaultPreferences, $location, localStorageService) {
     $scope.init = function() {
+      $scope.languages = lang;
       $scope.showFilters = false;
       $scope.toggleFilters = function() {
         $scope.showFilters = !$scope.showFilters;

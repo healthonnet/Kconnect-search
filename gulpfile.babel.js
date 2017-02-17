@@ -26,6 +26,12 @@ const trustServiceProxy = proxy('/trustability', {
   logLevel: 'debug',
 });
 
+const translateServiceProxy = proxy('/translation', {
+    target: 'http://everyone.khresmoi.eu/hon-search/',
+    changeOrigin: true,
+    logLevel: 'debug',
+});
+
 const disambiguatorServiceProxy = proxy('/khresmoiDisambiguator', {
   target: 'http://everyone.khresmoi.eu/hon-search/',
   changeOrigin: true,
@@ -212,6 +218,7 @@ gulp.task('serve', ['html'], () => {
         trustServiceProxy,
         newsServiceProxy,
         suggestServiceProxy,
+        translateServiceProxy,
         questionsServiceProxy,
         historyApiFallback(),
       ],
@@ -256,6 +263,7 @@ gulp.task('serve-prod', ['default'], () => {
         trustServiceProxy,
         newsServiceProxy,
         suggestServiceProxy,
+        translateServiceProxy,
         questionsServiceProxy,
         historyApiFallback(),
       ];
