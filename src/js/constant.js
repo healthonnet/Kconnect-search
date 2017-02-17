@@ -4,6 +4,7 @@ app.constant('TRANSLATION_SERVICE_URL', '/translation');
 app.constant('DISAMBIGUATOR_SERVICE_URL', '/khresmoiDisambiguator');
 app.constant('NEWS_SERVICE_URL', '/feeds');
 app.constant('SUGGEST_SERVICE_URL', '/suggest');
+app.constant('QUESTIONS_SERVICE_URL', '/questions');
 app.constant('SCREENSHOT_SERVICE_URL', 'http://everyone.khresmoi.eu:3000');
 app.constant('VERSION', '0.1.0-feat-translations');
 app.constant('DEFAULT_PREFERENCES', {
