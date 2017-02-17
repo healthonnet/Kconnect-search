@@ -54,6 +54,18 @@
   }
 }
 
+.top-search,
+.middle-search {
+  .dropdown-menu {
+    width: 100%;
+    background-color: rgba(255,255,255,0.9);
+    font-size: 1.3em;
+    li {
+      margin-bottom: 5px;
+    }
+  }
+}
+
 .search-details {
   height: 100%;
   img {

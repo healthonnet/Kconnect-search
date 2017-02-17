@@ -44,6 +44,12 @@ const suggestServiceProxy = proxy('/suggest', {
   logLevel: 'debug',
 });
 
+const questionsServiceProxy = proxy('/questions', {
+  target: 'http://everyone.khresmoi.eu/people-also-ask/',
+  changeOrigin: true,
+  logLevel: 'debug',
+});
+
 /**
  * Task jshint
  * Use js lint
@@ -206,6 +212,7 @@ gulp.task('serve', ['html'], () => {
         trustServiceProxy,
         newsServiceProxy,
         suggestServiceProxy,
+        questionsServiceProxy,
         historyApiFallback(),
       ],
     },
@@ -249,6 +256,7 @@ gulp.task('serve-prod', ['default'], () => {
         trustServiceProxy,
         newsServiceProxy,
         suggestServiceProxy,
+        questionsServiceProxy,
         historyApiFallback(),
       ];
     },
