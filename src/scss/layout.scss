@@ -93,3 +93,11 @@ body:after{
     padding-bottom: #{$i}em;
   }
 }
+
+$i: 6;
+@while $i < 100 {
+  .font-size-#{$i} {
+    font-size: #{$i}px;
+  }
+  $i: $i + 4;
+}
