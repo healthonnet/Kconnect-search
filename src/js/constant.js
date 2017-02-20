@@ -6,7 +6,7 @@ app.constant('NEWS_SERVICE_URL', '/feeds');
 app.constant('SUGGEST_SERVICE_URL', '/suggest');
 app.constant('QUESTIONS_SERVICE_URL', '/questions');
 app.constant('SCREENSHOT_SERVICE_URL', 'http://everyone.khresmoi.eu:3000');
-app.constant('VERSION', '0.1.0-provisu');
+app.constant('VERSION', '0.1.1-fix-crop-links');
 app.constant('DEFAULT_PREFERENCES', {
   hello: 'world',
   test: true,
