@@ -42,6 +42,13 @@
       height: 20px;
     }
   }
+  .text-overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+  }
+
   .filter-tabs {
     margin-top: 10px;
     border: none;
