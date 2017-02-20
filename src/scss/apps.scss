@@ -5,6 +5,22 @@
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
+    .icon-wrapper {
+      position: relative;
+      .icon-modal {
+        position: absolute;
+        top: 0;
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+        padding: 10px;
+        height: 100%;
+        width: 100%;
+        margin-top: auto;
+        margin-bottom: auto;
+        text-align: justify;
+        overflow: hidden;
+      }
+    }
     .btn {
       padding: 6px 5px;
     }
