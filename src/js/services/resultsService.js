@@ -7,6 +7,7 @@ app.factory('ResultsService', function($http, SELECT_SERVICE_URL) {
         query: options.query ? options.query : '',
         lang: options.lang ? options.lang : 'en',
         rows: options.rows ? options.rows : 4,
+        start: options.page ? options.rows * options.page : 0,
         section: options.section ?
           'khresmoi_sections_sectionType_facet:' +
           options.section.toUpperCase() : '',
@@ -20,6 +21,7 @@ app.factory('ResultsService', function($http, SELECT_SERVICE_URL) {
           facet: true,
           indent: 'off',
           group: true,
+          start: options.start,
           docType: 'html',
           'f.khresmoi_sections_sectionType_facet.facet.limit': 50,
           'f.khresmoi_sections_sectionType_facet.facet.mincount': 1,

@@ -18,12 +18,12 @@
   <div class="row results">
     <div class="col-xs-12">
       <ul class="nav nav-tabs filter-tabs" role="tablist">
-        <li role="presentation" ng-class="{true: 'active'}[all == 'all']">
+        <li role="presentation" ng-class="{true: 'active'}[results.all == 'all']">
           <a href="#" ng-click="searchSection()" role="tab" data-toggle="tab">
             all <span>{{results.matches}}</span>
           </a>
         </li>
-        <li role="presentation" ng-repeat="(key, value) in sections" ng-class="{true: 'active'}[all == key]">
+        <li role="presentation" ng-repeat="(key, value) in results.sections" ng-class="{true: 'active'}[results.all == key]">
           <a href="#" ng-click="searchSection(key)" role="tab" data-toggle="tab">
             {{ key | translate }} <span>{{ value }}</span>
           </a>
@@ -87,5 +87,9 @@
     </div>
     <div class="col-md-5 search-details hidden-sm" ng-include="'views/partials/screenshot.html'" ng-if="!lowVision">
     </div>
+  </div>
+
+  <div class="row">
+    <ul uib-pagination total-items="results.nbPages" ng-model="results.currentPage" max-size="results.maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="changePage()"></ul>
   </div>
 </div>
