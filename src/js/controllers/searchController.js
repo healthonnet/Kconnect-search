@@ -1,12 +1,12 @@
 'use strict';
 
 app.controller('SearchController',
-  ['$scope', '$location', 'ResultsService', 'SuggestionService',
+  ['$scope', '$location', 'ResultsService', 'SuggestionsService',
   'TrustabilityService', 'ScreenshotService',
-  'DisambiguatorService', 'QuestionsService', 'TranslationService',
-  function($scope, $location, resultsService, suggestionService,
+  'DisambiguatorService', 'TranslationService',
+  function($scope, $location, resultsService, suggestionsService,
     trustabilityService, screenshotService,
-    disambiguatorService, questionsService, translationService) {
+    disambiguatorService, translationService) {
     $scope.pageTitle = 'Search';
     $scope.pageIcon = 'fa-globe';
     $scope.pageTitleColor = 'text-dark-blue';
@@ -67,15 +67,19 @@ app.controller('SearchController',
       if (val.length < 3) {return;}
 
       var array = [];
-      return suggestionService.getSuggestion(val)
-      .then(function(res) {
-        array = array.concat(res.data.suggestions);
-        return questionsService.getQuestions(val, 'en');
-      })
-      .then(function(res) {
-        array = array.concat(res.data);
-        return array;
-      });
+      return suggestionsService.getSpellcheck(val, lang)
+        .then(function(res) {
+          array = array.concat(cureSpellcheck(res.data));
+          return suggestionsService.getSuggestions(val, lang);
+        })
+        .then(function(res) {
+          array = array.concat(res.data.suggestions);
+          return suggestionsService.getQuestions(val, lang);
+        })
+        .then(function(res) {
+          array = array.concat(res.data);
+          return array;
+        });
     };
 
     $scope.handleResults = function() {
@@ -234,6 +238,18 @@ var getColor = function(normalizedValue) {
     return '#fdef00';
   }
   return '#00dd00';
+};
+
+var cureSpellcheck = function(res) {
+  var array = [];
+  var length = res.spellcheck.suggestions.length;
+  length = length > 5 ? 5 : length;
+  for (var i = 0; i < 4; i++) {
+    array.push(res.spellcheck.suggestions[i][1][0][1].replace(
+      /spellcheck_\w\w:"([^\"]+)"/gi,'$1'
+    ));
+  }
+  return array;
 };
 
 var mockCard = {
