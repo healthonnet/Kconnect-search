@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-xs-11 col-xs-offset-1">
     <div class="row" ng-show="images.length > 0">
-        <p>About {{ nbResults }} results</p>
+        <p>{{ 'IMAGE_RESULTS' | translate}}: {{form.param}}</p>
         <ul class="dynamic-grid" angular-grid="images"
             ag-options="angularGridOptions" ag-grid-id="gallery" ag-infinite-scroll="loadImages()">
           <li data-ng-repeat="image in images" class="grid">
@@ -19,8 +19,8 @@
         </div>
         <br>
     </div>
-      <div class="row" ng-hide="images.length > 0 || !param">
-        <p>No Images found.</p>
-      </div>
+    <div class="row" ng-hide="images.length > 0 || !param">
+      <p>{{ 'NO_RESULTS' | translate }}</p>
+    </div>
   </div>
 </div>
