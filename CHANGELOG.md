@@ -1,11 +1,13 @@
 Kconnect-search Changelog
 =========================
 
-v0.1.1 / 2017-02-20
+v0.1.1 / 2017-02-21
 -------------------
 
 * fix: screenshot size is fixed to 1024x768
 * fix: better long url crop
+* fix: add Spellcheck suggestions
+* fix: handle custom \<base\> tag
 * chore: app content
 
 v0.1.0 / 2017-02-20
