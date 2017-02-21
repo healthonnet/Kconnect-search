@@ -74,7 +74,8 @@ var app = angular.module('App', [
       .when('/apps', {
         templateUrl: 'views/apps.html',
         controller: 'ApplicationsController',
-      });
+      })
+      .otherwise('/');
 
     localStorageServiceProvider
         .setPrefix('kcon')

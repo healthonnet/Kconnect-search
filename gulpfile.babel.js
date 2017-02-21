@@ -6,6 +6,7 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import download from 'gulp-download';
 import decompress from 'gulp-decompress';
+import htmlreplace from 'gulp-html-replace';
 import historyApiFallback from 'connect-history-api-fallback';
 import proxy from 'http-proxy-middleware';
 
@@ -145,7 +146,11 @@ gulp.task('styles', ['images', 'flags'], () => {
  */
 gulp.task('html', ['bower', 'fonts', 'styles', 'lang'], () => {
   if (process.env.NODE_ENV === 'production') {
+    const hostBase = process.env.HOST_BASE || '';
     return gulp.src('src/**/*.html')
+      .pipe(htmlreplace({
+        'base': '<base href="' + hostBase + '/index.html">'
+      }))
       .pipe($.useref())
       .pipe($.if('*.css', $.minifyCss()))
       .pipe(gulp.dest(DEST));

@@ -1,13 +1,13 @@
 <div class="navbar navbar-default navbar-fixed-left navbar-transparent">
   <ul class="nav navbar-nav">
-    <li><a href="/" title="{{ 'TITLE' | translate }}"><img ng-src="{{logotypeProvisu}}" id="logotype"/></a></li>
+    <li><a href="index.html" title="{{ 'TITLE' | translate }}"><img ng-src="{{logotypeProvisu}}" id="logotype"/></a></li>
   </ul>
   <ul class="nav navbar-nav navbar-middle">
-  <li><a ng-href="/{{currentQuery}}" title="{{ 'WEB' | translate }}" class="search-web" ng-class="searchActive? 'text-dark-blue' : 'text-neutral'"><i class="fa fa-2x fa-globe" aria-hidden="true"></i>{{ 'WEB' | translate }}</a></li>
-  <li><a ng-href="/images{{currentQuery}}" title="{{ 'PICTURES' | translate }}" class="search-images" ng-class="picturesActive? 'text-dark-purple' : 'text-neutral'"><i class="fa fa-2x fa-picture-o" aria-hidden="true"></i>{{ 'PICTURES' | translate }}</a></li>
-  <li><a href="/news{{currentQuery}}" title="{{ 'NEWS' | translate }}" class="search-news" ng-class="newsActive? 'text-dark-orange' : 'text-neutral'"><i class="fa fa-2x fa-newspaper-o" aria-hidden="true"></i>{{ 'NEWS' | translate }}</a></li>
-  <li><a href="/pro{{currentQuery}}" title="{{ 'SEARCH_PRO' | translate }}" class="search-pro" ng-class="proActive? 'text-dark-green' : 'text-neutral'"><i class="fa fa-2x fa-user-md" aria-hidden="true"></i>{{ 'SEARCH_PRO' | translate }}</a></li>
-  <li><a href="/apps{{currentQuery}}" title="{{ 'APP' | translate }}" class="search-apps" ng-class="appsActive? 'text-dark-red' : 'text-neutral'"><i class="fa fa-2x fa-mobile" aria-hidden="true"></i>{{ 'APPS' | translate }}</a></li>
+  <li><a ng-href="index.html{{currentQuery}}" title="{{ 'WEB' | translate }}" class="search-web" ng-class="searchActive? 'text-dark-blue' : 'text-neutral'"><i class="fa fa-2x fa-globe" aria-hidden="true"></i>{{ 'WEB' | translate }}</a></li>
+  <li><a ng-href="images{{currentQuery}}" title="{{ 'PICTURES' | translate }}" class="search-images" ng-class="picturesActive? 'text-dark-purple' : 'text-neutral'"><i class="fa fa-2x fa-picture-o" aria-hidden="true"></i>{{ 'PICTURES' | translate }}</a></li>
+  <li><a href="news{{currentQuery}}" title="{{ 'NEWS' | translate }}" class="search-news" ng-class="newsActive? 'text-dark-orange' : 'text-neutral'"><i class="fa fa-2x fa-newspaper-o" aria-hidden="true"></i>{{ 'NEWS' | translate }}</a></li>
+  <li><a href="pro{{currentQuery}}" title="{{ 'SEARCH_PRO' | translate }}" class="search-pro" ng-class="proActive? 'text-dark-green' : 'text-neutral'"><i class="fa fa-2x fa-user-md" aria-hidden="true"></i>{{ 'SEARCH_PRO' | translate }}</a></li>
+  <li><a href="apps{{currentQuery}}" title="{{ 'APP' | translate }}" class="search-apps" ng-class="appsActive? 'text-dark-red' : 'text-neutral'"><i class="fa fa-2x fa-mobile" aria-hidden="true"></i>{{ 'APPS' | translate }}</a></li>
   <hr />
   <li><a href="#" ng-click="toggleFilters()" title="{{ 'FILTER' | translate }}"><i class="fa fa-2x fa-filter" aria-hidden="true"></i>{{ 'FILTER' | translate }}</a></li>
   <li><a href="#" ng-click="provisu()" title="{{ 'LOW_VISION' | translate }}"><i class="fa fa-2x fa-low-vision" aria-hidden="true"></i>{{ 'LOW_VISION' | translate }}</a></li>
