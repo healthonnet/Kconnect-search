@@ -7,7 +7,7 @@ app.constant('SUGGEST_SERVICE_URL', '/hon-terms-dictionary/suggest');
 app.constant('SPELLCHECK_SERVICE_URL', 'hon-search/suggest');
 app.constant('QUESTIONS_SERVICE_URL', '/questions');
 app.constant('SCREENSHOT_SERVICE_URL', 'http://everyone.khresmoi.eu:3000');
-app.constant('VERSION', '0.1.2-fix-typeahead');
+app.constant('VERSION', '0.1.1-fix-typeahead');
 app.constant('DEFAULT_PREFERENCES', {
   hello: 'world',
   test: true,
