@@ -13,6 +13,7 @@ var app = angular.module('App', [
   'dcbImgFallback',
   'angularMoment',
   'LocalStorageModule',
+  'hc.marked',
 ])
   .config(function($routeProvider, $translateProvider,
                    $locationProvider, localStorageServiceProvider) {

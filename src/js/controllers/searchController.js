@@ -2,10 +2,10 @@
 
 app.controller('SearchController',
   ['$scope', '$location', 'ResultsService', 'SuggestionService',
-  'TrustabilityService', 'ScreenshotService',
+  'TrustabilityService', 'ScreenshotService', '$translate',
   'DisambiguatorService', 'QuestionsService', 'TranslationService',
   function($scope, $location, resultsService, suggestionService,
-    trustabilityService, screenshotService,
+    trustabilityService, screenshotService, $translate,
     disambiguatorService, questionsService, translationService) {
     $scope.pageTitle = 'Search';
     $scope.pageIcon = 'fa-globe';
@@ -196,7 +196,10 @@ app.controller('SearchController',
           });
         });
     } else {
-      $scope.card = mockCard;
+      $scope.card = 'views/partials/card.html';
+      $translate('SEARCH_CARD').then(function(res) {
+        $scope.cardcontent = res;
+      });
     }
   },]);
 
@@ -234,12 +237,4 @@ var getColor = function(normalizedValue) {
     return '#fdef00';
   }
   return '#00dd00';
-};
-
-var mockCard = {
-  url: 'views/partials/card.html',
-  title: 'Benefits',
-  text: 'Not for profit | No <span>ads</span> | ' +
-    'No <span>cookies</span><br />' +
-    'Lookup our <a href="/privacy">Privacy Policies</a>',
 };
