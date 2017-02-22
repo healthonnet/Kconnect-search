@@ -6,7 +6,7 @@ Welcome, so you are thinking about contributing to KConnect Search ? Awesome, th
 Setup
 -----
 
-You need to have `Node.js`.
+You need to have `Node.js`, `npm` and `gulp` installed.
 
 Then:
 
