@@ -20,7 +20,7 @@
       <ul class="nav nav-tabs filter-tabs" role="tablist">
         <li role="presentation" ng-class="{true: 'active'}[all == 'all']">
           <a href="#" ng-click="searchSection()" role="tab" data-toggle="tab">
-            all <span>{{results.matches}}</span>
+            {{ 'FIL_ALL_NO_EXCEPTIONS' | translate }} <span>{{results.matches}}</span>
           </a>
         </li>
         <li role="presentation" ng-repeat="(key, value) in sections" ng-class="{true: 'active'}[all == key]">

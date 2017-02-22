@@ -2,10 +2,10 @@
 
 app.controller('SearchController',
   ['$scope', '$location', 'ResultsService', 'SuggestionsService',
-  'TrustabilityService', 'ScreenshotService',
+  'TrustabilityService', 'ScreenshotService', '$translate',
   'DisambiguatorService', 'TranslationService',
   function($scope, $location, resultsService, suggestionsService,
-    trustabilityService, screenshotService,
+    trustabilityService, screenshotService, $translate,
     disambiguatorService, translationService) {
     $scope.pageTitle = 'Search';
     $scope.pageIcon = 'fa-globe';
@@ -195,7 +195,10 @@ app.controller('SearchController',
           });
         });
     } else {
-      $scope.card = mockCard;
+      $scope.card = 'views/partials/card.html';
+      $translate('SEARCH_CARD').then(function(res) {
+        $scope.cardcontent = res;
+      });
     }
   },]);
 

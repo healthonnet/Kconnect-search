@@ -15,6 +15,7 @@ import proxy from 'http-proxy-middleware';
 const $ = gulpLoadPlugins();
 const DEST = 'dist';
 const PORT = process.env.PORT || 3000;
+const TAG = 'v0.1.*';
 browserSync.create();
 
 const selectServiceProxy = proxy('/hon-search/select', {
@@ -174,7 +175,7 @@ gulp.task('lang', () => {
     'api/export/archive/json.zip?' +
     'key=eMJfQxM9QEEO7im7ZxWZZgMgOQ6lqsKy&' +
     'fallback=en&' +
-    'path=locale-%7B%25lang%7D.json')
+    'path=locale-%7B%25lang%7D.json&filter=' + TAG)
     .pipe(decompress({strip: 1}))
     .pipe(gulp.dest(DEST + '/locales'));
 });
