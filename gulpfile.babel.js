@@ -280,7 +280,7 @@ gulp.task('serve-prod', ['default'], () => {
   });
 });
 
-gulp.task('war-prod', ['default'], () => {
+gulp.task('war', ['default'], () => {
   gulp.src(['./' + DEST + '/**'])
       .pipe(war({
           welcome: 'index.html',
