@@ -121,7 +121,7 @@ app.controller('SearchController',
 
           $scope.fathead = {
             type: 'definition',
-            title: 'Definition of ' + q,
+            title: q,
             content: res.data.results[0].definition,
           };
 
