@@ -52,7 +52,8 @@ body.provisu-black {
     border: darkslategrey solid 1px;
   }
 
-  .btn-info {
+  .btn-info,
+  a.btn-info {
     background-color: yellow;
     color: black;
   }
@@ -166,7 +167,8 @@ body.provisu-blue {
     border: deepskyblue solid 1px;
   }
 
-  .btn-info {
+  .btn-info,
+  a.btn-info {
     background-color: white;
     color: black;
   }
@@ -271,7 +273,8 @@ body.provisu-cyan {
     border: lightgrey solid 1px;
   }
 
-  .btn-info {
+  .btn-info,
+  a.btn-info {
     background-color: red;
     color: black;
   }

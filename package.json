@@ -24,6 +24,7 @@
     "gulp-connect": "^5.0.0",
     "gulp-decompress": "^2.0.1",
     "gulp-download": "0.0.1",
+    "gulp-html-replace": "^1.6.2",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.1.1",
     "gulp-jscs": "^4.0.0",
@@ -38,7 +39,9 @@
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2",
     "gulp-util": "^3.0.8",
+    "gulp-war": "^0.1.4",
     "gulp-watch": "^4.3.11",
+    "gulp-zip": "^4.0.0",
     "http-proxy-middleware": "^0.17.3",
     "jshint": "^2.9.4"
   }
