@@ -1,10 +1,10 @@
 'use strict';
 
 app.controller('SearchController',
-  ['$scope', '$location', 'ResultsService', 'SuggestionsService',
+  ['$scope', '$location', '$window', 'ResultsService', 'SuggestionsService',
   'TrustabilityService', 'ScreenshotService', '$translate',
   'DisambiguatorService', 'TranslationService',
-  function($scope, $location, resultsService, suggestionsService,
+  function($scope, $location, $window, resultsService, suggestionsService,
     trustabilityService, screenshotService, $translate,
     disambiguatorService, translationService) {
     $scope.pageTitle = 'Search';
@@ -63,7 +63,10 @@ app.controller('SearchController',
         screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
     };
 
-    $scope.getSuggestion = function(val, lang = 'en') {
+    $scope.getSuggestion = function(val, lang) {
+      if (!lang) {
+        lang = $scope.kConfig.lang;
+      }
       if (val.length < 3) {return;}
 
       var array = [];
@@ -138,68 +141,87 @@ app.controller('SearchController',
         $scope.highlight = translated;
       }
 
-      // TODO Pagination
+      // Paginated results
       resultsService.getResults({
-        query: q,
+        query: q || '',
         lang: queryLanguage,
         rows: 10,
-        page: $scope.page,
+        page: 1,
         section: section,
         filters: filters,
-      })
-        .then(function(res) {
-          // Sections
-          $scope.all = 'all';
-          if (section) {
-            $scope.all = section.toUpperCase();
-          }
-          $scope.sections = res.data.facet_counts
-            .facet_fields.khresmoi_sections_sectionType_facet;
-
-          // Results
-          $scope.results = res.data.grouped.domain;
-
-          // Certification
-          $scope.results.groups.forEach(function(link) {
-            // Handle extra datas and mutators
-            // Region free title
-            link.doclist.docs[0].title =
-                link.doclist.docs[0]['title_' + queryLanguage];
-
-            // HonCode certification
-            link.doclist.docs[0].isCertified = false;
-            if (link.doclist.docs[0].is_certified_facet) {
-              if (link.doclist.docs[0].is_certified_facet[0] === 'true') {
-                link.doclist.docs[0].certified = true;
-              }
-            }
-
-            // Readability
-            var diff = link.doclist.docs[0].readability_difficult_facet;
-            var easy = link.doclist.docs[0].readability_easy_facet;
-            if (easy && diff) {
-              link.doclist.docs[0].readability = 60;
-            } else if (easy) {
-              link.doclist.docs[0].readability = 90;
-            } else if (diff) {
-              link.doclist.docs[0].readability = 30;
-            } else {
-              link.doclist.docs[0].readability = 0;
-            }
-
-            // Trustability
-            trustabilityService.getTrustabilityValueFromHost(link.groupValue)
-              .then(function(data) {
-                link.doclist.docs[0].trustability = data;
-              });
-          });
-        });
+      }).then(function(res) {
+        $scope.results = $scope.treatResults(res, trustabilityService,
+          1, queryLanguage);
+      });
     } else {
       $scope.card = 'views/partials/card.html';
       $translate('SEARCH_CARD').then(function(res) {
         $scope.cardcontent = res;
       });
     }
+
+    $scope.changePage = function() {
+      var queryLanguage = $scope.targetLang || $scope.kConfig.lang;
+      resultsService.getResults({
+        query: q || '',
+        lang: queryLanguage,
+        rows: 10,
+        page: $scope.results.currentPage,
+        section: section,
+        filters: filters,
+      }).then(function(res) {
+        $window.scrollTo(0,0);
+        $scope.results = $scope.treatResults(res, trustabilityService,
+          $scope.results.currentPage, queryLanguage);
+      });
+    };
+
+    $scope.treatResults = function(res, trustabilityService, page, lang) {
+      if (!lang) {
+        lang = $scope.kConfig.lang;
+      }
+      var results = res.data.grouped.domain;
+      results.all = 'all';
+      results.nbPages = res.data.grouped.domain.matches / 10;
+      results.currentPage = page;
+      results.maxSize = 10;
+      results.sections = res.data.facet_counts
+        .facet_fields.khresmoi_sections_sectionType_facet;
+      res.data.grouped.domain.groups.forEach(function(link) {
+        // Handle extra datas and mutators
+        // Region free title
+        link.doclist.docs[0].title =
+          link.doclist.docs[0]['title_' + lang];
+
+        // HonCode certification
+        link.doclist.docs[0].isCertified = false;
+        if (link.doclist.docs[0].is_certified_facet) {
+          if (link.doclist.docs[0].is_certified_facet[0] === 'true') {
+            link.doclist.docs[0].certified = true;
+          }
+        }
+
+        // Readability
+        var diff = link.doclist.docs[0].readability_difficult_facet;
+        var easy = link.doclist.docs[0].readability_easy_facet;
+        if (easy && diff) {
+          link.doclist.docs[0].readability = 60;
+        } else if (easy) {
+          link.doclist.docs[0].readability = 90;
+        } else if (diff) {
+          link.doclist.docs[0].readability = 30;
+        } else {
+          link.doclist.docs[0].readability = 0;
+        }
+
+        // Trustability
+        trustabilityService.getTrustabilityValueFromHost(link.groupValue)
+          .then(function(data) {
+            link.doclist.docs[0].trustability = data;
+          });
+      });
+      return results;
+    };
   },]);
 
 function serialize(obj) {
