@@ -151,7 +151,7 @@ gulp.task('html', ['fonts', 'styles', 'lang'], () => {
   if (process.env.NODE_ENV === 'production') {
     return gulp.src('src/**/*.html')
       .pipe(htmlreplace({
-        'base': '<base href="' + hostBase + '/index.html">'
+        base: '<base href="' + hostBase + '/index.html">'
       }))
       .pipe($.useref())
       .pipe($.if('*.css', $.minifyCss()))
@@ -159,7 +159,7 @@ gulp.task('html', ['fonts', 'styles', 'lang'], () => {
   }
   return gulp.src('src/**/*.html')
     .pipe(htmlreplace({
-      'base': '<base href="' + hostBase + '/index.html">'
+      base: '<base href="' + hostBase + '/index.html">'
     }))
     .pipe($.useref())
     .pipe(gulp.dest(DEST));
@@ -198,7 +198,7 @@ gulp.task('clean', () => {
   return del.sync([
     DEST,
     'src/css',
-  ], {force : true});
+  ], {force: true});
 });
 
 /**
@@ -283,8 +283,8 @@ gulp.task('serve-prod', ['default'], () => {
 gulp.task('war', ['default'], () => {
   gulp.src(['./' + DEST + '/**'])
       .pipe(war({
-          welcome: 'index.html',
-          displayName: 'betaKconnect',
+        welcome: 'index.html',
+        displayName: 'betaKconnect',
       }))
       .pipe(zip('beta.war'))
       .pipe(gulp.dest(DEST));
