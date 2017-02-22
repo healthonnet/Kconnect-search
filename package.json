@@ -39,7 +39,9 @@
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2",
     "gulp-util": "^3.0.8",
+    "gulp-war": "^0.1.4",
     "gulp-watch": "^4.3.11",
+    "gulp-zip": "^4.0.0",
     "http-proxy-middleware": "^0.17.3",
     "jshint": "^2.9.4"
   }

@@ -67,7 +67,7 @@
             <img ng-src="{{ link.doclist.docs[0].url | favicon }}" alt="favicon">
             <a href="{{ link.doclist.docs[0].url }}" ng-mouseover="showScreenshot($index)">{{ link.doclist.docs[0].title | cut:true:40:' ...'}}</a>
             <div class="visible-sm-inline-block visible-xs-inline-block">
-              <img src="/images/honcode.png" ng-if="link.doclist.docs[0].certified">
+              <img src="images/honcode.png" ng-if="link.doclist.docs[0].certified">
               <span class="m-trust" ng-show="link.doclist.docs[0].trustability">
                 <i class="fa fa-stethoscope" aria-hidden="true" style="color: {{getColor(link.doclist.docs[0].trustability)}}"></i>
               </span>
