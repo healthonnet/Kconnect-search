@@ -1,10 +1,10 @@
 'use strict';
 
 app.controller('SearchController',
-  ['$scope', '$location', 'ResultsService', 'SuggestionService',
+  ['$scope', '$location', 'ResultsService', 'SuggestionsService',
   'TrustabilityService', 'ScreenshotService', '$translate',
   'DisambiguatorService', 'TranslationService',
-  function($scope, $location, resultsService, suggestionService,
+  function($scope, $location, resultsService, suggestionsService,
     trustabilityService, screenshotService, $translate,
     disambiguatorService, translationService) {
     $scope.pageTitle = 'Search';
