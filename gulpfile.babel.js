@@ -60,7 +60,7 @@ const spellcheckServiceProxy = proxy('/hon-search/suggest', {
 });
 
 const questionsServiceProxy = proxy('/people-also-ask/questions', {
-  target: 'http://everyone.khresmoi.eu/people-also-ask/',
+  target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
 });
