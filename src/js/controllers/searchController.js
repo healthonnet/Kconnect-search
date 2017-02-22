@@ -1,12 +1,12 @@
 'use strict';
 
 app.controller('SearchController',
-  ['$scope', '$location', '$window', 'ResultsService',
-  'SuggestionService', 'TrustabilityService', 'ScreenshotService',
-  'DisambiguatorService', 'QuestionsService', 'TranslationService',
-  function($scope, $location, $window, resultsService,
-    suggestionService, trustabilityService, screenshotService,
-    disambiguatorService, questionsService, translationService) {
+  ['$scope', '$location', '$window', 'ResultsService', 'SuggestionsService',
+  'TrustabilityService', 'ScreenshotService', '$translate',
+  'DisambiguatorService', 'TranslationService',
+  function($scope, $location, $window, resultsService, suggestionsService,
+    trustabilityService, screenshotService, $translate,
+    disambiguatorService, translationService) {
     $scope.pageTitle = 'Search';
     $scope.pageIcon = 'fa-globe';
     $scope.pageTitleColor = 'text-dark-blue';
@@ -70,15 +70,19 @@ app.controller('SearchController',
       if (val.length < 3) {return;}
 
       var array = [];
-      return suggestionService.getSuggestion(val)
-      .then(function(res) {
-        array = array.concat(res.data.suggestions);
-        return questionsService.getQuestions(val, 'en');
-      })
-      .then(function(res) {
-        array = array.concat(res.data);
-        return array;
-      });
+      return suggestionsService.getSpellcheck(val, lang)
+        .then(function(res) {
+          array = array.concat(cureSpellcheck(res.data));
+          return suggestionsService.getSuggestions(val, lang);
+        })
+        .then(function(res) {
+          array = array.concat(res.data.suggestions);
+          return suggestionsService.getQuestions(val, lang);
+        })
+        .then(function(res) {
+          array = array.concat(res.data);
+          return array;
+        });
     };
 
     $scope.handleResults = function() {
@@ -117,12 +121,7 @@ app.controller('SearchController',
       disambiguatorService.getFatheadContent(q)
         .then(function(res) {
           if (!res.data.results[0]) { return; }
-
-          $scope.fathead = {
-            type: 'definition',
-            title: 'Definition of ' + q,
-            content: res.data.results[0].definition,
-          };
+          $scope.fathead = extractDefinitionFromDisambiguator(q, res.data);
 
           if (allowTranslate) {
             // Translate fathead
@@ -155,7 +154,10 @@ app.controller('SearchController',
           1, queryLanguage);
       });
     } else {
-      $scope.card = mockCard;
+      $scope.card = 'views/partials/card.html';
+      $translate('SEARCH_CARD').then(function(res) {
+        $scope.cardcontent = res;
+      });
     }
 
     $scope.changePage = function() {
@@ -256,6 +258,94 @@ var getColor = function(normalizedValue) {
     return '#fdef00';
   }
   return '#00dd00';
+};
+
+var cureSpellcheck = function(res) {
+  var array = [];
+  var length = res.spellcheck.suggestions.length;
+  length = length > 5 ? 5 : length;
+  for (var i = 0; i < 4; i++) {
+    array.push(res.spellcheck.suggestions[i][1][0][1].replace(
+      /spellcheck_\w\w:"([^\"]+)"/gi,'$1'
+    ));
+  }
+  return array;
+};
+
+var extractDefinitionFromDisambiguator = function(query, data) {
+  if (!data || !data.results) {
+    return null;
+  }
+
+  for (var i = 0; i < data.results.length; i++) {
+    var result = data.results[i];
+    var definition = honTrim(result.definition);
+    var url = result.uri && result.uri.namespace + result.uri.localName;
+
+    var foundExactLabel = result.label &&
+      equalsIgnoreCase(honTrim(result.label), query);
+
+    if (!foundExactLabel && result.labels) {
+      for (var j = 0; j < result.labels.length; j++) {
+        var label = honTrim(result.labels[j]);
+        if (equalsIgnoreCase(label, query)) {
+          foundExactLabel = true;
+          break;
+        }
+      }
+    }
+    if (foundExactLabel && definition && url && foundExactLabel) {
+      var cleanedQuery = query.replace(/^./, query.charAt(0).toUpperCase());
+      var list = definition.split(/[A-Z]+:/);
+      var def = list[1] ? list[1] : list[0];
+      def = def.replace(/,$/, '').toLowerCase();
+      def = capitalizeSentences(def,1);
+      return {
+        type: 'definition',
+        title: cleanedQuery,
+        content: def,
+        url: url,
+      };
+    }
+  }
+};
+
+var honTrim = function(str) {
+  return !str ? str : str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+};
+
+var equalsIgnoreCase = function(first, second) {
+  if (!first) {
+    return !second;
+  }
+  if (!second) {
+    return false;
+  }
+  return first.toUpperCase() === second.toUpperCase();
+};
+
+var capitalizeSentences  = function(capText, capLock) {
+  if (capLock === 1 || capLock === true) {
+    capText = capText.toLowerCase();
+  }
+
+  var wordSplit = '. ';
+  var wordArray = capText.split(wordSplit);
+  var numWords  = wordArray.length;
+
+  for (var x = 0; x < numWords; x++) {
+    wordArray[x] = wordArray[x].replace(
+      wordArray[x].charAt(0),wordArray[x].charAt(0).toUpperCase()
+    );
+    if (x === 0) {
+      capText = wordArray[x] + '. ';
+    } else if (x !== numWords - 1) {
+      capText = capText + wordArray[x] + '. ';
+    }else if (x === numWords - 1) {
+      capText = capText + wordArray[x];
+    }
+  }
+  return capText;
 };
 
 var mockCard = {

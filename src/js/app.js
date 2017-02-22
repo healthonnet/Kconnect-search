@@ -13,6 +13,7 @@ var app = angular.module('App', [
   'dcbImgFallback',
   'angularMoment',
   'LocalStorageModule',
+  'hc.marked',
 ])
   .config(function($routeProvider, $translateProvider,
                    $locationProvider, localStorageServiceProvider) {
@@ -74,7 +75,8 @@ var app = angular.module('App', [
       .when('/apps', {
         templateUrl: 'views/apps.html',
         controller: 'ApplicationsController',
-      });
+      })
+      .otherwise('/');
 
     localStorageServiceProvider
         .setPrefix('kcon')

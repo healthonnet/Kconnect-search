@@ -2,8 +2,8 @@
 
 app
   .controller('ImageController',
-  ['$scope', '$location', 'ImageService', 'angularGridInstance',
-  function($scope, $location, $imageService, angularGridInstance) {
+  ['$scope', '$location', 'ImageService', 'angularGridInstance', '$translate',
+  function($scope, $location, $imageService, angularGridInstance, $translate) {
     $scope.$emit('picturesActive');
     $scope.pageIcon = 'fa-picture-o';
     $scope.pageTitleColor = 'text-dark-purple';
@@ -59,13 +59,9 @@ app
       $scope.form.param = q;
       $scope.loadImages();
     } else {
-      $scope.card = mockImageCard;
+      $scope.card = 'views/partials/card.html';
+      $translate('IMAGE_CARD').then(function(res) {
+        $scope.cardcontent = res;
+      });
     }
   },]);
-
-var mockImageCard = {
-  url: 'views/partials/card.html',
-  title: 'Sensitive content',
-  text: '<p>Some wording to make about sensitive content</p>' +
-  '<p>Lookup our <a href="/diclaimer">diclaimer</a></p>',
-};

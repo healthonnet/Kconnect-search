@@ -2,8 +2,8 @@
 
 app
   .controller('ProController',
-    ['$scope', '$location', '$sce', 'spanWordFilter',
-    function($scope, $location, $sce, spanWord) {
+    ['$scope', '$location', '$sce', 'spanWordFilter', '$translate',
+    function($scope, $location, $sce, spanWord, $translate) {
     $scope.pageTitle = 'Pro';
     $scope.form = {};
     $scope.$emit('proActive');
@@ -29,13 +29,10 @@ app
         $scope.screenshot = link;
       };
     } else {
-      $scope.card = mockProCard;
+      $scope.card = 'views/partials/card.html';
+      $translate('PRO_CARD').then(function(res) {
+        $scope.cardcontent = res;
+      });
     }
     // TODO: fill with pro controller
   },]);
-
-var mockProCard = {
-  url: 'views/partials/card.html',
-  title: 'Professional search',
-  text: 'Lookup our <a href="/privacy">tutorial</a>',
-};

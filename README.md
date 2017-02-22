@@ -8,25 +8,30 @@ Kconnect-search engine front-end
 [![label](https://img.shields.io/github/issues/healthonnet/Kconnect-search.svg)](https://github.com/healthonnet/Kconnect-search/issues)
 [![license](https://img.shields.io/github/license/healthonnet/Kconnect-search.svg)](https://github.com/healthonnet/Kconnect-search/blob/master/LICENSE)
 
-## Install
+Overview
+--------
 
-```
-$ npm install
-$ npm test
-$ gulp
-```
+Kconnect-search is the new front-end web search engine for medical search.
 
-## Browser reload
+Contributing to Kconnect-search
+-------------------------------
 
-```
-$ gulp serve
-```
+Contributions are always welcome, no matter how large or small.
 
-## Developers
+See [Contributing](CONTRIBUTING.md).
+
+Developers
+----------
 
 * Cédric Frossard - <cedric.frossard@healthonnet.org>
 * Pierre Repetto-Andipatin - <pierre.repetto@healthonnet.org>
 
-## License
+Contributors
+------------
+
+* Bruno Laurent
+
+License
+------
 
 Apache License 2.0

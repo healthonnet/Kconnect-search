@@ -6,34 +6,38 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import download from 'gulp-download';
 import decompress from 'gulp-decompress';
+import war from 'gulp-war';
+import zip from 'gulp-zip';
+import htmlreplace from 'gulp-html-replace';
 import historyApiFallback from 'connect-history-api-fallback';
 import proxy from 'http-proxy-middleware';
 
 const $ = gulpLoadPlugins();
 const DEST = 'dist';
 const PORT = process.env.PORT || 3000;
+const TAG = 'v0.1.*';
 browserSync.create();
 
-const selectServiceProxy = proxy('/select', {
-  target: 'http://everyone.khresmoi.eu/hon-search/',
+const selectServiceProxy = proxy('/hon-search/select', {
+  target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
 });
 
-const trustServiceProxy = proxy('/trustability', {
-  target: 'http://everyone.khresmoi.eu/hon-search/',
+const trustServiceProxy = proxy('/hon-search/trustability', {
+  target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
 });
 
-const translateServiceProxy = proxy('/translation', {
-    target: 'http://everyone.khresmoi.eu/hon-search/',
-    changeOrigin: true,
-    logLevel: 'debug',
+const translateServiceProxy = proxy('/hon-search/translation', {
+  target: 'http://everyone.khresmoi.eu/',
+  changeOrigin: true,
+  logLevel: 'debug',
 });
 
-const disambiguatorServiceProxy = proxy('/khresmoiDisambiguator', {
-  target: 'http://everyone.khresmoi.eu/hon-search/',
+const disambiguatorServiceProxy = proxy('/hon-search/khresmoiDisambiguator', {
+  target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
 });
@@ -44,14 +48,20 @@ const newsServiceProxy = proxy('/feeds', {
   logLevel: 'debug',
 });
 
-const suggestServiceProxy = proxy('/suggest', {
-  target: 'http://everyone.khresmoi.eu/hon-terms-dictionary/',
+const suggestServiceProxy = proxy('/hon-terms-dictionary/suggest', {
+  target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
 });
 
-const questionsServiceProxy = proxy('/questions', {
-  target: 'http://everyone.khresmoi.eu/people-also-ask/',
+const spellcheckServiceProxy = proxy('/hon-search/suggest', {
+  target: 'http://everyone.khresmoi.eu/',
+  changeOrigin: true,
+  logLevel: 'debug',
+});
+
+const questionsServiceProxy = proxy('/people-also-ask/questions', {
+  target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
 });
@@ -137,14 +147,21 @@ gulp.task('styles', ['images', 'flags'], () => {
  * Task html
  * Apply uglify, minify to src
  */
-gulp.task('html', ['bower', 'fonts', 'styles', 'lang'], () => {
+gulp.task('html', ['fonts', 'styles', 'lang'], () => {
+  const hostBase = process.env.HOST_BASE || '';
   if (process.env.NODE_ENV === 'production') {
     return gulp.src('src/**/*.html')
+      .pipe(htmlreplace({
+        base: '<base href="' + hostBase + '/index.html">'
+      }))
       .pipe($.useref())
       .pipe($.if('*.css', $.minifyCss()))
       .pipe(gulp.dest(DEST));
   }
   return gulp.src('src/**/*.html')
+    .pipe(htmlreplace({
+      base: '<base href="' + hostBase + '/index.html">'
+    }))
     .pipe($.useref())
     .pipe(gulp.dest(DEST));
 });
@@ -158,7 +175,7 @@ gulp.task('lang', () => {
     'api/export/archive/json.zip?' +
     'key=eMJfQxM9QEEO7im7ZxWZZgMgOQ6lqsKy&' +
     'fallback=en&' +
-    'path=locale-%7B%25lang%7D.json')
+    'path=locale-%7B%25lang%7D.json&filter=' + TAG)
     .pipe(decompress({strip: 1}))
     .pipe(gulp.dest(DEST + '/locales'));
 });
@@ -175,23 +192,14 @@ gulp.task('icon', () => {
 });
 
 /**
- * Task bower
- * Launch bower
- */
-gulp.task('bower', () => {
-  return $.bower();
-});
-
-/**
  * Task clean
  * Remove dist directory
  */
 gulp.task('clean', () => {
-  return del([
+  return del.sync([
     DEST,
-    'src/lib',
     'src/css',
-  ]);
+  ], {force: true});
 });
 
 /**
@@ -220,6 +228,7 @@ gulp.task('serve', ['html'], () => {
         suggestServiceProxy,
         translateServiceProxy,
         questionsServiceProxy,
+        spellcheckServiceProxy,
         historyApiFallback(),
       ],
     },
@@ -265,14 +274,25 @@ gulp.task('serve-prod', ['default'], () => {
         suggestServiceProxy,
         translateServiceProxy,
         questionsServiceProxy,
+        spellcheckServiceProxy,
         historyApiFallback(),
       ];
     },
   });
 });
 
+gulp.task('war', ['default'], () => {
+  gulp.src(['./' + DEST + '/**'])
+      .pipe(war({
+        welcome: 'index.html',
+        displayName: 'betaKconnect',
+      }))
+      .pipe(zip('beta.war'))
+      .pipe(gulp.dest(DEST));
+});
+
 /**
  * Task default
  * Apply all tasks to build project
  */
-gulp.task('default', ['html']);
+gulp.task('default', ['clean', 'html']);

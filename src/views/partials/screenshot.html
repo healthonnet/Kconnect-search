@@ -10,7 +10,7 @@
   <div class="row space-bottom">
     <div class="col-md-4">
       <h3>{{ 'CERTIFIED' | translate }}</h3>
-      <img src="/images/honcode.png" ng-if="screenshot.certified">
+      <img src="images/honcode.png" ng-if="screenshot.certified" alt="{{'HONCODE_CERTIFIED' | translate}}" title="{{'HONCODE_CERTIFIED' | translate}}">
     </div>
     <div class="col-md-4">
       <h3>{{ 'TRUSTABILITY' | translate }}</h3>
@@ -59,6 +59,6 @@
   </div>
   <div class="row">
     <h3>{{ 'PREVIEW' | translate }}</h3>
-    <a href="{{screenshot.url}}" ng-if="screenshot.url"><img ng-src="{{screenshot.preview}}"></a>
+    <a href="{{screenshot.url}}" ng-if="screenshot.url"><img ng-src="{{screenshot.preview}}" alt="{{'SCREENSHOT' | translate}}" title="{{'SCREENSHOT' | translate}}"></a>
   </div>
 </div>
