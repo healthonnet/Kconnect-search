@@ -8,7 +8,7 @@
         <div class="app" ng-class="{'bg-info': app.pro}">
           <div class="icon-wrapper" ng-mouseleave="app.showModal = false" >
             <img class="img-responsive" ng-src="{{app.icon}}"
-                 ng-mouseover="app.showModal = true">
+                 ng-mouseover="app.showModal = true" alt="{{app.title}}" title="{{app.title}}">
             <div class="icon-modal" ng-show="app.showModal">
               {{app.description}}
             </div>

@@ -9,9 +9,11 @@
             ag-options="angularGridOptions" ag-grid-id="gallery" ag-infinite-scroll="loadImages()">
           <li data-ng-repeat="image in images" class="grid">
             <img ng-src="{{ image.url }}" class="grid-img"
-                 loading-src fallback-src
-                 data-actual-width = "{{image.actualWidth}}"
-                 data-actual-height="{{image.actualHeight}}" />
+                loading-src fallback-src
+                data-actual-width = "{{image.actualWidth}}"
+                data-actual-height="{{image.actualHeight}}"
+                alt="{{image.pageTitle_en}}"
+                title="{{image.pageTitle_en}}" />
           </li>
         </ul>
         <div class="col-xs-12 text-center">
