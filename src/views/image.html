@@ -12,8 +12,8 @@
                 loading-src fallback-src
                 data-actual-width = "{{image.actualWidth}}"
                 data-actual-height="{{image.actualHeight}}"
-                alt="{{image.pageTitle_en}}"
-                title="{{image.pageTitle_en}}" />
+                alt="{{image['alt_' + image.language]}}"
+                title="{{image['pageTitle_' + image.language]}}" />
           </li>
         </ul>
         <div class="col-xs-12 text-center">
