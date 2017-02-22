@@ -7,7 +7,7 @@ app.factory('ResultsService', function($http, SELECT_SERVICE_URL) {
         query: options.query ? options.query : '',
         lang: options.lang ? options.lang : 'en',
         rows: options.rows ? options.rows : 4,
-        start: options.page ? options.rows * options.page : 0,
+        start: options.page ? (options.rows * (options.page - 1)) : 0,
         section: options.section ?
           'khresmoi_sections_sectionType_facet:' +
           options.section.toUpperCase() : '',
