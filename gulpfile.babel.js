@@ -146,7 +146,7 @@ gulp.task('styles', ['images', 'flags'], () => {
  * Task html
  * Apply uglify, minify to src
  */
-gulp.task('html', ['bower', 'fonts', 'styles', 'lang'], () => {
+gulp.task('html', ['fonts', 'styles', 'lang'], () => {
   if (process.env.NODE_ENV === 'production') {
     const hostBase = process.env.HOST_BASE || '';
     return gulp.src('src/**/*.html')
@@ -188,23 +188,14 @@ gulp.task('icon', () => {
 });
 
 /**
- * Task bower
- * Launch bower
- */
-gulp.task('bower', () => {
-  return $.bower();
-});
-
-/**
  * Task clean
  * Remove dist directory
  */
 gulp.task('clean', () => {
-  return del([
+  return del.sync([
     DEST,
-    'src/lib',
     'src/css',
-  ]);
+  ], {force : true});
 });
 
 /**
