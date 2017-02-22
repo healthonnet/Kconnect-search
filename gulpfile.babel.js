@@ -6,6 +6,8 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import download from 'gulp-download';
 import decompress from 'gulp-decompress';
+import war from 'gulp-war';
+import zip from 'gulp-zip';
 import htmlreplace from 'gulp-html-replace';
 import historyApiFallback from 'connect-history-api-fallback';
 import proxy from 'http-proxy-middleware';
@@ -284,8 +286,18 @@ gulp.task('serve-prod', ['default'], () => {
   });
 });
 
+gulp.task('war-prod', ['default'], () => {
+  gulp.src(['./' + DEST + '/**'])
+      .pipe(war({
+          welcome: 'index.html',
+          displayName: 'betaKconnect',
+      }))
+      .pipe(zip('beta.war'))
+      .pipe(gulp.dest(DEST));
+});
+
 /**
  * Task default
  * Apply all tasks to build project
  */
-gulp.task('default', ['html']);
+gulp.task('default', ['clean', 'html']);
