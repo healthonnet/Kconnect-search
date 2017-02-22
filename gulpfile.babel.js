@@ -147,8 +147,8 @@ gulp.task('styles', ['images', 'flags'], () => {
  * Apply uglify, minify to src
  */
 gulp.task('html', ['fonts', 'styles', 'lang'], () => {
+  const hostBase = process.env.HOST_BASE || '';
   if (process.env.NODE_ENV === 'production') {
-    const hostBase = process.env.HOST_BASE || '';
     return gulp.src('src/**/*.html')
       .pipe(htmlreplace({
         'base': '<base href="' + hostBase + '/index.html">'
@@ -158,6 +158,9 @@ gulp.task('html', ['fonts', 'styles', 'lang'], () => {
       .pipe(gulp.dest(DEST));
   }
   return gulp.src('src/**/*.html')
+    .pipe(htmlreplace({
+      'base': '<base href="' + hostBase + '/index.html">'
+    }))
     .pipe($.useref())
     .pipe(gulp.dest(DEST));
 });
