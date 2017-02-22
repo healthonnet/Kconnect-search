@@ -17,26 +17,26 @@ const DEST = 'dist';
 const PORT = process.env.PORT || 3000;
 browserSync.create();
 
-const selectServiceProxy = proxy('/select', {
-  target: 'http://everyone.khresmoi.eu/hon-search/',
+const selectServiceProxy = proxy('/hon-search/select', {
+  target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
 });
 
-const trustServiceProxy = proxy('/trustability', {
-  target: 'http://everyone.khresmoi.eu/hon-search/',
+const trustServiceProxy = proxy('/hon-search/trustability', {
+  target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
 });
 
-const translateServiceProxy = proxy('/translation', {
-  target: 'http://everyone.khresmoi.eu/hon-search/',
+const translateServiceProxy = proxy('/hon-search/translation', {
+  target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
 });
 
-const disambiguatorServiceProxy = proxy('/khresmoiDisambiguator', {
-  target: 'http://everyone.khresmoi.eu/hon-search/',
+const disambiguatorServiceProxy = proxy('/hon-search/khresmoiDisambiguator', {
+  target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
 });
@@ -59,7 +59,7 @@ const spellcheckServiceProxy = proxy('/hon-search/suggest', {
   logLevel: 'debug',
 });
 
-const questionsServiceProxy = proxy('/questions', {
+const questionsServiceProxy = proxy('/people-also-ask/questions', {
   target: 'http://everyone.khresmoi.eu/people-also-ask/',
   changeOrigin: true,
   logLevel: 'debug',
