@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp serve-prod",
-    "test": "gulp test",
+    "pretest": "gulp protractor-install",
+    "test": "gulp test && gulp protractor-run",
     "postinstall": "node node_modules/bower/bin/bower install"
   },
   "author": "Health On the Net",
@@ -44,5 +45,8 @@
     "gulp-zip": "^4.0.0",
     "http-proxy-middleware": "^0.17.3",
     "jshint": "^2.9.4"
+  },
+  "devDependencies": {
+    "protractor": "^5.1.1"
   }
 }
