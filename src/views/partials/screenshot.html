@@ -59,6 +59,6 @@
   </div>
   <div class="row">
     <h3>{{ 'PREVIEW' | translate }}</h3>
-    <a href="{{screenshot.url}}" ng-if="screenshot.url"><img ng-src="{{screenshot.preview}}" alt="{{'SCREENSHOT' | translate}}" title="{{'SCREENSHOT' | translate}}"></a>
+    <a href="{{screenshot.url}}" ng-if="screenshot.url"><img hide-until-good ng-src="{{screenshot.preview}}" alt="{{'SCREENSHOT' | translate}}" title="{{'SCREENSHOT' | translate}}"></a>
   </div>
 </div>
