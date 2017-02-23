@@ -28,7 +28,10 @@ app.factory('ProvisuService',
         htm.removeClass('provisu-blue');
         htm.addClass('provisu-cyan');
       },
-      showBigger: function(fontSize = 14) {
+      showBigger: function(fontSize) {
+        if (!fontSize) {
+          fontSize = 14;
+        }
         var htm = angular.element(document.querySelector('body'));
         var newFontSize = fontSize + FONT_SIZE_SPAN;
         newFontSize = (newFontSize > 98) ? 98 : newFontSize;
@@ -36,10 +39,13 @@ app.factory('ProvisuService',
         htm.addClass('font-size-' + newFontSize);
         return newFontSize;
       },
-      showSmaller: function(fontSize = 14) {
+      showSmaller: function(fontSize) {
+        if (!fontSize) {
+          fontSize = 14;
+        }
         var htm = angular.element(document.querySelector('body'));
         var newFontSize = fontSize - FONT_SIZE_SPAN;
-        newFontSize = (newFontSize < 6) ? 4 : newFontSize;
+        newFontSize = (newFontSize < 6) ? 6 : newFontSize;
         htm.removeClass('font-size-' + fontSize);
         htm.addClass('font-size-' + newFontSize);
         return newFontSize;
