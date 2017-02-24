@@ -11,6 +11,9 @@ app.constant('VERSION', '0.1.2-pagination');
 app.constant('DEFAULT_PREFERENCES', {
   hello: 'world',
   test: true,
+  fontSize: 14,
+  lowVision: false,
+  mainColor: 'White',
   advancedSearch: true,
   advancedNews: false,
 });

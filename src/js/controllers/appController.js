@@ -15,13 +15,6 @@ app.controller('AppController',
         $scope.showFilters = !$scope.showFilters;
       };
 
-      // Pro Visu Service
-      $scope.logotypeProvisu = $scope.logotypeProvisu || 'images/kconnect.svg';
-      $scope.lowVision = false;
-      $scope.provisu = function() {
-        $scope.lowVision = !$scope.lowVision;
-      };
-
       // App values & settings
       $scope.kConfig = defaultPreferences;
       $scope.kConfig.lang = $translate.proposedLanguage();
@@ -35,6 +28,17 @@ app.controller('AppController',
 
       // Init Lang
       $scope.switchLang($scope.kConfig.lang);
+
+      // Init Pro Visu Service
+      $scope.initProvisu();
+
+      $scope.logotypeProvisu = $scope.logotypeProvisu || 'images/kconnect.svg';
+
+      $scope.provisu = function() {
+        $scope.kConfig.lowVision = !$scope.kConfig.lowVision;
+        $scope.initProvisu();
+      };
+
     };
 
     // Private functions & Utils
@@ -98,6 +102,58 @@ app.controller('AppController',
       $scope.proActive = false;
       $scope.appsActive = false;
     });
+
+    // Provisu Utils
+    $scope.initProvisu = function() {
+      if ($scope.kConfig.lowVision) {
+        provisuService.showBigger($scope.kConfig.fontSize);
+        $scope.setProvisu($scope.kConfig.mainColor);
+      } else {
+        $scope.setProvisu();
+      }
+    };
+
+    $scope.setProvisu = function(color) {
+      switch (color) {
+        case 'White': {
+          provisuService.showWhite();
+          $scope.logotypeProvisu = 'images/kconnect.svg';
+          $scope.kConfig.mainColor = 'White';
+          break;
+        }
+        case 'Black': {
+          provisuService.showBlack();
+          $scope.logotypeProvisu = 'images/kconnect-yellow.svg';
+          $scope.kConfig.mainColor = 'Black';
+          break;
+        }
+        case 'Blue': {
+          provisuService.showBlue();
+          $scope.logotypeProvisu = 'images/kconnect-blue.svg';
+          $scope.kConfig.mainColor = 'Blue';
+          break;
+        }
+        case 'Cyan': {
+          provisuService.showCyan();
+          $scope.logotypeProvisu = 'images/kconnect-cyan.svg';
+          $scope.kConfig.mainColor = 'Cyan';
+          break;
+        }
+        default: {
+          provisuService.reset();
+          $scope.logotypeProvisu = 'images/kconnect.svg';
+        }
+      }
+    };
+
+    $scope.bigger = function() {
+      $scope.kConfig.fontSize =
+        provisuService.showBigger($scope.kConfig.fontSize);
+    };
+    $scope.smaller = function() {
+      $scope.kConfig.fontSize =
+        provisuService.showSmaller($scope.kConfig.fontSize);
+    };
 
     function initLocalStorage() {
       if (localStorageService.isSupported) {

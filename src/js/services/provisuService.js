@@ -4,6 +4,10 @@ app.factory('ProvisuService',
   ['$rootElement',
   function($rootElement) {
     return {
+      reset: function() {
+        this.showWhite();
+        this.showBigger(10);
+      },
       showWhite: function() {
         var htm = angular.element(document.querySelector('body'));
         htm.removeClass('provisu-black');
@@ -34,8 +38,9 @@ app.factory('ProvisuService',
         }
         var htm = angular.element(document.querySelector('body'));
         var newFontSize = fontSize + FONT_SIZE_SPAN;
-        newFontSize = (newFontSize > 98) ? 98 : newFontSize;
-        htm.removeClass('font-size-' + fontSize);
+        newFontSize =
+          (newFontSize > FONT_SIZE_MAX) ? FONT_SIZE_MAX : newFontSize;
+        this.clearFontClasses(htm);
         htm.addClass('font-size-' + newFontSize);
         return newFontSize;
       },
@@ -45,12 +50,21 @@ app.factory('ProvisuService',
         }
         var htm = angular.element(document.querySelector('body'));
         var newFontSize = fontSize - FONT_SIZE_SPAN;
-        newFontSize = (newFontSize < 6) ? 6 : newFontSize;
-        htm.removeClass('font-size-' + fontSize);
+        newFontSize =
+          (newFontSize < FONT_SIZE_MIN) ? FONT_SIZE_MIN : newFontSize;
+        this.clearFontClasses(htm);
         htm.addClass('font-size-' + newFontSize);
         return newFontSize;
+      },
+      clearFontClasses: function(element) {
+        // RemoveClass doesn't support a function as first argument.
+        for (var i = FONT_SIZE_MIN; i < FONT_SIZE_MAX; i += FONT_SIZE_SPAN) {
+          element.removeClass('font-size-' + i);
+        }
       },
     };
   },]);
 
 var FONT_SIZE_SPAN = 4;
+var FONT_SIZE_MAX = 98;
+var FONT_SIZE_MIN = 6;
