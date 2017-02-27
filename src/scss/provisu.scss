@@ -107,6 +107,16 @@ body.provisu-black {
       }
     }
   }
+
+  .pagination>li>a,
+  .pagination>li>span {
+    background: black;
+  }
+
+  .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background: yellow;
+    color: black;
+  }
 }
 
 body.provisu-black:after {
@@ -213,6 +223,16 @@ body.provisu-blue {
       }
     }
   }
+
+  .pagination>li>a,
+  .pagination>li>span {
+    background: blue;
+  }
+
+  .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background: white;
+    color: black;
+  }
 }
 
 body.provisu-blue:after {
@@ -318,6 +338,16 @@ body.provisu-cyan {
         color: red !important;
       }
     }
+  }
+
+  .pagination>li>a,
+  .pagination>li>span {
+    background: $cyan;
+  }
+
+  .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background: red;
+    color: $cyan;
   }
 }
 
