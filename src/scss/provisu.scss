@@ -52,6 +52,11 @@ body.provisu-black {
     border: darkslategrey solid 1px;
   }
 
+  .fathead p,
+  .fathead h2 {
+    color: white;
+  }
+
   .btn-info,
   a.btn-info {
     background-color: yellow;
@@ -173,6 +178,11 @@ body.provisu-blue {
     color: black;
   }
 
+  .fathead p,
+  .fathead h2 {
+    color: yellow;
+  }
+
   .search-icon {
     background-color: white;
   }
@@ -276,6 +286,11 @@ body.provisu-cyan {
   .btn-info,
   a.btn-info {
     background-color: red;
+    color: black;
+  }
+
+  .fathead p,
+  .fathead h2 {
     color: black;
   }
 

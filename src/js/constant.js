@@ -7,10 +7,15 @@ app.constant('SUGGEST_SERVICE_URL', '/hon-terms-dictionary/suggest');
 app.constant('SPELLCHECK_SERVICE_URL', '/hon-search/suggest');
 app.constant('QUESTIONS_SERVICE_URL', '/people-also-ask/questions');
 app.constant('SCREENSHOT_SERVICE_URL', 'http://everyone.khresmoi.eu:3000');
-app.constant('VERSION', '0.1.2-fix-tomcat');
+app.constant('VERSION', '0.1.2-pagination');
+app.constant('FONT_SIZE_SPAN', 4);
+app.constant('DEFAULT_FONT_SIZE', 14);
 app.constant('DEFAULT_PREFERENCES', {
   hello: 'world',
   test: true,
+  fontSize: 14,
+  lowVision: false,
+  mainColor: 'White',
   advancedSearch: true,
   advancedNews: false,
 });

@@ -78,14 +78,14 @@
           </h2>
           <p>
             <a href="{{ link.doclist.docs[0].url }}" class="text-overflow inline-block" ng-bind-html="link.doclist.docs[0].url | spanWord:highlight"></a>
-            <a href="https://provisu.ch/service?url={{link.doclist.docs[0].url}}" target="_blank" class="pull-right" ng-if="lowVision"><i class="fa fa-2x fa-low-vision" aria-hidden="true"></i></a>
+            <a href="https://provisu.ch/service?url={{link.doclist.docs[0].url}}" target="_blank" class="pull-right" ng-if="kConfig.lowVision"><i class="fa fa-2x fa-low-vision" aria-hidden="true"></i></a>
           </p>
           <p ng-bind-html="link.doclist.docs[0].snippet | cut:true:70:' ...'| spanWord:highlight">
           </p>
         </div>
       </div>
     </div>
-    <div class="col-md-5 search-details hidden-sm" ng-include="'views/partials/screenshot.html'" ng-if="!lowVision">
+    <div class="col-md-5 search-details hidden-sm" ng-include="'views/partials/screenshot.html'" ng-if="!kConfig.lowVision">
     </div>
   </div>
 
