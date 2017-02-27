@@ -291,7 +291,7 @@ gulp.task('war', ['default'], () => {
         webappExtras: [
           '<error-page>\n',
             '<error-code>404</error-code>\n',
-            '<location>' + hostBase + '</location>\n',
+            '<location>/</location>\n',
           '</error-page>\n',
         ],
       }))
