@@ -11,6 +11,8 @@ import zip from 'gulp-zip';
 import htmlreplace from 'gulp-html-replace';
 import historyApiFallback from 'connect-history-api-fallback';
 import proxy from 'http-proxy-middleware';
+import path from 'path';
+import childProcess from 'child_process';
 
 const $ = gulpLoadPlugins();
 const DEST = 'dist';
@@ -248,6 +250,39 @@ gulp.task('serve', ['html'], () => {
  */
 gulp.task('test', ['jshint', 'jscs']);
 
+function getProtractorBinary(binaryName) {
+  var winExt = /^win/.test(process.platform)? '.cmd' : '';
+  var pkgPath = require.resolve('protractor');
+  var protractorDir =
+    path.resolve(path.join(path.dirname(pkgPath), '..', 'bin'));
+  return path.join(protractorDir, '/' + binaryName + winExt);
+}
+
+gulp.task('protractor-install', done => {
+  childProcess.spawn(getProtractorBinary('webdriver-manager'), ['update'], {
+    stdio: 'inherit'
+  }).once('close', done);
+});
+
+gulp.task('protractor-run', ['serve-prod'], done => {
+  let child = childProcess.spawn(
+    getProtractorBinary('protractor'),
+    ['./protractor.js']
+  );
+
+  child.stdout.on('data', data => {
+    console.log(data.toString());
+  });
+
+  child.on('close', code => {
+    if (code === 1) {
+      process.exit(1);
+    }
+    $.connect.serverClose();
+    done();
+  });
+});
+
 /**
  * Task reload
  * reload the browser after executing default
@@ -282,12 +317,20 @@ gulp.task('serve-prod', ['default'], () => {
 });
 
 gulp.task('war', ['default'], () => {
+  const hostBase = process.env.HOST_BASE || '/beta';
+
   gulp.src(['./' + DEST + '/**'])
       .pipe(war({
         welcome: 'index.html',
         displayName: 'betaKconnect',
+        webappExtras: [
+          '<error-page>\n',
+            '<error-code>404</error-code>\n',
+            '<location>/</location>\n',
+          '</error-page>\n',
+        ],
       }))
-      .pipe(zip('beta.war'))
+      .pipe(zip(hostBase.substring(1) + '.war'))
       .pipe(gulp.dest(DEST));
 });
 

@@ -15,7 +15,13 @@
   "esversion": 6,
   "globals": {
     "angular": true,
-    "app": true
+    "app": true,
+    "describe": true,
+    "it": true,
+    "browser": true,
+    "expect": true,
+    "by": true,
+    "element": true
   },
   "devel": {
     "console" : false

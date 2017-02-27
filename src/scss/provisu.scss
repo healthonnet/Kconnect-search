@@ -52,6 +52,11 @@ body.provisu-black {
     border: darkslategrey solid 1px;
   }
 
+  .fathead p,
+  .fathead h2 {
+    color: white;
+  }
+
   .btn-info,
   a.btn-info {
     background-color: yellow;
@@ -106,6 +111,16 @@ body.provisu-black {
         color: white !important;
       }
     }
+  }
+
+  .pagination>li>a,
+  .pagination>li>span {
+    background: black;
+  }
+
+  .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background: yellow;
+    color: black;
   }
 }
 
@@ -173,6 +188,11 @@ body.provisu-blue {
     color: black;
   }
 
+  .fathead p,
+  .fathead h2 {
+    color: yellow;
+  }
+
   .search-icon {
     background-color: white;
   }
@@ -212,6 +232,16 @@ body.provisu-blue {
         color: yellow !important;
       }
     }
+  }
+
+  .pagination>li>a,
+  .pagination>li>span {
+    background: blue;
+  }
+
+  .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background: white;
+    color: black;
   }
 }
 
@@ -279,6 +309,11 @@ body.provisu-cyan {
     color: black;
   }
 
+  .fathead p,
+  .fathead h2 {
+    color: black;
+  }
+
   .search-icon {
     background-color: red;
   }
@@ -318,6 +353,16 @@ body.provisu-cyan {
         color: red !important;
       }
     }
+  }
+
+  .pagination>li>a,
+  .pagination>li>span {
+    background: $cyan;
+  }
+
+  .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background: red;
+    color: $cyan;
   }
 }
 

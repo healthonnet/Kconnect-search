@@ -16,6 +16,23 @@ var app = angular.module('App', [
   'hc.marked',
   'sticky',
 ])
+  .directive('hideUntilGood', function() {
+    return {
+      restrict: 'A',
+      multiElement: true,
+      link: function(scope, element, attrs) {
+        attrs.$observe('ngSrc', function(value) {
+          if (!value || value.length === 0) {
+            element.attr('src', value);
+          }
+          element.css('display', 'none');
+        });
+        element.bind('load', function() {
+          element.css('display', '');
+        });
+      },
+    };
+  })
   .config(function($routeProvider, $translateProvider,
                    $locationProvider, localStorageServiceProvider) {
 
