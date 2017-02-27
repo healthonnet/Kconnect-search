@@ -14,6 +14,7 @@ var app = angular.module('App', [
   'angularMoment',
   'LocalStorageModule',
   'hc.marked',
+  'sticky',
 ])
   .directive('hideUntilGood', function() {
     return {
