@@ -1,8 +1,8 @@
 'use strict';
 
 app.factory('ProvisuService',
-  ['$rootElement',
-  function($rootElement) {
+  ['$rootElement', 'FONT_SIZE_SPAN', 'DEFAULT_FONT_SIZE',
+  function($rootElement, FONT_SIZE_SPAN, DEFAULT_FONT_SIZE) {
     return {
       reset: function() {
         this.showWhite();
@@ -32,9 +32,18 @@ app.factory('ProvisuService',
         htm.removeClass('provisu-blue');
         htm.addClass('provisu-cyan');
       },
+      setFontSize: function(fontSize) {
+        if (!fontSize) {
+          fontSize = DEFAULT_FONT_SIZE;
+        }
+        var htm = angular.element(document.querySelector('body'));
+        this.clearFontClasses(htm);
+        htm.addClass('font-size-' + fontSize);
+        return fontSize;
+      },
       showBigger: function(fontSize) {
         if (!fontSize) {
-          fontSize = 14;
+          fontSize = DEFAULT_FONT_SIZE;
         }
         var htm = angular.element(document.querySelector('body'));
         var newFontSize = fontSize + FONT_SIZE_SPAN;
@@ -46,7 +55,7 @@ app.factory('ProvisuService',
       },
       showSmaller: function(fontSize) {
         if (!fontSize) {
-          fontSize = 14;
+          fontSize = DEFAULT_FONT_SIZE;
         }
         var htm = angular.element(document.querySelector('body'));
         var newFontSize = fontSize - FONT_SIZE_SPAN;
@@ -65,6 +74,5 @@ app.factory('ProvisuService',
     };
   },]);
 
-var FONT_SIZE_SPAN = 4;
 var FONT_SIZE_MAX = 98;
 var FONT_SIZE_MIN = 6;

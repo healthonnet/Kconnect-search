@@ -106,9 +106,7 @@ app.controller('AppController',
     // Provisu Utils
     $scope.initProvisu = function() {
       if ($scope.kConfig.lowVision) {
-        if ($scope.kConfig.fontSize !== 14) {
-          provisuService.showBigger($scope.kConfig.fontSize);
-        }
+        provisuService.setFontSize($scope.kConfig.fontSize);
         $scope.setProvisu($scope.kConfig.mainColor);
       } else {
         $scope.setProvisu();
