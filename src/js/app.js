@@ -94,7 +94,12 @@ var app = angular.module('App', [
         templateUrl: 'views/apps.html',
         controller: 'ApplicationsController',
       })
-      .otherwise('/');
+      .otherwise({
+        redirectTo: function() {
+          console.log(location.search);
+          return '/' + location.search;
+        }
+      });
 
     localStorageServiceProvider
         .setPrefix('kcon')
