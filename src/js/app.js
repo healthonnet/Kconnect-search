@@ -96,7 +96,6 @@ var app = angular.module('App', [
       })
       .otherwise({
         redirectTo: function() {
-          console.log(location.search);
           return '/' + location.search;
         }
       });
