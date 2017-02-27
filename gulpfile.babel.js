@@ -282,12 +282,20 @@ gulp.task('serve-prod', ['default'], () => {
 });
 
 gulp.task('war', ['default'], () => {
+  const hostBase = process.env.HOST_BASE || '/beta';
+
   gulp.src(['./' + DEST + '/**'])
       .pipe(war({
         welcome: 'index.html',
         displayName: 'betaKconnect',
+        webappExtras: [
+          '<error-page>\n',
+            '<error-code>404</error-code>\n',
+            '<location>' + hostBase + '</location>\n',
+          '</error-page>\n',
+        ],
       }))
-      .pipe(zip('beta.war'))
+      .pipe(zip(hostBase.substring(1) + '.war'))
       .pipe(gulp.dest(DEST));
 });
 
