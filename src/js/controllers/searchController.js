@@ -110,9 +110,9 @@ app.controller('SearchController',
           $scope.lang.translatableTargets)
           .then(function(data) {
             data.forEach(function(langTargetResponse) {
-              var key = langTargetResponse.config.params.targetLang;
+              var key = langTargetResponse.lang;
               var translation =
-                langTargetResponse.data.translation[0].translated[0].text;
+                langTargetResponse.translation;
               $scope.translatedQueries[key] = translation;
             });
           });
@@ -123,13 +123,13 @@ app.controller('SearchController',
           if (!res.data.results[0]) { return; }
           $scope.fathead = extractDefinitionFromDisambiguator(q, res.data);
 
-          if (allowTranslate) {
-            // Translate fathead
+          // Translate fathead to User language
+          if ($scope.kConfig.lang !== 'en') {
             translationService.translate(
-              $scope.fathead.content, $scope.kConfig.lang, $scope.targetLang)
+              $scope.fathead.content, 'en', $scope.kConfig.lang)
               .then(function(data) {
                 $scope.fathead.content =
-                    data.data.translation[0].translated[0].text;
+                    data.translation;
               });
           }
         });
@@ -225,10 +225,9 @@ app.controller('SearchController',
           translationService
             .translate(link.doclist.docs[0].title, lang, $scope.kConfig.lang)
             .then(function(res) {
-              if (!res.data.translation) {return;}
+              if (!res.translation) {return;}
 
-              var translatedTitle =
-                res.data.translation[0].translated[0].text;
+              var translatedTitle = res.translation;
               link.doclist.docs[0].translatedTitle = translatedTitle;
             });
 
@@ -236,9 +235,8 @@ app.controller('SearchController',
           translationService
             .translate(link.doclist.docs[0].snippet, lang, $scope.kConfig.lang)
             .then(function(res) {
-              if (!res.data.translation) {return;}
-              var translatedSnippet =
-                res.data.translation[0].translated[0].text;
+              if (!res.translation) {return;}
+              var translatedSnippet = res.translation;
               link.doclist.docs[0].translatedSnippet = translatedSnippet;
             });
         }
