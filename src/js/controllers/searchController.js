@@ -150,8 +150,7 @@ app.controller('SearchController',
         section: section,
         filters: filters,
       }).then(function(res) {
-        $scope.results = $scope.treatResults(res, trustabilityService,
-          1, queryLanguage);
+        $scope.results = $scope.treatResults(res, 1, queryLanguage);
       });
     } else {
       $scope.card = 'views/partials/card.html';
@@ -171,12 +170,12 @@ app.controller('SearchController',
         filters: filters,
       }).then(function(res) {
         $window.scrollTo(0,0);
-        $scope.results = $scope.treatResults(res, trustabilityService,
+        $scope.results = $scope.treatResults(res,
           $scope.results.currentPage, queryLanguage);
       });
     };
 
-    $scope.treatResults = function(res, trustabilityService, page, lang) {
+    $scope.treatResults = function(res, page, lang) {
       if (!lang) {
         lang = $scope.kConfig.lang;
       }
