@@ -17,6 +17,7 @@ app.constant('DEFAULT_PREFERENCES', {
   advancedSearch: true,
   advancedNews: false,
   cardResults: false,
+  translatedResults: true,
 });
 app.constant('LANGUAGES', {
   bg: {

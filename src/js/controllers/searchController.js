@@ -138,7 +138,7 @@ app.controller('SearchController',
       if (allowTranslate) {
         queryLanguage = $scope.targetLang;
         q = translated;
-        $scope.highlight = translated;
+        $scope.translatedHighlight = translated;
       }
 
       // Paginated results
@@ -219,6 +219,30 @@ app.controller('SearchController',
           .then(function(data) {
             link.doclist.docs[0].trustability = data;
           });
+
+        if (lang !== $scope.kConfig.lang) {
+          // Translations
+          // Title
+          translationService
+            .translate(link.doclist.docs[0].title, lang, $scope.kConfig.lang)
+            .then(function(res) {
+              if (!res.data.translation) {return;}
+
+              var translatedTitle =
+                res.data.translation[0].translated[0].text;
+              link.doclist.docs[0].translatedTitle = translatedTitle;
+            });
+
+          // Snippet
+          translationService
+            .translate(link.doclist.docs[0].snippet, lang, $scope.kConfig.lang)
+            .then(function(res) {
+              if (!res.data.translation) {return;}
+              var translatedSnippet =
+                res.data.translation[0].translated[0].text;
+              link.doclist.docs[0].translatedSnippet = translatedSnippet;
+            });
+        }
       });
       return results;
     };
