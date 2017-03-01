@@ -16,7 +16,7 @@ app.constant('DEFAULT_PREFERENCES', {
   mainColor: 'White',
   advancedSearch: true,
   advancedNews: false,
-  cardResults: false,
+  translatedResults: true,
 });
 app.constant('LANGUAGES', {
   bg: {

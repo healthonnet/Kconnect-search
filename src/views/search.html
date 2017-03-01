@@ -1,3 +1,2 @@
 <ng-include ng-if="!param" src="'views/partials/middle-search.html'"></ng-include>
-<ng-include ng-if="param && !kConfig.cardResults" src="'views/partials/full-search.html'"></ng-include>
-<ng-include ng-if="param && kConfig.cardResults" src="'views/partials/card-results.html'"></ng-include>
+<ng-include ng-if="param" src="'views/partials/card-results.html'"></ng-include>

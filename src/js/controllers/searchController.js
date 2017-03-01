@@ -110,9 +110,9 @@ app.controller('SearchController',
           $scope.lang.translatableTargets)
           .then(function(data) {
             data.forEach(function(langTargetResponse) {
-              var key = langTargetResponse.config.params.targetLang;
+              var key = langTargetResponse.lang;
               var translation =
-                langTargetResponse.data.translation[0].translated[0].text;
+                langTargetResponse.translation;
               $scope.translatedQueries[key] = translation;
             });
           });
@@ -123,13 +123,13 @@ app.controller('SearchController',
           if (!res.data.results[0]) { return; }
           $scope.fathead = extractDefinitionFromDisambiguator(q, res.data);
 
-          if (allowTranslate) {
-            // Translate fathead
+          // Translate fathead to User language
+          if ($scope.kConfig.lang !== 'en') {
             translationService.translate(
-              $scope.fathead.content, $scope.kConfig.lang, $scope.targetLang)
+              $scope.fathead.content, 'en', $scope.kConfig.lang)
               .then(function(data) {
                 $scope.fathead.content =
-                    data.data.translation[0].translated[0].text;
+                    data.translation;
               });
           }
         });
@@ -138,7 +138,7 @@ app.controller('SearchController',
       if (allowTranslate) {
         queryLanguage = $scope.targetLang;
         q = translated;
-        $scope.highlight = translated;
+        $scope.translatedHighlight = translated;
       }
 
       // Paginated results
@@ -150,8 +150,7 @@ app.controller('SearchController',
         section: section,
         filters: filters,
       }).then(function(res) {
-        $scope.results = $scope.treatResults(res, trustabilityService,
-          1, queryLanguage);
+        $scope.results = $scope.treatResults(res, 1, queryLanguage);
       });
     } else {
       $scope.card = 'views/partials/card.html';
@@ -171,12 +170,12 @@ app.controller('SearchController',
         filters: filters,
       }).then(function(res) {
         $window.scrollTo(0,0);
-        $scope.results = $scope.treatResults(res, trustabilityService,
+        $scope.results = $scope.treatResults(res,
           $scope.results.currentPage, queryLanguage);
       });
     };
 
-    $scope.treatResults = function(res, trustabilityService, page, lang) {
+    $scope.treatResults = function(res, page, lang) {
       if (!lang) {
         lang = $scope.kConfig.lang;
       }
@@ -219,6 +218,28 @@ app.controller('SearchController',
           .then(function(data) {
             link.doclist.docs[0].trustability = data;
           });
+
+        if (lang !== $scope.kConfig.lang) {
+          // Translations
+          // Title
+          translationService
+            .translate(link.doclist.docs[0].title, lang, $scope.kConfig.lang)
+            .then(function(res) {
+              if (!res.translation) {return;}
+
+              var translatedTitle = res.translation;
+              link.doclist.docs[0].translatedTitle = translatedTitle;
+            });
+
+          // Snippet
+          translationService
+            .translate(link.doclist.docs[0].snippet, lang, $scope.kConfig.lang)
+            .then(function(res) {
+              if (!res.translation) {return;}
+              var translatedSnippet = res.translation;
+              link.doclist.docs[0].translatedSnippet = translatedSnippet;
+            });
+        }
       });
       return results;
     };
