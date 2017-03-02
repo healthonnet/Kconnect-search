@@ -53,7 +53,7 @@
 
   <div class="row">
     <div class="col-md-6 results">
-      <div class="row card" ng-repeat="link in results.groups track by $index" ng-mouseover="showScreenshot($index)">
+      <div class="row card" ng-repeat="link in results.groups track by $index" ng-mouseover="showScreenshot($index)" ng-class="{false: 'highlight'}[highlight == $index]">
         <div class="col-xs-12">
           <h2>
             <div ng-if="targetLang" ng-click="kConfig.translatedResults = !kConfig.translatedResults" class="translations-flags inline noselect">
@@ -91,7 +91,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 search-details hidden-sm card" sticky confine="true" sticky-class="sticky-card" ng-include="'views/partials/screenshot.html'" ng-if="!lowVision">
+    <div class="col-md-6 search-details hidden-sm card" sticky confine="true" sticky-class="sticky-card" ng-class="{false: 'highlight'}[highlight >= 0]" ng-include="'views/partials/screenshot.html'" ng-if="!lowVision">
     </div>
   </div>
 
