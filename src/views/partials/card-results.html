@@ -56,9 +56,9 @@
       <div class="row card" ng-repeat="link in results.groups track by $index" ng-mouseover="showScreenshot($index)">
         <div class="col-xs-12">
           <h2>
-            <div ng-if="targetLang" ng-click="kConfig.translatedResults = !kConfig.translatedResults" class="translations-flags inline noselect">
-              <span class="flag flag-{{ languages[targetLang].flag }}"></span>
-              <span ng-show="kConfig.translatedResults" class="flag flag-{{ lang.flag }} userLang"></span>
+            <div ng-click="kConfig.translatedResults = !kConfig.translatedResults" ng-if="targetLang" class="btn btn-default translation-btn inline noselect">
+                <span ng-class="kConfig.translatedResults?'flag-behind':'flag-above'" class="flag flag-{{ languages[targetLang].flag }}"></span>
+                <span ng-class="kConfig.translatedResults?'flag-above':'flag-behind'" class="flag flag-{{ lang.flag }}"></span>
             </div>
             <img ng-src="{{ link.doclist.docs[0].url | favicon }}" class="noselect" alt="favicon" title="{{ link.doclist.docs[0].title }}">
             <a ng-hide="(kConfig.translatedResults && link.doclist.docs[0].translatedTitle)" href="{{ link.doclist.docs[0].url }}">
