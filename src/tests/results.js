@@ -9,12 +9,27 @@ var ResultsPage = function() {
     if (!query) {
       query = 'cancer';
     }
-    element(by.model('form.param')).setKeys(query);
+    element(by.model('form.param')).clear().sendKeys(query);
   };
 
-  this.execSearch = function() {
-    // TODO: do the search
+  this.execSearch = function(query) {
+    this.fillQuery(query);
+    return element(by.css('.middle-search-submit')).click();
   };
+
+  this.getResults = function() {
+    return element.all(
+      by.repeater(
+        'link in results.groups track by $index'
+      )
+    );
+  };
+};
+
+var hasClass = function(element, cls) {
+  return element.getAttribute('class').then(function(classes) {
+    return classes.split(' ').indexOf(cls) !== -1;
+  });
 };
 
 describe('Protractor Results Page', function() {
@@ -25,18 +40,32 @@ describe('Protractor Results Page', function() {
   });
 
   it('should do a search', function() {
-    resultsPage.fillQuery();
-    // TODO: test
+    resultsPage.execSearch().then(function() {
+      expect(browser.getCurrentUrl()).toContain('?q=cancer');
+      resultsPage.getResults().count().then(function(count) {
+        expect(count).not.toEqual(0);
+      });
+    });
   });
 
   it('should show grey cards', function() {
-    // TODO: test
+    resultsPage.execSearch().then(function() {
+      resultsPage.getResults().each(function(element, index) {
+        expect(hasClass(element, 'highlight')).toBe(true);
+      });
+    });
   });
 
-  // T
-  // it('should have lang button', function() {
-  //   browser.get('http://localhost:3000');
-  //   var langLink = element(by.css('a[href*="language"]'));
-  //   expect(langLink.isDisplayed()).toBe(true);
-  // });
+  it('should hover a result and not to be grey', function() {
+    resultsPage.execSearch().then(function() {
+      browser.actions().mouseMove(element(by.css('.highlight'))).perform();
+      resultsPage.getResults().each(function(element, index) {
+        if (index === 0) {
+          expect(hasClass(element, 'highlight')).toBe(false);
+        } else {
+          expect(hasClass(element, 'highlight')).toBe(true);
+        }
+      });
+    });
+  });
 });
