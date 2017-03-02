@@ -21,7 +21,8 @@
     "browser": true,
     "expect": true,
     "by": true,
-    "element": true
+    "element": true,
+    "beforeEach": true
   },
   "devel": {
     "console" : false

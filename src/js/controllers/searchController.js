@@ -17,6 +17,7 @@ app.controller('SearchController',
     $scope.filters = $scope.filters || {};
     $scope.filters = deserialize($location.search().filters);
     $scope.$emit('searchActive');
+    $scope.highlight = undefined;
 
     $scope.submit = function(targetlang) {
       if ($scope.form.param !== undefined) {
@@ -56,8 +57,10 @@ app.controller('SearchController',
     $scope.showScreenshot = function($index) {
       if ($index === undefined) {
         $scope.screenshot = undefined;
+        $scope.highlight = undefined;
         return;
       }
+      $scope.highlight = $index;
       $scope.screenshot = $scope.results.groups[$index].doclist.docs[0];
       $scope.screenshot.preview =
         screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
