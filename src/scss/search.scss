@@ -31,7 +31,6 @@
     position: relative;
     font-size:inherit;
     padding:0;
-    background-color: rgba(28, 182, 241, 0.5);
     .flag-behind{
       position:absolute;
       top:2px;
@@ -44,7 +43,7 @@
     }
     .flag-above {
       position: absolute;
-      top:12px;
+      top:8px;
       left:8px;
       z-index:1;
       -webkit-transition:all 0.5s ease;
