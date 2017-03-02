@@ -5,7 +5,8 @@ body.provisu-black {
   background-color: black;
 
   input,
-  select {
+  select,
+  input.search {
     background-color: black;
     color: rgb(255,254,251);
   }
@@ -52,9 +53,24 @@ body.provisu-black {
     border: darkslategrey solid 1px;
   }
 
-  .fathead p,
-  .fathead h2 {
-    color: white;
+  .fathead {
+    background: black;
+    border: none;
+    box-shadow: none;
+    p,
+    h2 {
+      color: white;
+    }
+  }
+
+  .card {
+    background: black;
+    border: none;
+    box-shadow: none;
+  }
+
+  .highlight {
+    background: black !important;
   }
 
   .btn-info,
@@ -135,7 +151,8 @@ body.provisu-blue {
   background-color: blue;
 
   input,
-  select {
+  select,
+  input.search {
     background-color: blue;
     color: rgb(255,254,251);
   }
@@ -188,9 +205,24 @@ body.provisu-blue {
     color: black;
   }
 
-  .fathead p,
-  .fathead h2 {
-    color: yellow;
+  .fathead {
+    background: blue;
+    border: none;
+    box-shadow: none;
+    p,
+    h2 {
+      color: yellow;
+    }
+  }
+
+  .card {
+    background: blue;
+    border: none;
+    box-shadow: none;
+  }
+
+  .highlight {
+    background: blue !important;
   }
 
   .search-icon {
@@ -256,7 +288,8 @@ body.provisu-cyan {
   background-color: $cyan;
 
   input,
-  select {
+  select,
+  input.search {
     background-color: $cyan;
     color: rgb(55,54,51);
   }
@@ -309,9 +342,24 @@ body.provisu-cyan {
     color: black;
   }
 
-  .fathead p,
-  .fathead h2 {
-    color: black;
+  .fathead {
+    background: $cyan;
+    border: none;
+    box-shadow: none;
+    p,
+    h2 {
+      color: black;
+    }
+  }
+
+  .card {
+    background: $cyan;
+    border: none;
+    box-shadow: none;
+  }
+
+  .highlight {
+    background: $cyan !important;
   }
 
   .search-icon {
