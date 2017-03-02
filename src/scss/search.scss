@@ -23,15 +23,34 @@
       color: green;
     }
   }
-  .translations-flags {
+
+  .translation-btn{
     display: inline-block;
-    height: 40px;
+    height: 35px;
     width: 40px;
     position: relative;
-    .userLang {
+    font-size:inherit;
+    padding:0;
+    background-color: rgba(28, 182, 241, 0.5);
+    .flag-behind{
+      position:absolute;
+      top:2px;
+      left:3px;
+      z-index:0;
+      -webkit-transition:all 0.5s ease;
+      -moz-transition:all 0.5s ease;
+      -o-transition:all 0.5s ease;
+      transition:all 0.5s ease;
+    }
+    .flag-above {
       position: absolute;
-      bottom: 12px;
-      left: 10px;
+      top:12px;
+      left:8px;
+      z-index:1;
+      -webkit-transition:all 0.5s ease;
+      -moz-transition:all 0.5s ease;
+      -o-transition:all 0.5s ease;
+      transition:all 0.5s ease;
     }
   }
 
