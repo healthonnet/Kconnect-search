@@ -75,7 +75,12 @@ app.controller('SearchController',
       var array = [];
       return suggestionsService.getSpellcheck(val, lang)
         .then(function(res) {
-          array = array.concat(cureSpellcheck(res.data));
+          var results = suggestionsService.cureSpellcheck(res.data);
+          $scope.suggestions = {
+            query: val,
+            results: results,
+          };
+          array = array.concat(results);
           return suggestionsService.getSuggestions(val, lang);
         })
         .then(function(res) {
@@ -123,8 +128,25 @@ app.controller('SearchController',
 
       disambiguatorService.getFatheadContent(q)
         .then(function(res) {
-          if (!res.data.results[0]) { return; }
+          if (!res.data.results[0]) {
+            return;
+          }
           $scope.fathead = extractDefinitionFromDisambiguator(q, res.data);
+
+          // Check if result is misspelt
+          if (!$scope.fathead) {
+            suggestionsService.getSpellcheck(q, $scope.kConfig.lang)
+              .then(function(res) {
+                var results = suggestionsService.cureSpellcheck(res.data);
+                if (results.length > 0) {
+                  $scope.fathead = {
+                    type: 'views/fatheads/suggestions.html',
+                    content: results[0],
+                  };
+                }
+                return;
+              });
+          }
 
           // Translate fathead to User language
           if ($scope.kConfig.lang !== 'en') {
@@ -284,18 +306,6 @@ var getColor = function(normalizedValue) {
   return '#00dd00';
 };
 
-var cureSpellcheck = function(res) {
-  var array = [];
-  var length = res.spellcheck.suggestions.length;
-  length = length > 5 ? 5 : length;
-  for (var i = 0; i < 4; i++) {
-    array.push(res.spellcheck.suggestions[i][1][0][1].replace(
-      /spellcheck_\w\w:"([^\"]+)"/gi,'$1'
-    ));
-  }
-  return array;
-};
-
 var extractDefinitionFromDisambiguator = function(query, data) {
   if (!data || !data.results) {
     return null;
@@ -325,7 +335,7 @@ var extractDefinitionFromDisambiguator = function(query, data) {
       def = def.replace(/,$/, '').toLowerCase();
       def = capitalizeSentences(def,1);
       return {
-        type: 'definition',
+        type: 'views/fatheads/definition.html',
         title: cleanedQuery,
         content: def,
         url: url,
@@ -370,12 +380,4 @@ var capitalizeSentences  = function(capText, capLock) {
     }
   }
   return capText;
-};
-
-var mockCard = {
-  url: 'views/partials/card.html',
-  title: 'Benefits',
-  text: 'Not for profit | No <span>ads</span> | ' +
-    'No <span>cookies</span><br />' +
-    'Lookup our <a href="/privacy">Privacy Policies</a>',
 };

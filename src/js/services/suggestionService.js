@@ -35,5 +35,19 @@ app.factory('SuggestionsService',
         },
       });
     },
+    cureSpellcheck: function(res) {
+      var array = [];
+      var length = res.spellcheck.suggestions.length;
+      if (length === 0) {
+        return {};
+      }
+      length = length > 5 ? 5 : length;
+      for (var i = 0; i < 4; i++) {
+        array.push(res.spellcheck.suggestions[i][1][0][1].replace(
+          /spellcheck_\w\w:"([^\"]+)"/gi,'$1'
+        ));
+      }
+      return array;
+    },
   };
 });
