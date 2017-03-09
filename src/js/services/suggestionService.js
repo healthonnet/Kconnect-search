@@ -4,7 +4,10 @@ app.factory('SuggestionsService',
   function($http, SUGGEST_SERVICE_URL,
     SPELLCHECK_SERVICE_URL, QUESTIONS_SERVICE_URL) {
   return {
-    getSuggestions: function(query, lang = 'en') {
+    getSuggestions: function(query, lang) {
+      if (!lang) {
+        lang = 'en';
+      }
       return $http.get(SUGGEST_SERVICE_URL, {
         params: {
           wt: 'json',
@@ -14,7 +17,10 @@ app.factory('SuggestionsService',
         },
       });
     },
-    getQuestions: function(query, lang = 'en') {
+    getQuestions: function(query, lang) {
+      if (!lang) {
+        lang = 'en';
+      }
       return $http.get(QUESTIONS_SERVICE_URL, {
         params: {
           language: lang,
@@ -23,7 +29,10 @@ app.factory('SuggestionsService',
         },
       });
     },
-    getSpellcheck: function(query, lang = 'en') {
+    getSpellcheck: function(query, lang) {
+      if (!lang) {
+        lang = 'en';
+      }
       return $http.get(SPELLCHECK_SERVICE_URL, {
         params: {
           wt: 'json',
