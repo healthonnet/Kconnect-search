@@ -76,10 +76,6 @@ app.controller('SearchController',
       return suggestionsService.getSpellcheck(val, lang)
         .then(function(res) {
           var results = suggestionsService.cureSpellcheck(res.data);
-          $scope.suggestions = {
-            query: val,
-            results: results,
-          };
           if (results.length) {
             array = array.concat(results);
           }
@@ -137,13 +133,13 @@ app.controller('SearchController',
 
           // Check if result is misspelt
           if (!$scope.fathead) {
-            suggestionsService.getSpellcheck(q, $scope.kConfig.lang)
+            suggestionsService.getAutocorrect(q, $scope.kConfig.lang)
               .then(function(res) {
-                var results = suggestionsService.cureSpellcheck(res.data);
-                if (results.length > 0) {
+                var results = suggestionsService.cureAutocorrect(q, res.data);
+                if (results) {
                   $scope.fathead = {
                     type: 'views/fatheads/suggestions.html',
-                    content: results[0],
+                    content: results,
                   };
                 }
                 return;

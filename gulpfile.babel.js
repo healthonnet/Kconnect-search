@@ -62,6 +62,12 @@ const spellcheckServiceProxy = proxy('/hon-search/suggest', {
   logLevel: 'debug',
 });
 
+const autocorrectServiceProxy = proxy('/hon-search/spell', {
+  target: 'http://everyone.khresmoi.eu/',
+  changeOrigin: true,
+  logLevel: 'debug',
+});
+
 const questionsServiceProxy = proxy('/people-also-ask/questions', {
   target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
@@ -231,6 +237,7 @@ gulp.task('serve', ['html'], () => {
         translateServiceProxy,
         questionsServiceProxy,
         spellcheckServiceProxy,
+        autocorrectServiceProxy,
         historyApiFallback(),
       ],
     },
@@ -310,6 +317,7 @@ gulp.task('serve-prod', ['default'], () => {
         translateServiceProxy,
         questionsServiceProxy,
         spellcheckServiceProxy,
+        autocorrectServiceProxy,
         historyApiFallback(),
       ];
     },
