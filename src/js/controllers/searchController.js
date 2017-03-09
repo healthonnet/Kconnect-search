@@ -80,7 +80,9 @@ app.controller('SearchController',
             query: val,
             results: results,
           };
-          array = array.concat(results);
+          if (results.length) {
+            array = array.concat(results);
+          }
           return suggestionsService.getSuggestions(val, lang);
         })
         .then(function(res) {
