@@ -13,6 +13,12 @@ Overview
 
 Kconnect-search is the new front-end web search engine for medical search.
 
+Documentation
+-------------
+
+You can read the documentation in the wiki:
+https://github.com/healthonnet/Kconnect-search/wiki.
+
 Contributing to Kconnect-search
 -------------------------------
 
