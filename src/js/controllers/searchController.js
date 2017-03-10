@@ -127,23 +127,13 @@ app.controller('SearchController',
       disambiguatorService.getFatheadContent(q)
         .then(function(res) {
           if (!res.data.results[0]) {
-            return;
+            throw new Error('No fathead');
           }
           $scope.fathead = extractDefinitionFromDisambiguator(q, res.data);
 
           // Check if result is misspelt
           if (!$scope.fathead) {
-            suggestionsService.getAutocorrect(q, $scope.kConfig.lang)
-              .then(function(res) {
-                var results = suggestionsService.cureAutocorrect(q, res.data);
-                if (results) {
-                  $scope.fathead = {
-                    type: 'views/fatheads/suggestions.html',
-                    content: results,
-                  };
-                }
-                return;
-              });
+            throw new Error('No fathead');
           }
 
           // Translate fathead to User language
@@ -155,6 +145,19 @@ app.controller('SearchController',
                     data.translation;
               });
           }
+        })
+        .catch(err => {
+          suggestionsService.getAutocorrect(q, $scope.kConfig.lang)
+            .then(function(res) {
+              var results = suggestionsService.cureAutocorrect(q, res.data);
+              if (results) {
+                $scope.fathead = {
+                  type: 'views/fatheads/suggestions.html',
+                  content: results,
+                };
+              }
+              return;
+            });
         });
 
       // Translated content request
