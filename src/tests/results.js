@@ -24,6 +24,13 @@ var ResultsPage = function() {
       )
     );
   };
+
+  this.getFathead = function(type) {
+    if (!type) {
+      type = '.fathead';
+    }
+    return element(by.css(type));
+  };
 };
 
 var hasClass = function(element, cls) {
@@ -66,6 +73,22 @@ describe('Protractor Results Page', function() {
           expect(hasClass(element, 'highlight')).toBe(true);
         }
       });
+    });
+  });
+
+  it('should have suggestions with "cance"', function() {
+    resultsPage.execSearch('cance').then(function() {
+      expect(
+        resultsPage.getFathead('.fathead-suggestions').isDisplayed()
+      ).toBeTruthy();
+    });
+  });
+
+  it('should not have suggestions with "cancer"', function() {
+    resultsPage.execSearch('cancer').then(function() {
+      expect(
+        resultsPage.getFathead('.fathead-suggestions').isPresent()
+      ).toBeFalsy();
     });
   });
 });

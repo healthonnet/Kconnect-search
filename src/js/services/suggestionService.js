@@ -1,10 +1,13 @@
 'use strict';
 
 app.factory('SuggestionsService',
-  function($http, SUGGEST_SERVICE_URL,
-    SPELLCHECK_SERVICE_URL, QUESTIONS_SERVICE_URL) {
+  function($http, SUGGEST_SERVICE_URL, AUTOCORRECT_SERVICE_URL,
+    SPELLCHECK_SERVICE_URL, QUESTIONS_SERVICE_URL, MAXIMUM_FREQUENCY_RATIO) {
   return {
-    getSuggestions: function(query, lang = 'en') {
+    getSuggestions: function(query, lang) {
+      if (!lang) {
+        lang = 'en';
+      }
       return $http.get(SUGGEST_SERVICE_URL, {
         params: {
           wt: 'json',
@@ -14,7 +17,11 @@ app.factory('SuggestionsService',
         },
       });
     },
-    getQuestions: function(query, lang = 'en') {
+
+    getQuestions: function(query, lang) {
+      if (!lang) {
+        lang = 'en';
+      }
       return $http.get(QUESTIONS_SERVICE_URL, {
         params: {
           language: lang,
@@ -23,7 +30,11 @@ app.factory('SuggestionsService',
         },
       });
     },
-    getSpellcheck: function(query, lang = 'en') {
+
+    getSpellcheck: function(query, lang) {
+      if (!lang) {
+        lang = 'en';
+      }
       return $http.get(SPELLCHECK_SERVICE_URL, {
         params: {
           wt: 'json',
@@ -35,5 +46,141 @@ app.factory('SuggestionsService',
         },
       });
     },
+
+    getAutocorrect: function(query, lang) {
+      if (!lang) {
+        lang = 'en';
+      }
+      return $http.get(AUTOCORRECT_SERVICE_URL, {
+        params: {
+          wt: 'json',
+          echoParams: 'explicit',
+          indent: 'off',
+          q: query,
+          'spellcheck.dictionary': lang,
+          'spellcheck.extendedResults': true,
+          'spellcheck.count': 25,
+        },
+      });
+    },
+
+    cureSpellcheck: function(res) {
+      var array = [];
+      var length = res.spellcheck.suggestions.length;
+      if (length === 0) {
+        return {};
+      }
+      length = length > 5 ? 5 : length;
+      for (var i = 0; i < 4; i++) {
+        array.push(res.spellcheck.suggestions[i][1][0][1].replace(
+          /spellcheck_\w\w:"([^\"]+)"/gi,'$1'
+        ));
+      }
+      return array;
+    },
+
+    cureAutocorrect: function(query, response) {
+      var finalSuggestions = {};
+      if (
+        !(response && response.spellcheck && response.spellcheck.suggestions)
+      ) {
+        return null;
+      }
+
+      var suggestions = response.spellcheck.suggestions;
+
+      if (suggestions instanceof Array) {
+        var tmp = {};
+        for (var i = 0; i < suggestions.length; i += 2) {
+          tmp[suggestions[i]] = suggestions[i + 1];
+        }
+        suggestions = tmp;
+      }
+
+      for (var word in suggestions) {
+        if (suggestions.hasOwnProperty(word)) {
+
+          if (word === 'collation' || word === 'correctlySpelled') {
+            continue;
+          }
+
+          if (suggestions[word].suggestion.length >= 1) {
+
+            // Only use the first suggestion
+            var suggestion = suggestions[word].suggestion[0];
+
+            if (response.responseHeader.params['spellcheck.extendedResults']) {
+              // Check the extended results
+              var frequencyRatio =
+                suggestions[word].origFreq * (1.0 / suggestion.freq);
+
+              if (frequencyRatio <= MAXIMUM_FREQUENCY_RATIO) {
+                // Only include if the frequency ratio is low enough
+                finalSuggestions[word] = [ suggestion.word ];
+              }
+            } else {
+              finalSuggestions[word] = [ suggestion.word ];
+            }
+          }
+        }
+      }
+
+      var size = 0;
+      for (var element in finalSuggestions) {
+        if (finalSuggestions.hasOwnProperty(element)) {
+          size++;
+        }
+      }
+
+      if (size > 0) {
+        // Handle suggestion
+
+        // Glue all the suggested words together
+        var replacePairs = {};
+        for (var thisWord in finalSuggestions) {
+          if (finalSuggestions.hasOwnProperty(thisWord)) {
+            replacePairs[thisWord] = finalSuggestions[thisWord][0];
+          }
+        }
+
+        var mySuggestion = strtr(query, replacePairs);
+
+        // Display them
+        if (
+          mySuggestion &&
+          !equalsIgnoreCase(
+            trim(query),
+            trim(mySuggestion)
+          )
+        ) {
+          return mySuggestion;
+        }
+        return null;
+      }
+    },
   };
 });
+
+function strtr(str, replacePairs) {
+  for (var from in replacePairs) {
+    if (replacePairs.hasOwnProperty(from)) {
+      str = str.replace(new RegExp(from, 'g'), replacePairs[from]);
+    }
+  }
+  return str;
+}
+
+function trim(str) {
+  return !str ? str : str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}
+
+function equalsIgnoreCase(first, second) {
+  if (!first) {
+    return !second;
+  }
+  if (!second) {
+    return false;
+  }
+
+  return first.toUpperCase() === second.toUpperCase();
+}

@@ -1,0 +1,10 @@
+<div class="row fathead" ng-if="fathead.content">
+ <div class="col-xs-12">
+   <div class="container-fluid">
+     <p class="fathead-suggestions">
+       {{ 'DID_YOU_MEAN' | translate }}
+       <a href="/?q={{fathead.content}}">{{fathead.content}}</a>
+       ?
+     </p>
+   </div>
+ </div>
