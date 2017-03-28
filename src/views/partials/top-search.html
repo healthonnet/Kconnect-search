@@ -3,7 +3,7 @@
         <div class="row">
             <form ng-submit="submit()">
                 <div class="input-group stylish-input-group">
-                    <input type="text" class="search" ng-model="form.param" ng-model-options="{debounce: 250}"  uib-typeahead="query for query in getSuggestion($viewValue)" typeahead-on-select="submit()" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" ng-model="form.param">
+                    <input type="text" class="search" ng-model="form.param" typeahead-min-length="3" ng-model-options="{debounce: 250}"  uib-typeahead="query for query in getSuggestion($viewValue)" typeahead-on-select="submit()" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" ng-model="form.param">
                     <span class="input-group-addon search-icon">
                     <button type="submit" class="btn">
                         <i class="fa fa-2x fa-search" aria-hidden="true"></i>
