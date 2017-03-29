@@ -2,7 +2,8 @@
 
 app.factory('SuggestionsService',
   function($http, SUGGEST_SERVICE_URL, AUTOCORRECT_SERVICE_URL,
-    SPELLCHECK_SERVICE_URL, QUESTIONS_SERVICE_URL, MAXIMUM_FREQUENCY_RATIO) {
+    SPELLCHECK_SERVICE_URL, QUESTIONS_SERVICE_URL,
+    TYPEAHEAD_SERVICE_URL, MAXIMUM_FREQUENCY_RATIO) {
   return {
     getSuggestions: function(query, lang) {
       if (!lang) {
@@ -158,6 +159,43 @@ app.factory('SuggestionsService',
         return null;
       }
     },
+
+    getSubjects: function(query) {
+      if (!query) { query = ''; }
+
+      return $http.get(TYPEAHEAD_SERVICE_URL + '/subject', {
+        params: {
+          q: query,
+        },
+      });
+    },
+
+    getPredicates: function(query, subjectUrl) {
+      if (!query) { query = ''; }
+      return $http.get(TYPEAHEAD_SERVICE_URL + '/predicate', {
+        paramSerializer: customHttpParamSerializer,
+        params: {
+          subject: subjectUrl,
+          q: query,
+        },
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+      });
+    },
+
+    getObjects: function(query, subjectUrl, predicateUrl) {
+      if (!query) { query = ''; }
+
+      return $http.get(TYPEAHEAD_SERVICE_URL + '/object', {
+        params: {
+          subject: subjectUrl,
+          predicate: predicateUrl,
+          q: query,
+        },
+      });
+    },
+
   };
 });
 
@@ -183,4 +221,43 @@ function equalsIgnoreCase(first, second) {
   }
 
   return first.toUpperCase() === second.toUpperCase();
+}
+
+var customHttpParamSerializer = function(params) {
+  if (!params) { return ''; }
+  var parts = [];
+  var value;
+  for (var param in params) {
+    if (params.hasOwnProperty(param)) {
+      value = params[param];
+      if (value === null || typeof value === undefined) { return; }
+      if (Array.isArray(value)) {
+        parts.concat(serializeArray(value, param));
+      } else {
+        parts.push(encodeUriQuery(param) + '=' +
+          encodeUriQuery(serializeValue(value)));
+      }
+    }
+  }
+  return parts.join('&');
+};
+
+function encodeUriQuery(val) {
+  return encodeURIComponent(val);
+}
+
+function serializeValue(v) {
+  if (typeof v === 'object') {
+    return v instanceof Date ? v.toISOString() : v;
+  }
+  return v;
+}
+
+function serializeArray(value, param) {
+  var parts = [];
+  value.forEach(function(v) {
+    parts.push(encodeUriQuery(param)  + '=' +
+      encodeUriQuery(serializeValue(v)));
+  });
+  return parts;
 }
