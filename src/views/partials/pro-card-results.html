@@ -73,8 +73,11 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 search-details hidden-sm card" sticky confine="true" sticky-class="sticky-card" ng-class="{false: 'highlight'}[highlight >= 0]" ng-include="'views/partials/screenshot.html'" ng-if="!lowVision">
+    <div class="col-md-6 search-details hidden-sm card" sticky confine="true" sticky-class="sticky-card" ng-class="{false: 'highlight'}[highlight >= 0]" ng-include="'views/partials/screenshot.html'" ng-if="!lowVision && results.length > 0 ">
     </div>
+  </div>
+  <div class="row card" ng-hide="results.length > 0 || !semanticQuery">
+    <p>{{ 'NO_RESULTS' | translate }}</p>
   </div>
 
   <div class="row card">
