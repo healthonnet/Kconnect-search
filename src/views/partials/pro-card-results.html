@@ -17,7 +17,7 @@
                    typeahead-on-select="validateQuery($item)" onfocus="this.select();"
                    placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
           </div>
-          <div class="jigsaw jigsaw-small bg-info col-xs-4" ng-if="form.predicate" style="z-index: 1">
+          <div class="jigsaw jigsaw-small bg-info col-xs-4 col-sm-5" ng-if="form.predicate" style="z-index: 1">
             <input type="text" ng-model="form.object" ng-model-options="{debounce: 250}"
                    typeahead-editable="false" typeahead-min-length="0"
                    uib-typeahead="object as object.label for object in getObjects($viewValue)"
