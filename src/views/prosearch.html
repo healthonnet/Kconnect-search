@@ -5,20 +5,20 @@
             <h1 id="kconnect">connect {{pageTitle}}</h1>
             <form ng-submit="submit()">
                 <div class="input-group stylish-input-group col-xs-12">
-                    <div class="jigsaw bg-info" style="z-index: 3">
+                    <div class="jigsaw jigsaw-big bg-info" style="z-index: 3">
                        <input type="text" ng-model="form.subject" ng-model-options="{debounce: 250}"
                            typeahead-editable="false" typeahead-min-length="0"
                            uib-typeahead="subject as subject.label for subject in getSubjects($viewValue)"
                            typeahead-on-select="validateQuery($item)" class="bg-info"
                            placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
                     </div>
-                    <div class="jigsaw" ng-if="form.subject" style="z-index: 2">
+                    <div class="jigsaw jigsaw-big" ng-if="form.subject" style="z-index: 2">
                         <input type="text" ng-model="form.predicate" ng-model-options="{debounce: 250}"
                            typeahead-editable="false" typeahead-min-length="0"
                            uib-typeahead="predicate as predicate.label for predicate in getPredicates($viewValue)"
                            typeahead-on-select="validateQuery($item)" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
                     </div>
-                    <div class="jigsaw bg-info" ng-if="form.predicate" style="z-index: 1">
+                    <div class="jigsaw jigsaw-big bg-info" ng-if="form.predicate" style="z-index: 1">
                         <input type="text" ng-model="form.object" ng-model-options="{debounce: 250}"
                            typeahead-editable="false" typeahead-min-length="0"
                            uib-typeahead="object as object.label for object in getObjects($viewValue)"

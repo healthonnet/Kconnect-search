@@ -99,8 +99,6 @@ app
           content: $scope.form.object.definition,
         };
       }
-
-      console.log($scope.semanticQuery);
     }
     if ($scope.semanticQuery && $scope.semanticQuery.length === 3) {
 

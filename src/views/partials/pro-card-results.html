@@ -3,34 +3,26 @@
     <div class="row">
       <form ng-submit="submit()">
         <div class="input-group stylish-input-group col-xs-12">
-          <div class="jigsaw bg-info" style="z-index: 3">
+          <div class="jigsaw jigsaw-small bg-info col-xs-4" style="z-index: 3">
             <input type="text" ng-model="form.subject" ng-model-options="{debounce: 250}"
                    typeahead-editable="false" typeahead-min-length="0"
                    uib-typeahead="subject as subject.label for subject in getSubjects($viewValue)"
                    typeahead-on-select="validateQuery($item)" class="bg-info"
                    placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
           </div>
-          <div class="jigsaw" ng-if="form.subject" style="z-index: 2">
+          <div class="jigsaw jigsaw-small col-xs-3" ng-if="form.subject" style="z-index: 2">
             <input type="text" ng-model="form.predicate" ng-model-options="{debounce: 250}"
                    typeahead-editable="false" typeahead-min-length="0"
                    uib-typeahead="predicate as predicate.label for predicate in getPredicates($viewValue)"
                    typeahead-on-select="validateQuery($item)" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
           </div>
-          <div class="jigsaw bg-info" ng-if="form.predicate" style="z-index: 1">
+          <div class="jigsaw jigsaw-small bg-info col-xs-4" ng-if="form.predicate" style="z-index: 1">
             <input type="text" ng-model="form.object" ng-model-options="{debounce: 250}"
                    typeahead-editable="false" typeahead-min-length="0"
                    uib-typeahead="object as object.label for object in getObjects($viewValue)"
                    typeahead-on-select="validateQuery($item)"
                    class="bg-info" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
           </div>
-        </div>
-        <div class="input-group stylish-input-group">
-          <input type="text" class="search" ng-model="form.param" typeahead-min-length="3" ng-model-options="{debounce: 250}"  uib-typeahead="query for query in getSuggestion($viewValue)" typeahead-on-select="submit()" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}" ng-model="form.param">
-          <span class="input-group-addon search-icon">
-            <button type="submit" class="btn">
-              <i class="fa fa-2x fa-search" aria-hidden="true"></i>
-            </button>
-          </span>
         </div>
       </form>
     </div>
