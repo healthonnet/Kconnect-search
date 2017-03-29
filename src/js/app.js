@@ -79,7 +79,7 @@ var app = angular.module('App', [
         controller: 'NewsController',
       })
       .when('/pro', {
-        templateUrl: 'views/search.html',
+        templateUrl: 'views/prosearch.html',
         controller: 'ProController',
       })
       .when('/settings', {

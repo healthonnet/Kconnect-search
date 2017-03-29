@@ -1,0 +1,42 @@
+<div ng-if="!param">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-2 col-xs-10 col-xs-offset-1 middle-search">
+            <p class="text-center" ng-class="pageTitleColor"><i class="fa fa-4x" ng-class="pageIcon" aria-hidden="true"></i></p>
+            <h1 id="kconnect">connect {{pageTitle}}</h1>
+            <form ng-submit="submit()">
+                <div class="input-group stylish-input-group col-xs-12">
+                    <div class="jigsaw bg-info" style="z-index: 3">
+                       <input type="text" ng-model="form.subject" ng-model-options="{debounce: 250}"
+                           typeahead-editable="false" typeahead-min-length="0"
+                           uib-typeahead="subject as subject.label for subject in getSubjects($viewValue)"
+                           typeahead-on-select="validateQuery($item)" class="bg-info"
+                           placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
+                    </div>
+                    <div class="jigsaw" ng-if="form.subject" style="z-index: 2">
+                        <input type="text" ng-model="form.predicate" ng-model-options="{debounce: 250}"
+                           typeahead-editable="false" typeahead-min-length="0"
+                           uib-typeahead="predicate as predicate.label for predicate in getPredicates($viewValue)"
+                           typeahead-on-select="validateQuery($item)" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
+                    </div>
+                    <div class="jigsaw bg-info" ng-if="form.predicate" style="z-index: 1">
+                        <input type="text" ng-model="form.object" ng-model-options="{debounce: 250}"
+                           typeahead-editable="false" typeahead-min-length="0"
+                           uib-typeahead="object as object.label for object in getObjects($viewValue)"
+                           typeahead-on-select="validateQuery($item)"
+                           class="bg-info" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
+                    </div>
+                </div>
+                <span class="input-group-addon search-icon" ng-if="form.param3 && form.param2 && form.param">
+                        <button type="submit" class="btn middle-search-submit">
+                            <i class="fa fa-2x fa-search" aria-hidden="true"></i>
+                        </button>
+                    </span>
+            </form>
+        </div>
+    </div>
+    <div ng-include="'views/partials/filters.html'" ng-if="showFilters" class="row col-sm-9 col-sm-offset-2 col-xs-10 col-xs-offset-1"></div>
+    <div ng-include="card" class="row"></div>
+    <div ng-include="'views/partials/provisu.html'" ng-if="kConfig.lowVision" class="row"></div>
+</div>
+
+<ng-include ng-if="param" src="'views/partials/card-results.html'"></ng-include>
