@@ -44,6 +44,12 @@ const disambiguatorServiceProxy = proxy('/hon-search/khresmoiDisambiguator', {
   logLevel: 'debug',
 });
 
+const typeaheadServiceProxy = proxy('/hon-search/typeahead', {
+  target: 'http://everyone.khresmoi.eu/',
+  changeOrigin: true,
+  logLevel: 'debug',
+});
+
 const newsServiceProxy = proxy('/feeds', {
   target: 'https://cloud.feedly.com/v3/search/',
   changeOrigin: true,
@@ -235,6 +241,7 @@ gulp.task('serve', ['html'], () => {
         newsServiceProxy,
         suggestServiceProxy,
         translateServiceProxy,
+        typeaheadServiceProxy,
         questionsServiceProxy,
         spellcheckServiceProxy,
         autocorrectServiceProxy,
@@ -315,6 +322,7 @@ gulp.task('serve-prod', ['default'], () => {
         newsServiceProxy,
         suggestServiceProxy,
         translateServiceProxy,
+        typeaheadServiceProxy,
         questionsServiceProxy,
         spellcheckServiceProxy,
         autocorrectServiceProxy,
