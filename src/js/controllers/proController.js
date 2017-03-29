@@ -11,7 +11,6 @@ app
     $scope.$emit('proActive');
     $scope.pageIcon = 'fa-user-md';
     $scope.pageTitleColor = 'text-dark-green';
-    $scope.test;
     $scope.validateQuery = function(item) {
       console.log('is my query valid ?');
       console.log(item);
@@ -20,7 +19,13 @@ app
       console.log($scope.form.object);
 
       // TODO true -> submit query
-      // TODO false -> new autocompletion step
+      if ($scope.form.subject && $scope.form.subject && $scope.form.object) {
+        console.log('valid');
+        $scope.submit();
+      } else {
+        // TODO false -> new autocompletion step
+        console.log('not complete');
+      }
     };
     $scope.getObjects = function(q) {
       var array = [];
@@ -67,20 +72,36 @@ app
     };
 
     $scope.submit = function() {
-      if ($scope.form.param !== undefined) {
-        // Prevent useless submit (same request)
-        if ($scope.form.param === $location.search().q) {
-          return;
-        }
-        $location.search('q', $scope.form.param);
+      var tags = [$scope.form.subject.label,
+        $scope.form.predicate.label,
+        $scope.form.object.label,];
+      /* Prevent useless submit (same request)
+      if ($scope.form.param === $location.search().q) {
+        return;
+      }*/
+      $location.search('tags', JSON.stringify(tags));
+      // Keep definitions if exists
+      if ($scope.form.object.definition) {
+        $location.search('fathead',
+          JSON.stringify($scope.form.object.definition));
       }
     };
 
-    var q = $location.search().q;
+    if ($location.search().tags) {
+      $scope.semanticQuery = JSON.parse($location.search().tags);
+      if ($location.search().fathead) {
+        $scope.fathead = {
+          type: 'views/fatheads/definition.html',
+          title: $scope.semanticQuery[2],
+          content: JSON.parse($location.search().fathead),
+        };
+      }
+      console.log($scope.semanticQuery);
+    }
+    if ($scope.semanticQuery && $scope.semanticQuery.length === 3) {
 
-    if (q) {
-      $scope.form.param = q;
-      $scope.param = q;
+      // D $scope.form.param = q;
+      // D $scope.param = q;
       $scope.showScreenshot = function(link) {
         $scope.screenshot = link;
       };
@@ -90,5 +111,4 @@ app
         $scope.cardcontent = res;
       });
     }
-    // TODO: fill with pro controller
   },]);
