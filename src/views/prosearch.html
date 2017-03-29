@@ -1,4 +1,4 @@
-<div ng-if="!param">
+<div ng-if="!semanticQuery">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-2 col-xs-10 col-xs-offset-1 middle-search">
             <p class="text-center" ng-class="pageTitleColor"><i class="fa fa-4x" ng-class="pageIcon" aria-hidden="true"></i></p>
@@ -39,4 +39,4 @@
     <div ng-include="'views/partials/provisu.html'" ng-if="kConfig.lowVision" class="row"></div>
 </div>
 
-<ng-include ng-if="param" src="'views/partials/card-results.html'"></ng-include>
+<ng-include ng-if="semanticQuery" src="'views/partials/pro-card-results.html'"></ng-include>
