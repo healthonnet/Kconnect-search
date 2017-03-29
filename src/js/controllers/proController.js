@@ -44,6 +44,7 @@ app
     };
     $scope.getPredicates = function(q) {
       $scope.form.object = undefined;
+      $scope.fathead = undefined;
 
       var array = [];
       var subject = $scope.form.subject.uri.namespace +
@@ -60,6 +61,8 @@ app
       // Clean params
       $scope.form.object = undefined;
       $scope.form.predicate = undefined;
+      $scope.fathead = undefined;
+
       var array = [];
 
       return suggestionsService.getSubjects(q)
@@ -79,23 +82,24 @@ app
       if ($scope.form.param === $location.search().q) {
         return;
       }*/
-      $location.search('tags', JSON.stringify(tags));
-      // Keep definitions if exists
-      if ($scope.form.object.definition) {
-        $location.search('fathead',
-          JSON.stringify($scope.form.object.definition));
-      }
+      $location.search('form', JSON.stringify($scope.form));
     };
 
-    if ($location.search().tags) {
-      $scope.semanticQuery = JSON.parse($location.search().tags);
-      if ($location.search().fathead) {
+    if ($location.search().form) {
+      $scope.semanticQuery = JSON.parse($location.search().form);
+      console.log($scope.semanticQuery);
+      $scope.form.subject = $scope.semanticQuery.subject;
+      $scope.form.predicate = $scope.semanticQuery.predicate;
+      $scope.form.object = $scope.semanticQuery.object;
+
+      if ($scope.form.object.definition) {
         $scope.fathead = {
           type: 'views/fatheads/definition.html',
-          title: $scope.semanticQuery[2],
-          content: JSON.parse($location.search().fathead),
+          title: $scope.form.object.label,
+          content: $scope.form.object.definition,
         };
       }
+
       console.log($scope.semanticQuery);
     }
     if ($scope.semanticQuery && $scope.semanticQuery.length === 3) {
