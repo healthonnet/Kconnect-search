@@ -6,6 +6,7 @@ app.constant('NEWS_SERVICE_URL', '/feeds');
 app.constant('SUGGEST_SERVICE_URL', '/hon-terms-dictionary/suggest');
 app.constant('SPELLCHECK_SERVICE_URL', '/hon-search/suggest');
 app.constant('TYPEAHEAD_SERVICE_URL', '/hon-search/typeahead');
+app.constant('MIMIR_SERVICE_URL', '/hon-search/mimir');
 app.constant('AUTOCORRECT_SERVICE_URL', '/hon-search/spell');
 app.constant('QUESTIONS_SERVICE_URL', '/people-also-ask/questions');
 app.constant('SCREENSHOT_SERVICE_URL', 'http://everyone.khresmoi.eu:3000');
