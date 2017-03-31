@@ -3,24 +3,17 @@
 app
   .controller('ProController',
     ['$scope', '$location', '$sce', 'spanWordFilter',
-      '$translate', 'SuggestionsService',
+      '$translate', 'SuggestionsService', 'ResultsService',
     function($scope, $location, $sce, spanWord,
-       $translate, suggestionsService) {
+       $translate, suggestionsService, resultsService) {
     $scope.pageTitle = 'Pro';
     $scope.form = {};
+    $scope.results = {};
     $scope.$emit('proActive');
     $scope.pageIcon = 'fa-user-md';
     $scope.pageTitleColor = 'text-dark-green';
     $scope.validateQuery = function(item) {
-      console.log('is my query valid ?');
-      console.log(item);
-      console.log($scope.form.subject);
-      console.log($scope.form.predicate);
-      console.log($scope.form.object);
-
-      // TODO true -> submit query
       if ($scope.form.subject && $scope.form.subject && $scope.form.object) {
-        console.log('valid');
         $scope.submit();
       } else {
         // TODO false -> new autocompletion step
@@ -35,7 +28,6 @@ app
         $scope.form.predicate.uri.localName;
       return suggestionsService.getObjects(q, subject, predicate)
         .then(function(res) {
-          console.log(res.data.results);
           if (res.data.results.length) {
             array = array.concat(res.data.results);
           }
@@ -75,9 +67,6 @@ app
     };
 
     $scope.submit = function() {
-      var tags = [$scope.form.subject.label,
-        $scope.form.predicate.label,
-        $scope.form.object.label,];
       /* Prevent useless submit (same request)
       if ($scope.form.param === $location.search().q) {
         return;
@@ -87,10 +76,16 @@ app
 
     if ($location.search().form) {
       $scope.semanticQuery = JSON.parse($location.search().form);
-      console.log($scope.semanticQuery);
       $scope.form.subject = $scope.semanticQuery.subject;
       $scope.form.predicate = $scope.semanticQuery.predicate;
       $scope.form.object = $scope.semanticQuery.object;
+
+      var subjectUri = $scope.semanticQuery.subject.uri.namespace +
+        $scope.semanticQuery.subject.uri.localName;
+      var predicateUri = $scope.semanticQuery.predicate.uri.namespace +
+        $scope.semanticQuery.predicate.uri.localName;
+      var objectUri = $scope.semanticQuery.object.uri.namespace +
+        $scope.semanticQuery.object.uri.localName;
 
       if ($scope.form.object.definition) {
         $scope.fathead = {
@@ -99,6 +94,20 @@ app
           content: $scope.form.object.definition,
         };
       }
+
+      // Paginated results
+      resultsService.getSemanticRequest({
+        subject: subjectUri,
+        predicate: predicateUri,
+        object: objectUri,
+      }).then(function(mimirQuery) {
+        console.log(mimirQuery);
+        var page = $scope.results.currentPage || 1;
+        resultsService.executeMimirQuery(mimirQuery, page)
+          .then(function(res) {
+            console.log(res);
+          });
+      });
     }
     if ($scope.semanticQuery && $scope.semanticQuery.length === 3) {
 
