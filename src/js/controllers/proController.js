@@ -101,11 +101,12 @@ app
         predicate: predicateUri,
         object: objectUri,
       }).then(function(mimirQuery) {
-        console.log(mimirQuery);
+        $scope.mimirQuery = mimirQuery;
         var page = $scope.results.currentPage || 1;
         resultsService.executeMimirQuery(mimirQuery, page)
           .then(function(res) {
             console.log(res);
+            $scope.results = res.results;
           });
       });
     }
