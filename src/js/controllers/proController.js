@@ -122,17 +122,6 @@ app
         $scope.cardcontent = res;
       });
     }
-    $scope.showScreenshot = function($index) {
-      if ($index === undefined) {
-        $scope.screenshot = undefined;
-        $scope.highlight = undefined;
-        return;
-      }
-      $scope.highlight = $index;
-      $scope.screenshot = $scope.results[$index];
-      $scope.screenshot.preview =
-        screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
-    };
 
     $scope.changePage = function() {
       resultsService.executeMimirQuery(

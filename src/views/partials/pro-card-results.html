@@ -34,8 +34,8 @@
   <ng-include src="fathead.type"></ng-include>
 
   <div class="row">
-    <div class="col-md-6 results">
-      <div class="row card" ng-repeat="link in results track by $index" ng-mouseover="showScreenshot($index)" ng-class="{false: 'highlight'}[highlight == $index]">
+    <div class="col-md-12 results">
+      <div class="row card" ng-repeat="link in results track by $index" ng-class="{false: 'highlight'}[highlight == $index]">
         <div class="col-xs-12">
           <h2>
             <div ng-click="kConfig.translatedResults = !kConfig.translatedResults" ng-if="targetLang" class="btn btn-default translation-btn inline noselect">
@@ -50,15 +50,6 @@
                href="http://translate.google.com/translate?hl={{lang.key}}&sl={{targetLang}}&tl={{lang.key}}&u={{link.doclist.docs[0].url}}" >
               {{link.translatedTitle | cut:true:40:' ...'}}
             </a>
-            <div class="visible-sm-inline-block visible-xs-inline-block">
-              <img src="images/honcode.png" ng-if="link.certified" alt="{{ 'HONCODE_CERTIFIED' | translate}}" title="{{ 'HONCODE_CERTIFIED' | translate}}">
-              <span class="m-trust" ng-show="link.trustability">
-                <i class="fa fa-stethoscope" aria-hidden="true" style="color: {{getColor(link.doclist.docs[0].trustability)}}"></i>
-              </span>
-              <span class="m-read" ng-show="link.readability">
-                <i class="fa fa-book" aria-hidden="true" style="color: {{getColor(link.doclist.docs[0].readability)}}"></i>
-              </span>
-            </div>
           </h2>
           <p>
             <a href="{{ link.url }}" class="text-overflow inline-block" ng-bind-html="link.url | spanWord:highlight"></a>
@@ -72,8 +63,6 @@
           </p>
         </div>
       </div>
-    </div>
-    <div class="col-md-6 search-details hidden-sm card" sticky confine="true" sticky-class="sticky-card" ng-class="{false: 'highlight'}[highlight >= 0]" ng-include="'views/partials/screenshot.html'" ng-if="!lowVision && results.length > 0 ">
     </div>
   </div>
   <div class="row card" ng-show="!results.length && (!mimirQuery || !semanticQuery)">
