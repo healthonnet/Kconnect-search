@@ -58,6 +58,9 @@
                href="http://translate.google.com/translate?hl={{lang.key}}&sl={{targetLang}}&tl={{lang.key}}&u={{link.doclist.docs[0].url}}" >
               {{link.doclist.docs[0].translatedTitle | cut:true:40:' ...'}}
             </a>
+            <a href="https://www.provisu.ch/service?url={{link.doclist.docs[0].url | encodeURI }}&amp;filter={{kConfig.mainColor | proVisuColor }}" ng-show="kConfig.lowVision" class="low-vision-link pull-right" target="_blank" title="{{ PROVISU_LOOK | translate }}">
+              <i class="fa fa-lg fa-low-vision"></i>
+            </a>
             <div class="visible-sm-inline-block visible-xs-inline-block">
               <img src="images/honcode.png" ng-if="link.doclist.docs[0].certified" alt="{{ 'HONCODE_CERTIFIED' | translate}}" title="{{ 'HONCODE_CERTIFIED' | translate}}">
               <span class="m-trust" ng-show="link.doclist.docs[0].trustability">
