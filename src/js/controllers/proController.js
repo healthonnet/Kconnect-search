@@ -4,8 +4,10 @@ app
   .controller('ProController',
     ['$scope', '$location', '$sce', 'spanWordFilter',
       '$translate', 'SuggestionsService', 'ResultsService',
+      'ScreenshotService',
     function($scope, $location, $sce, spanWord,
-       $translate, suggestionsService, resultsService) {
+       $translate, suggestionsService, resultsService,
+       screenshotService) {
     $scope.pageTitle = 'Pro';
     $scope.form = {};
     $scope.results = {};
@@ -114,13 +116,22 @@ app
 
       // D $scope.form.param = q;
       // D $scope.param = q;
-      $scope.showScreenshot = function(link) {
-        $scope.screenshot = link;
-      };
+      console.log('test');
     } else {
       $scope.card = 'views/partials/card.html';
       $translate('PRO_CARD').then(function(res) {
         $scope.cardcontent = res;
       });
     }
+    $scope.showScreenshot = function($index) {
+      if ($index === undefined) {
+        $scope.screenshot = undefined;
+        $scope.highlight = undefined;
+        return;
+      }
+      $scope.highlight = $index;
+      $scope.screenshot = $scope.results[$index];
+      $scope.screenshot.preview =
+        screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
+    };
   },]);
