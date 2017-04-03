@@ -81,7 +81,7 @@
   </div>
 
   <div class="row card" ng-show="results.length > 0 || !semanticQuery">
-    <ul uib-pagination total-items="results.nbPages" ng-model="results.currentPage" max-size="results.maxSize" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="changePage()"></ul>
+    <ul uib-pagination total-items="res.total / 10" ng-model="res.currentPage" max-size="10" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="changePage()"></ul>
   </div>
 
 </div>

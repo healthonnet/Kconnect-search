@@ -107,17 +107,16 @@ app
         var page = $scope.results.currentPage || 1;
         resultsService.executeMimirQuery(mimirQuery, page)
           .then(function(res) {
-            console.log(res);
             $scope.results = res.results;
+            $scope.res = {
+              total: res.total,
+              currentPage: page,
+            };
+            console.log(res);
           });
       });
     }
-    if ($scope.semanticQuery && $scope.semanticQuery.length === 3) {
-
-      // D $scope.form.param = q;
-      // D $scope.param = q;
-      console.log('test');
-    } else {
+    if (!$scope.semanticQuery || !$scope.semanticQuery.length) {
       $scope.card = 'views/partials/card.html';
       $translate('PRO_CARD').then(function(res) {
         $scope.cardcontent = res;
@@ -133,5 +132,13 @@ app
       $scope.screenshot = $scope.results[$index];
       $scope.screenshot.preview =
         screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
+    };
+
+    $scope.changePage = function() {
+      resultsService.executeMimirQuery(
+        $scope.mimirQuery, $scope.res.currentPage)
+        .then(function(res) {
+          $scope.results = res.results;
+        });
     };
   },]);
