@@ -15,7 +15,7 @@ app
     $scope.pageIcon = 'fa-user-md';
     $scope.pageTitleColor = 'text-dark-green';
     $scope.validateQuery = function(item) {
-      if ($scope.form.subject && $scope.form.subject && $scope.form.object) {
+      if ($scope.form.subject && $scope.form.predicate && $scope.form.object) {
         $scope.submit();
       } else {
         // TODO false -> new autocompletion step
@@ -69,6 +69,11 @@ app
     };
 
     $scope.submit = function() {
+      if (!$scope.form.subject ||
+        !$scope.form.predicate ||
+        !$scope.form.object) {
+        return false;
+      }
       /* Prevent useless submit (same request)
       if ($scope.form.param === $location.search().q) {
         return;
