@@ -65,6 +65,17 @@ var ResultsPage = function() {
     }
     return element(by.css(type));
   };
+
+  this.getLowVisionButton = function(className) {
+    if (!className) {
+      className = '.tooltip-wt';
+    }
+    return element(by.css(className));
+  };
+
+  this.getLowVisionPanel = function() {
+    return element(by.css('[ng-click="provisu()"]'));
+  };
 };
 
 var hasClass = function(element, cls) {
@@ -215,5 +226,27 @@ describe('Protractor Results Page', function() {
       });
     });
   });
+});
 
+describe('Low vision results pages', function() {
+  var resultsPage = new ResultsPage();
+
+  beforeEach(function() {
+    resultsPage.get();
+  });
+
+  it('should change color to white over black', function() {
+    resultsPage.getLowVisionPanel().click().then(function() {
+      return resultsPage.getLowVisionButton('.tooltip-bk').click();
+    })
+      .then(function() {
+        return resultsPage.fillQuery();
+      })
+      .then(function() {
+        expect(hasClass(element(by.css('body')), 'provisu-black')).toBe(true);
+        resultsPage.getResults().each(function(element2, index) {
+          expect(element2.element(by.css('.low-vision-link')).isPresent()).toBe(true);
+        });
+      });
+  });
 });

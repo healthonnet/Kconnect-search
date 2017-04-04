@@ -50,6 +50,9 @@
                href="http://translate.google.com/translate?hl={{lang.key}}&sl={{targetLang}}&tl={{lang.key}}&u={{link.doclist.docs[0].url}}" >
               {{link.translatedTitle | cut:true:40:' ...'}}
             </a>
+            <a href="https://www.provisu.ch/service?url={{link.doclist.docs[0].url | encodeURI }}&amp;filter={{kConfig.mainColor | proVisuColor }}" ng-show="kConfig.lowVision" class="low-vision-link pull-right" target="_blank" title="{{ PROVISU_LOOK | translate }}">
+              <i class="fa fa-lg fa-low-vision"></i>
+            </a>
           </h2>
           <p>
             <a href="{{ link.url }}" class="text-overflow inline-block" ng-bind-html="link.url | spanWord:highlight"></a>
