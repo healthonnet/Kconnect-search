@@ -123,6 +123,9 @@ describe('Low vision results pages', function() {
       resultsPage.getResults().each(function(element2, index) {
         expect(element2.element(by.css('.low-vision-link')).isPresent()).toBe(true);
       });
+      resultsPage.getLowVisionPanel().click().then(function() {
+        expect(hasClass(element(by.css('body')), 'provisu-black')).not.toBe(true);
+      });
     });
   });
 });
