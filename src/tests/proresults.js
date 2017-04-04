@@ -5,39 +5,46 @@ var ResultsPage = function() {
     browser.get('http://localhost:3000/pro');
   };
 
-  this.fillQuery = function(subject, predicate, object) {
+  this.fillSubject = function(subject) {
     if (!subject) {
       subject = 'Drug';
     }
+    element(by.model('form.subject')).clear().sendKeys(subject);
+    return element(by.model('form.subject')).sendKeys(protractor.Key.ENTER);
+  };
+
+  this.fillPredicate = function(predicate) {
     if (!predicate) {
       predicate = 'has indications';
     }
+    element(by.model('form.predicate')).clear().sendKeys(predicate);
+    return element(by.model('form.predicate')).sendKeys(protractor.Key.ENTER);
+  };
+
+  this.fillObject = function(object) {
     if (!object) {
       object = 'diabetes';
     }
-    element(by.model('form.subject')).clear().sendKeys(subject);
-    element(by.model('form.subject')).sendKeys(protractor.Key.ENTER);
-    element(by.model('form.predicate')).clear().sendKeys(predicate);
-    element(by.model('form.predicate')).sendKeys(protractor.Key.ENTER);
     element(by.model('form.object')).clear().sendKeys(object);
     return element(by.model('form.object')).sendKeys(protractor.Key.ENTER);
   };
 
+  this.fillQuery = function(subject, predicate, object) {
+    this.fillSubject(subject);
+    this.fillPredicate(predicate);
+    return this.fillObject(object);
+  };
+
   this.fillBadQuery = function() {
-    element(by.model('form.subject')).clear().sendKeys('Drug');
-    element(by.model('form.subject')).sendKeys(protractor.Key.ENTER);
-    element(by.model('form.predicate')).clear().sendKeys('bad entry');
-    return element(by.model('form.predicate')).sendKeys(protractor.Key.ENTER);
+    this.fillSubject();
+    return this.fillPredicate('bad entry');
   };
 
   this.fillAndEdit = function() {
-    element(by.model('form.subject')).clear().sendKeys('Drug');
-    element(by.model('form.subject')).sendKeys(protractor.Key.ENTER);
-    element(by.model('form.predicate')).clear().sendKeys('has indications');
-    element(by.model('form.predicate')).sendKeys(protractor.Key.ENTER);
+    this.fillSubject();
+    this.fillPredicate();
     element(by.model('form.object')).clear().sendKeys('diabetes');
-    element(by.model('form.predicate')).clear().sendKeys('has indications');
-    return element(by.model('form.predicate')).sendKeys(protractor.Key.ENTER);
+    return this.fillPredicate();
   };
 
   this.execSearch = function(subject, predicate, object) {
@@ -77,14 +84,40 @@ describe('Protractor Results Page', function() {
     resultsPage.get();
   });
 
-  it('shouldn\'t keep unknown entry', function() {
-    resultsPage.fillBadQuery().then(function() {
-    expect(element(by.model('form.predicate')).getAttribute('value')).not.toEqual('bad entry');
-    expect(element(by.model('form.predicate')).getAttribute('value')).toEqual('');
+  // TODO check no uncomplete submit
+  it('shouldn\'t submit incomplete form', function() {
+    resultsPage.fillSubject('bad entry').then(function() {
+      expect(browser.getCurrentUrl()).not.toContain('?form=');
+      resultsPage.getResults().count().then(function(count) {
+        expect(count).toEqual(0);
+      });
+    });
+    resultsPage.fillSubject().then(function() {
+      resultsPage.fillPredicate().then(function() {
+        expect(browser.getCurrentUrl()).not.toContain('?form=');
+        resultsPage.getResults().count().then(function(count) {
+          expect(count).toEqual(0);
+        });
+        resultsPage.fillObject('bad entry').then(function() {
+          expect(browser.getCurrentUrl()).not.toContain('?form=');
+          resultsPage.getResults().count().then(function(count) {
+            expect(count).toEqual(0);
+          });
+        });
+      });
     });
   });
 
-  // TODO check edit previous input clear others
+  /* it('shouldn\'t keep unknown entry', function() {
+    resultsPage.fillBadQuery().then(function() {
+      expect(element(by.model('form.predicate')).getAttribute('value')).toEqual('bad entry');
+      expect(element(by.model('form.object')).isPresent()).toBe(false);
+      element(by.model('form.subject')).click().then(function() {
+        expect(element(by.model('form.predicate')).getAttribute('value')).toEqual('');
+      });
+    });
+  });
+
   it('should clear next inputs on edit', function() {
     resultsPage.fillAndEdit().then(function() {
       expect(element(by.model('form.object')).getAttribute('value')).not.toEqual('diabetes');
@@ -94,7 +127,6 @@ describe('Protractor Results Page', function() {
 
   it('should do a search', function() {
     resultsPage.execSearch().then(function() {
-      // OK expect(browser.getCurrentUrl()).toContain('?q=cancer');
       resultsPage.getResults().count().then(function(count) {
         expect(count).not.toEqual(0);
       });
@@ -107,6 +139,6 @@ describe('Protractor Results Page', function() {
         expect(hasClass(element, 'pro')).toBe(true);
       });
     });
-  });
+  });*/
 
 });
