@@ -38,7 +38,11 @@ body.provisu-black {
     background-color: black;
     border: yellow solid 1px;
   }
-
+  .jigsaw {
+    &:before {
+      display: none;
+    }
+  }
   .navbar-default {
     border: none;
     hr {
@@ -184,7 +188,11 @@ body.provisu-blue {
     background-color: blue;
     border: white solid 1px;
   }
-
+  .jigsaw {
+    &:before {
+      display: none;
+    }
+  }
   .navbar-default {
     border: none;
     hr {
@@ -341,7 +349,11 @@ body.provisu-cyan {
     background-color: red;
     color: black;
   }
-
+  .jigsaw {
+    &:before {
+      display: none;
+    }
+  }
   .fathead {
     background: $cyan;
     border: none;

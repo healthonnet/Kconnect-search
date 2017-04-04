@@ -196,9 +196,18 @@ body:after{
 $i: 6;
 @while $i < 100 {
   .font-size-#{$i} {
+    .jigsaw:before {
+      display: none;
+    }
     font-size: #{$i}px;
   }
   $i: $i + 4;
+}
+
+.font-size-14 {
+  .jigsaw:before {
+    display: initial;
+  }
 }
 
 .noselect {
