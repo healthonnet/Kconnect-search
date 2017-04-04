@@ -84,7 +84,6 @@ describe('Protractor Results Page', function() {
     resultsPage.get();
   });
 
-  // TODO check no uncomplete submit
   it('shouldn\'t submit incomplete form', function() {
     resultsPage.fillSubject('bad entry').then(function() {
       expect(browser.getCurrentUrl()).not.toContain('?form=');
@@ -108,7 +107,7 @@ describe('Protractor Results Page', function() {
     });
   });
 
-  /* it('shouldn\'t keep unknown entry', function() {
+  it('shouldn\'t keep unknown entry', function() {
     resultsPage.fillBadQuery().then(function() {
       expect(element(by.model('form.predicate')).getAttribute('value')).toEqual('bad entry');
       expect(element(by.model('form.object')).isPresent()).toBe(false);
@@ -139,6 +138,6 @@ describe('Protractor Results Page', function() {
         expect(hasClass(element, 'pro')).toBe(true);
       });
     });
-  });*/
+  });
 
 });
