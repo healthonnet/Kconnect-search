@@ -91,4 +91,14 @@ describe('Protractor Results Page', function() {
       ).toBeFalsy();
     });
   });
+
+  it('should show certification for "eurogin"', function() {
+    resultsPage.execSearch('eurogin').then(function() {
+      browser.actions().mouseMove(element.all(by.css('.highlight')).get(0))
+        .perform();
+      expect(
+        element(by.css('.hon-certified')).isPresent()
+      ).toBe(true);
+    });
+  });
 });
