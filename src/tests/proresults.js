@@ -15,7 +15,7 @@ var ResultsPage = function() {
 
   this.fillPredicate = function(predicate) {
     if (!predicate) {
-      predicate = 'has indications';
+      predicate = 'has indication';
     }
     element(by.model('form.predicate')).clear().sendKeys(predicate);
     return element(by.model('form.predicate')).sendKeys(protractor.Key.ENTER);
@@ -80,14 +80,36 @@ describe('Protractor Results Page', function() {
     resultsPage.get();
   });
 
+  it('shouldn\'t keep unknown entry', function() {
+    var test = function() {
+      resultsPage.fillBadQuery().then(function() {
+        expect(element(by.model('form.predicate')).getAttribute('value')).toEqual('bad entry');
+        expect(element(by.model('form.object')).isPresent()).toBe(false);
+        element(by.model('form.subject')).click().then(function() {
+          expect(element(by.model('form.predicate')).getAttribute('value')).toEqual('');
+        });
+      });
+    };
+
+    // Run the test
+    test();
+    // Same behaviour on results page
+    resultsPage.execSearch().then(function() {
+      test();
+    });
+  });
+
   it('shouldn\'t submit incomplete form', function() {
     resultsPage.fillSubject('bad entry').then(function() {
       expect(browser.getCurrentUrl()).not.toContain('?form=');
+      expect(element(by.model('form.predicate')).isPresent()).toBe(false);
+      expect(element(by.model('form.object')).isPresent()).toBe(false);
       resultsPage.getResults().count().then(function(count) {
         expect(count).toEqual(0);
       });
     });
     resultsPage.fillSubject().then(function() {
+      expect(element(by.model('form.object')).isPresent()).toBe(false);
       resultsPage.fillPredicate().then(function() {
         expect(browser.getCurrentUrl()).not.toContain('?form=');
         resultsPage.getResults().count().then(function(count) {
@@ -101,29 +123,74 @@ describe('Protractor Results Page', function() {
         });
       });
     });
-  });
 
-  it('shouldn\'t keep unknown entry', function() {
-    resultsPage.fillBadQuery().then(function() {
-      expect(element(by.model('form.predicate')).getAttribute('value')).toEqual('bad entry');
-      expect(element(by.model('form.object')).isPresent()).toBe(false);
-      element(by.model('form.subject')).click().then(function() {
-        expect(element(by.model('form.predicate')).getAttribute('value')).toEqual('');
+    // On results page too
+    resultsPage.execSearch().then(function() {
+      var currentUrl = browser.getCurrentUrl();
+      resultsPage.fillSubject('bad entry').then(function() {
+        expect(browser.getCurrentUrl()).toEqual(currentUrl);
+        expect(element(by.model('form.predicate')).isPresent()).toBe(false);
+        expect(element(by.model('form.object')).isPresent()).toBe(false);
+        resultsPage.getResults().count().then(function(count) {
+          expect(count).not.toEqual(0);
+        });
+      });
+      resultsPage.fillSubject().then(function() {
+        expect(element(by.model('form.object')).isPresent()).toBe(false);
+        resultsPage.fillPredicate().then(function() {
+          expect(browser.getCurrentUrl()).toEqual(currentUrl);
+          resultsPage.getResults().count().then(function(count) {
+            expect(count).not.toEqual(0);
+          });
+          resultsPage.fillObject('bad entry').then(function() {
+            expect(browser.getCurrentUrl()).toEqual(currentUrl);
+            resultsPage.getResults().count().then(function(count) {
+              expect(count).not.toEqual(0);
+            });
+          });
+        });
       });
     });
   });
 
   it('should clear next inputs on edit', function() {
-    resultsPage.fillAndEdit().then(function() {
-      expect(element(by.model('form.object')).getAttribute('value')).not.toEqual('diabetes');
-      expect(element(by.model('form.object')).getAttribute('value')).toEqual('');
+    var test = function() {
+      resultsPage.fillAndEdit().then(function() {
+        expect(element(by.model('form.object')).getAttribute('value')).not.toEqual('diabetes');
+        expect(element(by.model('form.object')).getAttribute('value')).toEqual('');
+      });
+    };
+
+    // Run the test
+    test();
+    // Same behaviour on results page
+    resultsPage.execSearch().then(function() {
+      test();
     });
   });
 
   it('should do a search', function() {
+    var test = function() {
+      resultsPage.execSearch().then(function() {
+        resultsPage.getResults().count().then(function(count) {
+          expect(count).not.toEqual(0);
+        });
+      });
+    };
+    // Run the test
+    test();
+    // Same behaviour on results page
+    resultsPage.execSearch().then(function() {
+      test();
+    });
+  });
+
+  it('should have a filled form on results page', function() {
     resultsPage.execSearch().then(function() {
       resultsPage.getResults().count().then(function(count) {
-        expect(count).not.toEqual(0);
+        expect(element(by.model('form.subject')).getAttribute('value')).toEqual('Drug');
+        expect(element(by.model('form.predicate')).getAttribute('value')).toEqual('has indication');
+        expect(element(by.model('form.object')).getAttribute('value')).toEqual('Diabetes Mellitus');
       });
     });
   });
