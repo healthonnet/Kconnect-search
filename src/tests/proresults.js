@@ -195,6 +195,19 @@ describe('Protractor Results Page', function() {
     });
   });
 
+  it('should have working pagination', function() {
+    resultsPage.execSearch().then(function() {
+      resultsPage.getResults().then(function(elementAll) {
+        var p1results = elementAll[0].getText();
+        element(by.css('.pagination-next a')).click().then(function() {
+          resultsPage.getResults().then(function(elementAll) {
+            expect(elementAll[0].getText()).not.toEqual(p1results);
+          });
+        });
+      });
+    });
+  });
+
   it('should have pro class', function() {
     resultsPage.execSearch().then(function() {
       resultsPage.getResults().each(function(element, index) {
