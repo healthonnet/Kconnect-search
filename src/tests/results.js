@@ -119,10 +119,9 @@ describe('Low vision results pages', function() {
       return resultsPage.execSearch('cancer');
     })
     .then(function() {
-      var link;
+      expect(hasClass(element(by.css('body')), 'provisu-black')).toBe(true);
       resultsPage.getResults().each(function(element2, index) {
-        link = element(by.css('low-vision-link'));
-        expect(hasClass(element2, 'highlight')).toBe(true);
+        expect(element2.element(by.css('.low-vision-link')).isPresent()).toBe(true);
       });
     });
   });
