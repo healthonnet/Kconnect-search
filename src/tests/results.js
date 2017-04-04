@@ -31,6 +31,17 @@ var ResultsPage = function() {
     }
     return element(by.css(type));
   };
+
+  this.getLowVisionButton = function(className) {
+    if (!className) {
+      className = '.tooltip-wt';
+    }
+    return element(by.css(className));
+  };
+
+  this.getLowVisionPanel = function() {
+    return element(by.css('[ng-click="provisu()"]'));
+  };
 };
 
 var hasClass = function(element, cls) {
@@ -89,6 +100,30 @@ describe('Protractor Results Page', function() {
       expect(
         resultsPage.getFathead('.fathead-suggestions').isPresent()
       ).toBeFalsy();
+    });
+  });
+});
+
+describe('Low vision results pages', function() {
+  var resultsPage = new ResultsPage();
+
+  beforeEach(function() {
+    resultsPage.get();
+  });
+
+  it('should change color to white over black', function() {
+    resultsPage.getLowVisionPanel().click().then(function() {
+      return resultsPage.getLowVisionButton('.tooltip-bk').click();
+    })
+    .then(function() {
+      return resultsPage.execSearch('cancer');
+    })
+    .then(function() {
+      var link;
+      resultsPage.getResults().each(function(element2, index) {
+        link = element(by.css('low-vision-link'));
+        expect(hasClass(element2, 'highlight')).toBe(true);
+      });
     });
   });
 });
