@@ -5,7 +5,7 @@
       <h1 id="kconnect">connect {{pageTitle}}</h1>
       <form ng-submit="submit()">
         <div class="input-group stylish-input-group">
-          <input type="text" ng-model="form.param" ng-model-options="{debounce: 250}" uib-typeahead="query for query in getSuggestion($viewValue)" typeahead-on-select="submit()" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
+          <input type="text" ng-model="form.param" ng-model-options="{debounce: 250}" typeahead-min-length="3" uib-typeahead="query for query in getSuggestion($viewValue)" typeahead-on-select="submit()" class="search" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
           <span class="input-group-addon search-icon">
             <button type="submit" class="btn middle-search-submit">
               <i class="fa fa-2x fa-search" aria-hidden="true"></i>

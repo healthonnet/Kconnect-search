@@ -1,6 +1,8 @@
 'use strict';
 
-app.factory('ResultsService', function($http, SELECT_SERVICE_URL) {
+app.factory('ResultsService',
+  function($http, SELECT_SERVICE_URL, TYPEAHEAD_SERVICE_URL,
+           MIMIR_SERVICE_URL, $httpParamSerializerJQLike) {
   return {
     getResults: function(options) {
       options = {
@@ -50,8 +52,67 @@ app.factory('ResultsService', function($http, SELECT_SERVICE_URL) {
         },
       });
     },
+    getSemanticRequest: function(options) {
+      if (!options.subject || !options.predicate || !options.object) {
+        return false;
+      }
+      options.rows = options.rows || 4;
+
+      return $http.get(TYPEAHEAD_SERVICE_URL + '/sparql.srj', {
+        params: {
+          subject: options.subject,
+          predicate: options.predicate,
+          object: options.object,
+        },
+      }).then(function(res) {
+        return buildMimirQuery(res.data.results);
+      });
+    },
+
+    executeMimirQuery: function(mimirQuery, page) {
+      if (!mimirQuery) {
+        return false;
+      }
+      return $http({
+        url: MIMIR_SERVICE_URL + '/postQuery',
+        method: 'POST',
+        data: $httpParamSerializerJQLike({
+          queryString: mimirQuery,
+        }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+      }).then(function(res) {
+        var xmlDoc = new DOMParser().parseFromString(res.data, 'text/xml');
+        if (xmlDoc.getElementsByTagName('queryId').length > 0) {
+          var queryId = xmlDoc.getElementsByTagName('queryId')[0].textContent;
+          var start = page ? (10 * (page - 1)) : 0;
+
+          return $http.get(MIMIR_SERVICE_URL + '/documentResults', {
+            params: {
+              queryId: queryId,
+              start: start,
+            },
+          }).then(function(res) {
+            return res.data;
+          });
+        }
+        return false;
+      });
+    },
   };
 });
+
+function buildMimirQuery(results) {
+  if (!results.bindings.length) {
+    return false;
+  }
+  var mimirQuery = results.bindings.map(function(element, index) {
+    return '{Lookup inst = "' + element.s.value + '"}';
+  }).join(' OR ');
+  mimirQuery = '(' + mimirQuery + ') IN {Publication language="en"}';
+  return mimirQuery;
+}
 
 function parseFilters(filters) {
   if (typeof filters !== 'string') {
