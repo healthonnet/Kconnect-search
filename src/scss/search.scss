@@ -153,3 +153,9 @@
     margin: 5px;
   }
 }
+
+@media (min-width: '1200px') {
+  .screenshot-card {
+    width: 159px;
+  }
+}
