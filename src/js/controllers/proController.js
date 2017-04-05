@@ -94,14 +94,6 @@ app
       var objectUri = $scope.semanticQuery.object.uri.namespace +
         $scope.semanticQuery.object.uri.localName;
 
-      if ($scope.form.object.definition) {
-        $scope.fathead = {
-          type: 'views/fatheads/definition.html',
-          title: $scope.form.object.label,
-          content: $scope.form.object.definition,
-        };
-      }
-
       // Paginated results
       resultsService.getSemanticRequest({
         subject: subjectUri,
@@ -114,6 +106,13 @@ app
         resultsService.getTreatments($scope.autocompleteQuery)
           .then(function(treatments) {
             console.log(treatments);
+            if (treatments.length) {
+              $scope.fathead = {
+                type: 'views/fatheads/treatments.html',
+                title: $scope.form.object.label,
+                content: treatments,
+              };
+            }
           });
         resultsService.executeMimirQuery($scope.mimirQuery, page)
           .then(function(res) {

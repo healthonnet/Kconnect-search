@@ -116,7 +116,7 @@ app.factory('ResultsService',
           'Content-Type': 'application/x-www-form-urlencoded'
         },
       }).then(function(res) {
-        return res.data;
+        return res.data.results;
       });
     },
   };

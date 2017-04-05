@@ -1,0 +1,15 @@
+<div class="row fathead" ng-if="fathead.content">
+  <div class="col-xs-12">
+    <div class="container-fluid">
+      <h2>{{ 'RELATED_TO' | translate }} : {{fathead.title}}</h2>
+      <div>
+        <ul>
+          <li ng-repeat="treatment in fathead.content">
+            <h3>{{ treatment.label }}</h3>
+            <p> {{ treatment.definition}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
