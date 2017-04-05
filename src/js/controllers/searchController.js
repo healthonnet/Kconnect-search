@@ -212,22 +212,29 @@ app.controller('SearchController',
       results.sections = res.data.facet_counts
         .facet_fields.khresmoi_sections_sectionType_facet;
       res.data.grouped.domain.groups.forEach(function(link) {
-        // Handle extra datas and mutators
+        // Handle extra data and mutators
         // Region free title
         link.doclist.docs[0].title =
           link.doclist.docs[0]['title_' + lang];
 
+        // Cards definitions
+        link.doclist.docs[0].cards = [];
+
         // HonCode certification
-        link.doclist.docs[0].isCertified = false;
+        link.doclist.docs[0].cards[0] =
+          '/views/cards/trustability.html';
         if (link.doclist.docs[0].is_certified_facet) {
           if (link.doclist.docs[0].is_certified_facet[0] === 'true') {
-            link.doclist.docs[0].certified = true;
+            link.doclist.docs[0].cards[0] =
+              '/views/cards/certification.html';
           }
         }
 
         // Readability
         var diff = link.doclist.docs[0].readability_difficult_facet;
         var easy = link.doclist.docs[0].readability_easy_facet;
+        link.doclist.docs[0].cards[1] =
+          '/views/cards/readability.html';
         if (easy && diff) {
           link.doclist.docs[0].readability = 60;
         } else if (easy) {
@@ -243,6 +250,9 @@ app.controller('SearchController',
           .then(function(data) {
             link.doclist.docs[0].trustability = data;
           });
+
+        // Cookies
+        link.doclist.docs[0].cards[2] = '/views/cards/cookies.html';
 
         if (lang !== $scope.kConfig.lang) {
           // Translations
