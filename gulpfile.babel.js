@@ -20,25 +20,7 @@ const PORT = process.env.PORT || 3000;
 const TAG = 'v0.1.*';
 browserSync.create();
 
-const selectServiceProxy = proxy('/hon-search/select', {
-  target: 'http://everyone.khresmoi.eu/',
-  changeOrigin: true,
-  logLevel: 'debug',
-});
-
-const trustServiceProxy = proxy('/hon-search/trustability', {
-  target: 'http://everyone.khresmoi.eu/',
-  changeOrigin: true,
-  logLevel: 'debug',
-});
-
-const translateServiceProxy = proxy('/hon-search/translation', {
-  target: 'http://everyone.khresmoi.eu/',
-  changeOrigin: true,
-  logLevel: 'debug',
-});
-
-const disambiguatorServiceProxy = proxy('/hon-search/khresmoiDisambiguator', {
+const honsearchServiceProxy = proxy('/hon-search', {
   target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
@@ -51,18 +33,6 @@ const newsServiceProxy = proxy('/feeds', {
 });
 
 const suggestServiceProxy = proxy('/hon-terms-dictionary/suggest', {
-  target: 'http://everyone.khresmoi.eu/',
-  changeOrigin: true,
-  logLevel: 'debug',
-});
-
-const spellcheckServiceProxy = proxy('/hon-search/suggest', {
-  target: 'http://everyone.khresmoi.eu/',
-  changeOrigin: true,
-  logLevel: 'debug',
-});
-
-const autocorrectServiceProxy = proxy('/hon-search/spell', {
   target: 'http://everyone.khresmoi.eu/',
   changeOrigin: true,
   logLevel: 'debug',
@@ -229,15 +199,10 @@ gulp.task('serve', ['html'], () => {
     server: {
       baseDir: './' + DEST,
       middleware: [
-        selectServiceProxy,
-        disambiguatorServiceProxy,
-        trustServiceProxy,
+        honsearchServiceProxy,
         newsServiceProxy,
         suggestServiceProxy,
-        translateServiceProxy,
         questionsServiceProxy,
-        spellcheckServiceProxy,
-        autocorrectServiceProxy,
         historyApiFallback(),
       ],
     },
@@ -309,15 +274,10 @@ gulp.task('serve-prod', ['default'], () => {
     livereload: false,
     middleware: (connect, opt) => {
       return [
-        selectServiceProxy,
-        disambiguatorServiceProxy,
-        trustServiceProxy,
+        honsearchServiceProxy,
         newsServiceProxy,
         suggestServiceProxy,
-        translateServiceProxy,
         questionsServiceProxy,
-        spellcheckServiceProxy,
-        autocorrectServiceProxy,
         historyApiFallback(),
       ];
     },

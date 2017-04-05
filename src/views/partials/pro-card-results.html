@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-sm-9 col-xs-11 col-xs-offset-1 top-search">
+    <div class="row">
+      <form>
+        <div class="input-group stylish-input-group col-xs-12">
+          <div class="jigsaw jigsaw-small bg-info col-xs-4" style="z-index: 3">
+            <input type="text" ng-model="form.subject" ng-model-options="{debounce: 250}"
+                   typeahead-editable="false" typeahead-min-length="0"
+                   uib-typeahead="subject as subject.label for subject in getSubjects($viewValue)"
+                   typeahead-on-select="validateQuery($item)" onfocus="this.select();"
+                   class="bg-info" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
+          </div>
+          <div class="jigsaw jigsaw-small col-xs-3" ng-if="form.subject" style="z-index: 2">
+            <input type="text" ng-model="form.predicate" ng-model-options="{debounce: 250}"
+                   typeahead-editable="false" typeahead-min-length="0"
+                   uib-typeahead="predicate as predicate.label for predicate in getPredicates($viewValue)"
+                   typeahead-on-select="validateQuery($item)" onfocus="this.select();"
+                   placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
+          </div>
+          <div class="jigsaw jigsaw-small bg-info col-xs-4 col-sm-5" ng-if="form.predicate" style="z-index: 1">
+            <input type="text" ng-model="form.object" ng-model-options="{debounce: 250}"
+                   typeahead-editable="false" typeahead-min-length="0"
+                   uib-typeahead="object as object.label for object in getObjects($viewValue)"
+                   typeahead-on-select="validateQuery($item)" onfocus="this.select();"
+                   class="bg-info" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="row col-sm-11 col-xs-11 col-xs-offset-1">
+  <ng-include src="fathead.type"></ng-include>
+
+  <div class="row">
+    <div class="col-md-12 results">
+      <div class="row card pro" ng-repeat="link in results track by $index">
+        <div class="col-xs-12">
+          <h2>
+            <div ng-click="kConfig.translatedResults = !kConfig.translatedResults" ng-if="targetLang" class="btn btn-default translation-btn inline noselect">
+                <span ng-class="kConfig.translatedResults?'flag-behind':'flag-above'" class="flag flag-{{ languages[targetLang].flag }}"></span>
+                <span ng-class="kConfig.translatedResults?'flag-above':'flag-behind'" class="flag flag-{{ lang.flag }}"></span>
+            </div>
+            <img ng-src="{{ link.url | favicon }}" class="noselect" alt="favicon" title="{{ link.title }}">
+            <a ng-hide="(kConfig.translatedResults && link.translatedTitle)" href="{{ link.url }}">
+              {{link.title | cut:true:40:' ...'}}
+            </a>
+            <a ng-show="(kConfig.translatedResults && link.translatedTitle)"
+               href="http://translate.google.com/translate?hl={{lang.key}}&sl={{targetLang}}&tl={{lang.key}}&u={{link.doclist.docs[0].url}}" >
+              {{link.translatedTitle | cut:true:40:' ...'}}
+            </a>
+            <a href="https://www.provisu.ch/service?url={{link.doclist.docs[0].url | encodeURI }}&amp;filter={{kConfig.mainColor | proVisuColor }}" ng-show="kConfig.lowVision" class="low-vision-link pull-right" target="_blank" title="{{ PROVISU_LOOK | translate }}">
+              <i class="fa fa-lg fa-low-vision"></i>
+            </a>
+          </h2>
+          <p>
+            <a href="{{ link.url }}" class="text-overflow inline-block" ng-bind-html="link.url | spanWord:highlight"></a>
+            <a href="https://provisu.ch/service?url={{link.url}}" target="_blank" class="pull-right" ng-if="lowVision"><i class="fa fa-2x fa-low-vision" aria-hidden="true"></i></a>
+          </p>
+          <p ng-hide="(kConfig.translatedResults && link.translatedTitle)"
+             ng-bind-html="link.snippet | cut:true:150:' ...'| spanWord:highlight">
+          </p>
+          <p ng-show="(kConfig.translatedResults && link.translatedTitle)"
+             ng-bind-html="link.translatedSnippet | cut:true:150:' ...'| spanWord:translatedHighlight">
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row card" ng-show="!results.length && (!mimirQuery || !semanticQuery)">
+    <p>{{ 'NO_RESULTS' | translate }}</p>
+  </div>
+
+  <div class="row card" ng-show="results.length > 0 || !semanticQuery">
+    <ul uib-pagination total-items="res.total / 10" ng-model="res.currentPage" max-size="10" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="changePage()"></ul>
+  </div>
+
+</div>

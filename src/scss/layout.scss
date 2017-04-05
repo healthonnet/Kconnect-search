@@ -113,6 +113,71 @@ body:after{
 /**
 * Helpers
 */
+
+.jigsaw {
+  height: 100%;
+  margin-top: 10px;
+  position: relative;
+  -webkit-border-radius: .5em;
+  -moz-border-radius: .5em;
+  border-radius: .5em;
+  display: block;
+  padding: 0.7em;
+  color: #000;
+  &::before {
+    z-index: 10;
+    background-color: $bg-info;
+    content: "";
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    top: 1em;
+    right: -1.1em;
+    -webkit-border-radius: 4em;
+    -moz-border-radius: 4em;
+    border-radius: 4em;
+  }
+  &:not(.bg-info) {
+    background-color: white;
+    &::before {
+      background-color: white;
+    }
+  }
+  &.jigsaw-big {
+    margin-top: 0;
+    width: 100%;
+    &:not(.bg-info) {
+      &::before {
+        background-color: white;
+        right: 4em;
+        left: auto;
+      }
+    }
+    &::before {
+      top: 3.8em;
+      left: 4em;
+      right: initial;
+    }
+    input {
+      font-size: 30px;
+    }
+    ul.dropdown-menu {
+      width: 100%;
+    }
+  }
+  input {
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    font-size: 1.5em;
+  }
+  ul.dropdown-menu {
+    width: initial;
+  }
+}
+
 @for $i from 0 through 12 {
   .vert-offset-top-#{$i} {
     margin-top: #{$i}em;
@@ -131,9 +196,18 @@ body:after{
 $i: 6;
 @while $i < 100 {
   .font-size-#{$i} {
+    .jigsaw:before {
+      display: none;
+    }
     font-size: #{$i}px;
   }
   $i: $i + 4;
+}
+
+.font-size-14 {
+  .jigsaw:before {
+    display: initial;
+  }
 }
 
 .noselect {

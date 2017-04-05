@@ -70,7 +70,6 @@ app.controller('SearchController',
       if (!lang) {
         lang = $scope.kConfig.lang;
       }
-      if (val.length < 3) {return;}
 
       var array = [];
       return suggestionsService.getSpellcheck(val, lang)
