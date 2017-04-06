@@ -59,6 +59,14 @@ var ResultsPage = function() {
     );
   };
 
+  this.getTreatments = function() {
+    return element.all(
+      by.repeater(
+        'treatment in fathead.content'
+      )
+    );
+  };
+
   this.getFathead = function(type) {
     if (!type) {
       type = '.fathead';
@@ -196,9 +204,17 @@ describe('Protractor Results Page', function() {
     });
   });
 
+  it('should have some treatments proposed', function() {
+    resultsPage.execSearch().then(function() {
+      resultsPage.getTreatments().count().then(function(count) {
+        expect(count).not.toEqual(0);
+      });
+    });
+  });
+
   it('should have a filled form on results page', function() {
     resultsPage.execSearch().then(function() {
-      resultsPage.getResults().count().then(function(count) {
+      resultsPage.getResults().then(function() {
         expect(element(by.model('form.subject')).getAttribute('value')).toEqual('Drug');
         expect(element(by.model('form.predicate')).getAttribute('value')).toEqual('has indication');
         expect(element(by.model('form.object')).getAttribute('value')).toEqual('Diabetes Mellitus');
