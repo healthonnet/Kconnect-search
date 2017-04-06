@@ -1,11 +1,11 @@
-<div class="row fathead" ng-if="fathead.content">
-  <div class="col-xs-12">
+<div class="row fathead" ng-if="fathead.content" resizable r-directions="['bottom']">
+  <div class="col-xs-12 fathead-inner">
     <div class="container-fluid">
       <h2>{{ 'DEFINITION_OF' | translate }} {{fathead.title}}</h2>
       <p uib-collapse="isDefinitionCollapsed && isSmallWidth">
         {{fathead.content}}
       </p>
-      <div class="text-center" ng-show="isSmallWidth">
+      <div class="text-center fathead-definition" ng-show="isSmallWidth">
         <button ng-click="isDefinitionCollapsed = !isDefinitionCollapsed" class="btn btn-default">
           <span ng-show="isDefinitionCollapsed">{{ 'SEE_DEFINITION' | translate }}</span>
           <span ng-hide="isDefinitionCollapsed">{{ 'HIDE_DEFINITION' | translate }}</span>

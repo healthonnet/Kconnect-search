@@ -2,8 +2,8 @@
 
 .fathead {
   width: 100%;
-  padding: 10px 0;
   border-bottom: silver 1px solid;
+  padding-bottom: 12px;
   h2 {
     color: $primary-color;
   }
@@ -13,6 +13,28 @@
   }
   .fathead-suggestions {
     font-size: 2em;
+  }
+  .fathead-inner {
+    height: inherit;
+    .container-fluid {
+      height: inherit;
+      overflow: hidden;
+      box-sizing: border-box;
+      padding: 15px;
+    }
+  }
+}
+
+.rg-bottom {
+  span {
+    border-top-color: $secondary-color;
+    border-bottom-color: $secondary-color;
+  }
+}
+
+@media (min-width: 768px) {
+  .fathead {
+    height: 200px;
   }
 }
 

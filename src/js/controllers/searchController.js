@@ -19,6 +19,7 @@ app.controller('SearchController',
     $scope.$emit('searchActive');
     $scope.highlight = undefined;
     $scope.isDefinitionCollapsed = false;
+    $scope.isSmallWidth = $window.innerWidth < 768;
 
     angular.element($window).bind('resize', function() {
       $scope.isSmallWidth = false;
@@ -152,10 +153,60 @@ app.controller('SearchController',
                     data.translation;
               });
           }
-          // Troubled
-          // if ($scope.fathead.content.length > 600) {
-          //   $scope.isDefinitionCollapsed = true;
-          // }
+
+          $scope.fathead.content =
+'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tellus' +
+' enim, vestibulum tempor magna et, ultrices porttitor nulla. ' +
+'Nunc sollicitudin ante quis ex pretium egestas. Donec sagittis ' +
+'nulla quis odio pulvinar, at commodo ligula commodo. Morbi sapien ' +
+'diam, rutrum ut nisi quis, malesuada accumsan risus. Aenean ' +
+'sollicitudin non ipsum id commodo. Praesent egestas diam eu purus ' +
+'eleifend accumsan. Suspendisse potenti. Vestibulum blandit, sapien ' +
+'et scelerisque varius, nunc ex pulvinar dolor, eu faucibus orci ' +
+'neque non mi. Sed et ullamcorper libero.<br />' +
+'Etiam sed justo ornare est laoreet ornare. Etiam non consectetur leo. ' +
+'Sed a dui vestibulum, rutrum elit eu, imperdiet felis. Ut tincidunt ' +
+'et lectus et rutrum. Phasellus eget massa at eros sollicitudin ' +
+'tristique. Aliquam erat volutpat. Aenean eu nulla sit amet lacus ' +
+'porta semper. Morbi ac nibh et ipsum efficitur condimentum. ' +
+'Sed non elit neque. Duis at porttitor velit.<br />' +
+'Vivamus pellentesque elementum tellus, vehicula vehicula enim ' +
+'fringilla et. Lorem ipsum dolor sit amet, consectetur adipiscing ' +
+'elit. Praesent ut efficitur lacus, id pellentesque sapien. ' +
+'Sed iaculis ac dolor vulputate vehicula. Aliquam nec lorem aliquet, ' +
+'sollicitudin felis at, egestas nunc. Aenean sem nulla, blandit a ' +
+'viverra vitae, lacinia sit amet tellus. Donec vel tortor id quam ' +
+'consequat elementum non eget ligula. Phasellus egestas, turpis ' +
+'varius aliquet malesuada, quam nunc suscipit enim, non condimentum ' +
+'ligula ante eu mauris. Sed posuere massa sed porta condimentum. ' +
+'Maecenas gravida, quam porta ullamcorper semper, lectus mi tempor ' +
+'tortor, vel convallis lacus mauris sodales turpis. Sed cursus ' +
+'ultricies metus, rhoncus tincidunt neque accumsan sit amet. ' +
+'In hac habitasse platea dictumst. Vestibulum ante ipsum primis ' +
+'in faucibus orci luctus et ultrices posuere cubilia Curae; ' +
+'Maecenas vulputate ex nec pharetra congue.<br />' +
+'Ut vulputate suscipit commodo. Nam vitae orci at tellus molestie ' +
+'blandit. Curabitur eget justo semper, auctor tellus in, ' +
+'placerat risus. Integer pulvinar arcu magna, vel molestie lacus ' +
+'dictum sit amet. Pellentesque habitant morbi tristique senectus ' +
+'et netus et malesuada fames ac turpis egestas. Sed a elementum ' +
+'mauris, vestibulum interdum lacus. Nullam lacinia eros ac lorem ' +
+'feugiat lacinia. Duis magna ex, laoreet eget varius sed, ' +
+'dignissim vitae augue.<br />\n' +
+'Nunc sem nisl, mattis quis odio a, accumsan sollicitudin mi. ' +
+'Phasellus facilisis tellus lectus, ut fermentum turpis mattis nec. ' +
+'Pellentesque sed rhoncus tellus. Nulla diam eros, consequat sed ' +
+'posuere varius, tincidunt a est. Mauris a lacus sed turpis commodo ' +
+'accumsan. Nulla facilisi. Aenean dui est, convallis eget massa eget, ' +
+'mattis bibendum purus. Sed eu cursus ex. Quisque in pellentesque velit.' +
+' Curabitur facilisis odio ultrices quam semper, ut volutpat neque ' +
+'feugiat. Aliquam fringilla lacus non erat dignissim gravida. Fusce ' +
+'aliquam nisi at est congue, molestie vestibulum mi sodales. ' +
+'Praesent porta nibh vitae felis cursus, vel rutrum metus vehicula.';
+
+          if ($scope.fathead.content.length > 600) {
+            $scope.isDefinitionCollapsed = true;
+          }
         })
         .catch(err => {
           suggestionsService.getAutocorrect(q, $scope.kConfig.lang)
