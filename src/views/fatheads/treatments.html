@@ -5,7 +5,9 @@
       <div>
         <ul>
           <li ng-repeat="treatment in fathead.content">
-            <h3>{{ treatment.label }}</h3>
+            <h3>{{ treatment.label }} -
+              <small><a target="_blank" href="{{treatment.uri.namespace}}{{treatment.uri.localName}}">{{ 'DETAILS' | translate }}</a></small>
+            </h3>
             <p> {{ treatment.definition}}</p>
           </li>
         </ul>
