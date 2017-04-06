@@ -20,6 +20,13 @@ app.controller('SearchController',
     $scope.highlight = undefined;
     $scope.isDefinitionCollapsed = false;
 
+    angular.element($window).bind('resize', function() {
+      $scope.isSmallWidth = false;
+      if ($window.innerWidth < 768) {
+        $scope.isSmallWidth = true;
+      }
+    });
+
     $scope.submit = function(targetlang) {
       if ($scope.form.param !== undefined) {
         // Prevent useless submit (same request)
@@ -145,10 +152,10 @@ app.controller('SearchController',
                     data.translation;
               });
           }
-
-          if ($scope.fathead.content.length > 600 && window.innerWidth < 768) {
-            $scope.isDefinitionCollapsed = true;
-          }
+          // Troubled
+          // if ($scope.fathead.content.length > 600) {
+          //   $scope.isDefinitionCollapsed = true;
+          // }
         })
         .catch(err => {
           suggestionsService.getAutocorrect(q, $scope.kConfig.lang)

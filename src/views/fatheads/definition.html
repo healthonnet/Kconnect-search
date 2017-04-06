@@ -2,10 +2,10 @@
   <div class="col-xs-12">
     <div class="container-fluid">
       <h2>{{ 'DEFINITION_OF' | translate }} {{fathead.title}}</h2>
-      <p uib-collapse="isDefinitionCollapsed">
+      <p uib-collapse="isDefinitionCollapsed && isSmallWidth">
         {{fathead.content}}
       </p>
-      <div class="text-center visible-xs">
+      <div class="text-center" ng-show="isSmallWidth">
         <button ng-click="isDefinitionCollapsed = !isDefinitionCollapsed" class="btn btn-default">
           <span ng-show="isDefinitionCollapsed">{{ 'SEE_DEFINITION' | translate }}</span>
           <span ng-hide="isDefinitionCollapsed">{{ 'HIDE_DEFINITION' | translate }}</span>
