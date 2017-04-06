@@ -153,3 +153,11 @@
     margin: 5px;
   }
 }
+
+@media (min-width: '1200px') {
+  .screenshot-card {
+    width: 159px !important;
+    margin: 0 auto;
+    display: block;
+  }
+}
