@@ -94,30 +94,33 @@ app
       var objectUri = $scope.semanticQuery.object.uri.namespace +
         $scope.semanticQuery.object.uri.localName;
 
-      if ($scope.form.object.definition) {
-        $scope.fathead = {
-          type: 'views/fatheads/definition.html',
-          title: $scope.form.object.label,
-          content: $scope.form.object.definition,
-        };
-      }
-
       // Paginated results
       resultsService.getSemanticRequest({
         subject: subjectUri,
         predicate: predicateUri,
         object: objectUri,
-      }).then(function(mimirQuery) {
-        $scope.mimirQuery = mimirQuery;
+      }).then(function(results) {
+        $scope.mimirQuery = results[0];
+        $scope.autocompleteQuery = results[1];
         var page = $scope.results.currentPage || 1;
-        resultsService.executeMimirQuery(mimirQuery, page)
+        resultsService.getTreatments($scope.autocompleteQuery)
+          .then(function(treatments) {
+            console.log(treatments);
+            if (treatments.length) {
+              $scope.fathead = {
+                type: 'views/fatheads/treatments.html',
+                title: $scope.form.object.label,
+                content: treatments,
+              };
+            }
+          });
+        resultsService.executeMimirQuery($scope.mimirQuery, page)
           .then(function(res) {
             $scope.results = res.results;
             $scope.res = {
               total: res.total,
               currentPage: page,
             };
-            console.log(res);
           });
       });
     }

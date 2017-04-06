@@ -1,0 +1,17 @@
+<div class="row fathead treatments" ng-if="fathead.content" resizable r-directions="['bottom']">
+  <div class="col-xs-12 fathead-inner">
+    <div class="container-fluid">
+      <h2>{{ 'RELATED_TO' | translate }} : {{fathead.title}}</h2>
+      <div>
+        <ul>
+          <li ng-repeat="treatment in fathead.content">
+            <h3>{{ treatment.label }} -
+              <small><a target="_blank" href="{{treatment.uri.namespace}}{{treatment.uri.localName}}">{{ 'DETAILS' | translate }}</a></small>
+            </h3>
+            <p> {{ treatment.definition}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

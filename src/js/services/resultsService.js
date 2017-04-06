@@ -2,7 +2,8 @@
 
 app.factory('ResultsService',
   function($http, SELECT_SERVICE_URL, TYPEAHEAD_SERVICE_URL,
-           MIMIR_SERVICE_URL, $httpParamSerializerJQLike) {
+           TYPEAHEADLABEL_SERVICE_URL, MIMIR_SERVICE_URL,
+           $httpParamSerializerJQLike) {
   return {
     getResults: function(options) {
       options = {
@@ -65,7 +66,10 @@ app.factory('ResultsService',
           object: options.object,
         },
       }).then(function(res) {
-        return buildMimirQuery(res.data.results);
+        return [
+          buildMimirQuery(res.data.results),
+          buildTreatmentQuery(res.data.results),
+        ];
       });
     },
 
@@ -100,6 +104,21 @@ app.factory('ResultsService',
         return false;
       });
     },
+
+    getTreatments: function(autocompleteQuery) {
+      return $http({
+        url: TYPEAHEADLABEL_SERVICE_URL + '/autocomplete.json',
+        method: 'POST',
+        data: $httpParamSerializerJQLike({
+          uri: autocompleteQuery,
+        }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+      }).then(function(res) {
+        return res.data.results;
+      });
+    },
   };
 });
 
@@ -112,6 +131,12 @@ function buildMimirQuery(results) {
   }).join(' OR ');
   mimirQuery = '(' + mimirQuery + ') IN {Publication language="en"}';
   return mimirQuery;
+}
+
+function buildTreatmentQuery(results) {
+  return results.bindings.map(function(element, index) {
+    return element.s.value;
+  }).join(',');
 }
 
 function parseFilters(filters) {

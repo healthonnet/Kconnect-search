@@ -25,6 +25,22 @@
   }
 }
 
+.treatments {
+  height: 200px;
+}
+
+@media (min-width: 768px) {
+  .treatments {
+    height: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .treatments {
+    height: 400px;
+  }
+}
+
 .rg-bottom {
   span {
     border-top-color: $secondary-color;
@@ -42,8 +58,9 @@
     }
   }
   .pro {
-    &:not(:hover) {
-      background: rgba(250,250,250,0.8) !important;
+    background: rgba(250,250,250,0.8) !important;
+    &:hover {
+      background: white !important;
     }
   }
   .translation-btn{
