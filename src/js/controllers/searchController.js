@@ -18,6 +18,15 @@ app.controller('SearchController',
     $scope.filters = deserialize($location.search().filters);
     $scope.$emit('searchActive');
     $scope.highlight = undefined;
+    $scope.isDefinitionCollapsed = false;
+    $scope.isSmallWidth = $window.innerWidth < 768;
+
+    angular.element($window).bind('resize', function() {
+      $scope.isSmallWidth = false;
+      if ($window.innerWidth < 768) {
+        $scope.isSmallWidth = true;
+      }
+    });
 
     $scope.submit = function(targetlang) {
       if ($scope.form.param !== undefined) {
@@ -143,6 +152,10 @@ app.controller('SearchController',
                 $scope.fathead.content =
                     data.translation;
               });
+          }
+
+          if ($scope.fathead.content.length > 600) {
+            $scope.isDefinitionCollapsed = true;
           }
         })
         .catch(err => {
