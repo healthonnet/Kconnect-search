@@ -25,6 +25,22 @@
   }
 }
 
+.treatments {
+  height: 200px;
+}
+
+@media (min-width: 768px) {
+  .treatments {
+    height: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .treatments {
+    height: 400px;
+  }
+}
+
 .rg-bottom {
   span {
     border-top-color: $secondary-color;
