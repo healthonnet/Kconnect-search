@@ -152,6 +152,29 @@
       }
     }
   }
+  .mockup-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: $light-grey;
+    border-radius: 10px;
+  }
+  .mockup-link {
+    width: 200px;
+    height: 20px;
+    display: inline-block;
+    background: rgb(235,235,255);
+  }
+  .mockup-underlink {
+    width: 400px;
+    height: 16px;
+    display: inline-block;
+    background: rgb(225,255,225);
+  }
+  .mockup-text {
+    height: 14px;
+    background: $light-grey;
+  }
 }
 
 .highlight {
