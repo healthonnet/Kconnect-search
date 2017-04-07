@@ -1,8 +1,8 @@
-<div class="row fathead treatments" ng-if="fathead.content" resizable r-directions="['bottom']">
+<div class="row fathead" ng-class="{'open': isFatheadCollapsed}" ng-if="fathead.content" >
   <div class="col-xs-12 fathead-inner">
     <div class="container-fluid">
       <h2>{{ 'RELATED_TO' | translate }} : {{fathead.title}}</h2>
-      <div>
+      <div class="treatments">
         <ul>
           <li ng-repeat="treatment in fathead.content">
             <h3>{{ treatment.label }} -
@@ -12,6 +12,11 @@
           </li>
         </ul>
       </div>
+    </div>
+    <div class="text-center toggle">
+      <button ng-click="isFatheadCollapsed = !isFatheadCollapsed" class="btn btn-default">
+        <i class="fa fa-angle-down" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
 </div>
