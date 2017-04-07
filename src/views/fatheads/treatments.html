@@ -8,7 +8,7 @@
             <h3>{{ treatment.label }} -
               <small><a target="_blank" href="{{treatment.uri.namespace}}{{treatment.uri.localName}}">{{ 'DETAILS' | translate }}</a></small>
             </h3>
-            <p> {{ treatment.definition}}</p>
+            <p ng-bind-html="treatment.definition | to_trusted"></p>
           </li>
         </ul>
       </div>

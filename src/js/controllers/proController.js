@@ -105,7 +105,6 @@ app
         var page = $scope.results.currentPage || 1;
         resultsService.getTreatments($scope.autocompleteQuery)
           .then(function(treatments) {
-            console.log(treatments);
             if (treatments.length) {
               $scope.fathead = {
                 type: 'views/fatheads/treatments.html',
