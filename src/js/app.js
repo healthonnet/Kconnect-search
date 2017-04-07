@@ -15,7 +15,6 @@ var app = angular.module('App', [
   'LocalStorageModule',
   'hc.marked',
   'sticky',
-  'angularResizable',
 ])
   .directive('hideUntilGood', function() {
     return {
