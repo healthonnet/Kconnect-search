@@ -35,7 +35,7 @@
 
   <div class="row">
     <div class="col-md-12 results">
-      <div class="row card pro" ng-repeat="link in results track by $index">
+      <div class="row card" ng-repeat="link in results track by $index" ng-class="{'pro': !kConfig.lowVision}" >
         <div class="col-xs-12">
           <h2>
             <div ng-click="kConfig.translatedResults = !kConfig.translatedResults" ng-if="targetLang" class="btn btn-default translation-btn inline noselect">
