@@ -10,10 +10,11 @@
       <ul class="nav nav-tabs filter-tabs" role="tablist">
         <li role="presentation" ng-class="{true: 'active'}[results.all == 'all']">
           <a href="#" ng-click="searchSection()" role="tab" data-toggle="tab">
-            {{ 'FIL_ALL_NO_EXCEPTIONS' | translate }} <span>{{results.matches}}</span>
+            {{ 'FIL_ALL_NO_EXCEPTIONS' | translate }}
+            <span ng-if="results.all == 'all'">{{results.matches}}</span>
           </a>
         </li>
-        <li role="presentation" ng-repeat="(key, value) in results.sections" ng-class="{true: 'active'}[results.all == key]">
+        <li role="presentation" ng-repeat="(key, value) in results.sections" ng-class="{true: 'active'}[results.all != 'all']">
           <a href="#" ng-click="searchSection(key)" role="tab" data-toggle="tab">
             {{ key | translate }} <span>{{ value }}</span>
           </a>
