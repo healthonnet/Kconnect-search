@@ -235,11 +235,11 @@ app.controller('SearchController',
 
         // HonCode certification
         link.doclist.docs[0].cards[0] =
-          '/views/cards/trustability.html';
+          'views/cards/trustability.html';
         if (link.doclist.docs[0].is_certified_facet) {
           if (link.doclist.docs[0].is_certified_facet[0] === 'true') {
             link.doclist.docs[0].cards[0] =
-              '/views/cards/certification.html';
+              'views/cards/certification.html';
           }
         }
 
@@ -247,7 +247,7 @@ app.controller('SearchController',
         var diff = link.doclist.docs[0].readability_difficult_facet;
         var easy = link.doclist.docs[0].readability_easy_facet;
         link.doclist.docs[0].cards[1] =
-          '/views/cards/readability.html';
+          'views/cards/readability.html';
         if (easy && diff) {
           link.doclist.docs[0].readability = 60;
         } else if (easy) {
@@ -265,7 +265,7 @@ app.controller('SearchController',
           });
 
         // Cookies
-        link.doclist.docs[0].cards[2] = '/views/cards/cookies.html';
+        link.doclist.docs[0].cards[2] = 'views/cards/cookies.html';
 
         if (lang !== $scope.kConfig.lang) {
           // Translations
