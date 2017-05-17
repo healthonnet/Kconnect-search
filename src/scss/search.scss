@@ -73,6 +73,12 @@
 }
 
 .results {
+  &.minHeight {
+    @media (min-width: 992px) {
+      min-height: 700px;
+    }
+  }
+
   p {
     span {
       font-weight: 900;

@@ -43,7 +43,8 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6 results">
+    <div class="col-md-6 results" ng-class="{'minHeight' : screenshot}">
+
       <div class="row card" ng-hide="results.groups">
         <div class="col-xs-12">
           <h2>
@@ -74,6 +75,7 @@
           <p class="mockup-text"></p>
         </div>
       </div>
+
       <div class="row card" ng-repeat="link in results.groups track by $index" ng-mouseover="showScreenshot($index)" ng-class="{false: 'highlight'}[highlight == $index]">
         <div class="col-xs-12">
           <h2>
@@ -115,7 +117,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 search-details hidden-sm card" sticky confine="true" sticky-class="sticky-card" ng-class="{false: 'highlight'}[highlight >= 0]" ng-include="'views/partials/screenshot.html'" ng-if="!lowVision">
+    <div class="col-md-6 search-details hidden-sm card" sticky confine="true" sticky-class="sticky-card" ng-class="{false: 'highlight'}[highlight >= 0]" ng-include="'views/partials/screenshot.html'" ng-if="!lowVision && screenshot">
     </div>
   </div>
 
