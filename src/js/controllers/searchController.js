@@ -188,7 +188,7 @@ app.controller('SearchController',
         section: section,
         filters: filters,
       }).then(function(res) {
-        $scope.results = $scope.treatResults(res, 1, queryLanguage);
+        $scope.results = $scope.treatResults(res, 1, queryLanguage, section);
       });
     } else {
       $scope.card = 'views/partials/card.html';
@@ -209,16 +209,16 @@ app.controller('SearchController',
       }).then(function(res) {
         $window.scrollTo(0,0);
         $scope.results = $scope.treatResults(res,
-          $scope.results.currentPage, queryLanguage);
+          $scope.results.currentPage, queryLanguage, section);
       });
     };
 
-    $scope.treatResults = function(res, page, lang) {
+    $scope.treatResults = function(res, page, lang, section) {
       if (!lang) {
         lang = $scope.kConfig.lang;
       }
       var results = res.data.grouped.domain;
-      results.all = 'all';
+      results.all = section || 'all';
       results.nbPages = res.data.grouped.domain.matches / 10;
       results.currentPage = page;
       results.maxSize = 10;
