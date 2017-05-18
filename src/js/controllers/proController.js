@@ -19,7 +19,10 @@ app
         $scope.submit();
       } else {
         setTimeout(function() {
-          document.getElementById(idNextStep).focus();
+          var focus = document.getElementById(idNextStep);
+          if (focus) {
+            focus.focus();
+          }
         },300);
         console.log('not complete');
       }
