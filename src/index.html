@@ -83,7 +83,7 @@
     <div ng-include="'views/partials/navbar-left.html'" class="hidden-xs"></div>
     <div class="m-nav-wrapper visible-xs">
       <div class="m-navbar" ng-class="isOpen ? 'is-open' : 'is-closed'" ng-include="'views/partials/navbar-left.html'"></div>
-      <button type="button" class="hamburger" ng-click="isOpen = !isOpen" ng-class="isOpen ? 'is-open' : 'is-closed'"  data-toggle="offcanvas">
+      <button type="button" class="hamburger" ng-blur="isOpen=false" ng-click="isOpen = !isOpen" ng-class="isOpen ? 'is-open' : 'is-closed'"  data-toggle="offcanvas">
         <span class="hamb-top"></span>
         <span class="hamb-middle"></span>
         <span class="hamb-bottom"></span>
