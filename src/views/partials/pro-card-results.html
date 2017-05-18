@@ -11,7 +11,7 @@
                    typeahead-on-select="validateQuery('proPredicate')" onfocus="this.select();"
                    class="bg-info" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
           </div>
-          <div class="jigsaw jigsaw-small col-xs-3" ng-show="form.subject" style="z-index: 2">
+          <div class="jigsaw jigsaw-small col-xs-3" ng-if="form.subject" style="z-index: 2">
             <input type="text" ng-model="form.predicate" ng-model-options="{debounce: 250}"
                    typeahead-editable="false" typeahead-min-length="0"
                    id="proPredicate"
@@ -19,7 +19,7 @@
                    typeahead-on-select="validateQuery('proObject')" onfocus="this.select();"
                    placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
           </div>
-          <div class="jigsaw jigsaw-small bg-info col-xs-4 col-sm-5" ng-show="form.predicate" style="z-index: 1">
+          <div class="jigsaw jigsaw-small bg-info col-xs-4 col-sm-5" ng-if="form.predicate" style="z-index: 1">
             <input type="text" ng-model="form.object" ng-model-options="{debounce: 250}"
                    typeahead-editable="false" typeahead-min-length="0"
                    id="proObject"
