@@ -92,6 +92,11 @@ body:after{
     border-color: #e7e7e7;
   }
 }
+@media (max-width: 767px) {
+  .language {
+    margin-top: 10px;
+  }
+}
 
 @media (min-width: 768px) {
   .language {
