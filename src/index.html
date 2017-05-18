@@ -93,7 +93,7 @@
     <div class="language" ng-include="'views/partials/language-button.html'"></div>
 
     <div ng-view class="fill col-sm-11" ng-class="isOpen ? 'col-xs-offset-2' : 'col-sm-offset-1'"></div>
-    <div class="row footer col-sm-11 col-sm-offset-1">
+    <div class="row footer col-sm-11" ng-class="isOpen ? 'col-xs-offset-2' : 'col-sm-offset-1'">
       <footer ng-include="'views/partials/footer.html'"></footer>
     </div>
   </body>
