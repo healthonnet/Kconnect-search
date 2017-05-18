@@ -14,11 +14,16 @@ app
     $scope.$emit('proActive');
     $scope.pageIcon = 'fa-user-md';
     $scope.pageTitleColor = 'text-dark-green';
-    $scope.validateQuery = function(item) {
+    $scope.validateQuery = function(idNextStep) {
       if ($scope.form.subject && $scope.form.predicate && $scope.form.object) {
         $scope.submit();
       } else {
-        // TODO false -> new autocompletion step
+        setTimeout(function() {
+          var focus = document.getElementById(idNextStep);
+          if (focus) {
+            focus.focus();
+          }
+        },300);
         console.log('not complete');
       }
     };

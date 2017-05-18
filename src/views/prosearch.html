@@ -8,22 +8,25 @@
                     <div class="jigsaw jigsaw-big bg-info" style="z-index: 3">
                         <input type="text" ng-model="form.subject" ng-model-options="{debounce: 250}"
                             typeahead-editable="false" typeahead-min-length="0"
-                            uib-typeahead="subject as subject.label for subject in getSubjects($viewValue)"
-                            typeahead-on-select="validateQuery($item)" onfocus="this.select();"
+                               id="proSubject"
+                               uib-typeahead="subject as subject.label for subject in getSubjects($viewValue)"
+                            typeahead-on-select="validateQuery('proPredicate')" onfocus="this.select();"
                             class="bg-info" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
                     </div>
                     <div class="jigsaw jigsaw-big" ng-if="form.subject" style="z-index: 2">
                         <input type="text" ng-model="form.predicate" ng-model-options="{debounce: 250}"
                             typeahead-editable="false" typeahead-min-length="0"
-                            uib-typeahead="predicate as predicate.label for predicate in getPredicates($viewValue)"
-                            typeahead-on-select="validateQuery($item)" onfocus="this.select();"
+                               id="proPredicate"
+                               uib-typeahead="predicate as predicate.label for predicate in getPredicates($viewValue)"
+                            typeahead-on-select="validateQuery('proObject')" onfocus="this.select();"
                             placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
                     </div>
                     <div class="jigsaw jigsaw-big bg-info" ng-if="form.predicate" style="z-index: 1">
                         <input type="text" ng-model="form.object" ng-model-options="{debounce: 250}"
                             typeahead-editable="false" typeahead-min-length="0"
-                            uib-typeahead="object as object.label for object in getObjects($viewValue)"
-                            typeahead-on-select="validateQuery($item)" onfocus="this.select();"
+                               id="proObject"
+                               uib-typeahead="object as object.label for object in getObjects($viewValue)"
+                            typeahead-on-select="validateQuery()" onfocus="this.select();"
                             class="bg-info" placeholder="{{ 'SEARCH_MEDICAL_TERMS' | translate }}">
                     </div>
                 </div>
