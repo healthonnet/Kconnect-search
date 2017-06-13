@@ -3,10 +3,10 @@
 app.controller('SearchController',
   ['$scope', '$location', '$window', 'ResultsService', 'SuggestionsService',
   'TrustabilityService', 'ScreenshotService', '$translate',
-  'DisambiguatorService', 'TranslationService',
+  'DisambiguatorService', 'TranslationService', 'COOKIESCALE',
   function($scope, $location, $window, resultsService, suggestionsService,
     trustabilityService, screenshotService, $translate,
-    disambiguatorService, translationService) {
+    disambiguatorService, translationService, cookieScale) {
     $scope.pageTitle = 'Search';
     $scope.pageIcon = 'fa-globe';
     $scope.pageTitleColor = 'text-dark-blue';
@@ -266,6 +266,19 @@ app.controller('SearchController',
 
         // Cookies
         link.doclist.docs[0].cards[2] = 'views/cards/cookies.html';
+        link.doclist.docs[0].cookiedensity = 'no';
+        var cookies = link.doclist.docs[0].cookies;
+        if (cookies) {
+          if (cookies > 0 && cookies <= cookieScale.few) {
+            link.doclist.docs[0].cookiedensity = 'few';
+          } else if (cookies > cookieScale.few &&
+            cookies <= cookieScale.more) {
+            link.doclist.docs[0].cookiedensity = 'more';
+          } else if (cookies > cookieScale.more) {
+            link.doclist.docs[0].cookiedensity = 'max';
+          }
+        }
+
 
         if (lang !== $scope.kConfig.lang) {
           // Translations
