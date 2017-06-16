@@ -1,2 +1,3 @@
-<h3>{{ 'COOKIES' | translate }}</h3>
-<img src="images/cookies.jpg" alt="{{'COOKIES_ALT' | translate}}" title="{{'COOKIES_TITLE' | translate}}" class="screenshot-card">
+<a href="disclaimer#cookies-detection" title="{{ 'HOW_DO_WE_DETECT_COOKIES' | translate }}"><h3 class="text-info">{{ 'FIRST_PARTY_COOKIES' | translate }}*</h3></a>
+<img ng-src="images/cookies/badge_cook_{{screenshot.cookiedensity}}.jpg" alt="{{'COOKIES_ALT' | translate}}" title="{{'COOKIES_TITLE' | translate}}" class="screenshot-card">
+<p class="text-center" style="margin-top: 20px;">{{'DETECTED' | translate}} : {{screenshot.cookies || 0}}</p>

@@ -144,3 +144,7 @@ app.constant('LANGUAGES', {
     key: 'sv',
   },
 });
+app.constant('COOKIESCALE', {
+  few: 15,
+  more: 30,
+});
