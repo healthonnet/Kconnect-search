@@ -2,8 +2,10 @@
 
 app
   .controller('ImageController',
-  ['$scope', '$location', 'ImageService', 'angularGridInstance', '$translate',
-  function($scope, $location, $imageService, angularGridInstance, $translate) {
+  ['$scope', '$location', 'ImageService',
+    'angularGridInstance', '$translate', 'Lightbox',
+  function($scope, $location, $imageService,
+           angularGridInstance, $translate, Lightbox) {
     $scope.$emit('picturesActive');
     $scope.pageIcon = 'fa-picture-o';
     $scope.pageTitleColor = 'text-dark-purple';
@@ -16,6 +18,10 @@ app
         $scope.images.push(group.doclist.docs[0]);
       });
     }
+
+    $scope.openLightboxModal = function(index) {
+      Lightbox.openModal($scope.images, index);
+    };
 
     $scope.loadImages = function() {
       $imageService.getImageResults(

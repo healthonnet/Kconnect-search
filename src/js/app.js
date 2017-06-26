@@ -13,6 +13,7 @@ var app = angular.module('App', [
   'dcbImgFallback',
   'angularMoment',
   'LocalStorageModule',
+  'bootstrapLightbox',
   'hc.marked',
   'sticky',
 ])

@@ -7,7 +7,7 @@
         <p>{{ 'IMAGE_RESULTS' | translate}}: {{form.param}}</p>
         <ul class="dynamic-grid" angular-grid="images"
             ag-options="angularGridOptions" ag-grid-id="gallery" ag-infinite-scroll="loadImages()">
-          <li data-ng-repeat="image in images" class="grid">
+          <li data-ng-repeat="image in images" class="grid" ng-click="openLightboxModal($index)">
             <img ng-src="{{ image.url }}" class="grid-img"
                 loading-src fallback-src
                 data-actual-width = "{{image.actualWidth}}"
