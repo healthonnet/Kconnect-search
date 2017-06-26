@@ -11,5 +11,5 @@
   <button class="btn" ng-class="{ 'btn-info': filters.video, 'btn-default': !filters.video }" ng-click="activateFilter('video')">{{ 'FIL_VID' | translate }}</button>
   <button class="btn" ng-class="{ 'btn-info': filters.services, 'btn-default': !filters.services }" ng-click="activateFilter('services')">{{ 'FIL_PRODUCTS_AND_SERVICES' | translate }}</button>
   <button class="btn" ng-class="{ 'btn-info': filters.research, 'btn-default': !filters.researcg }" ng-click="activateFilter('research')">{{ 'FIL_RESEARCH' | translate }}</button>
-  <button class="btn bg-info" ng-click="resetFilters()">{{ 'FIL_RESET' | translate }}</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.all, 'btn-default': !filters.all }" ng-click="resetFilters()">{{ 'FIL_ALL_NO_EXCEPTIONS' | translate }}</button>
 </div>

@@ -16,6 +16,9 @@ app.controller('SearchController',
     $scope.searchActive = true;
     $scope.filters = $scope.filters || {};
     $scope.filters = deserialize($location.search().filters);
+    if (Object.keys($scope.filters).length === 0) {
+      $scope.filters.all = true;
+    }
     $scope.$emit('searchActive');
     $scope.highlight = undefined;
     $scope.isDefinitionCollapsed = false;
@@ -51,6 +54,8 @@ app.controller('SearchController',
     };
 
     $scope.activateFilter = function(filter) {
+      $scope.filters.all = false;
+
       $scope.filters[filter] = !$scope.filters[filter];
       $location.search('filters', serialize($scope.filters));
     };
