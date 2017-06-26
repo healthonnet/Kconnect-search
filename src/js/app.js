@@ -35,7 +35,8 @@ var app = angular.module('App', [
     };
   })
   .config(function($routeProvider, $translateProvider,
-                   $locationProvider, localStorageServiceProvider) {
+                   $locationProvider, localStorageServiceProvider,
+                   LightboxProvider) {
 
     $translateProvider
       .useStaticFilesLoader({
@@ -104,4 +105,8 @@ var app = angular.module('App', [
     localStorageServiceProvider
         .setPrefix('kcon')
         .setDefaultToCookie(false);
+
+    // Set a custom template
+    LightboxProvider.templateUrl = 'views/partials/image-lightbox.html';
+    // LightboxProvider.fullScreenMode = true;
   });
