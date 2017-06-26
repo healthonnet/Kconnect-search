@@ -54,6 +54,15 @@ app.controller('SearchController',
       $scope.filters[filter] = !$scope.filters[filter];
       $location.search('filters', serialize($scope.filters));
     };
+    $scope.resetFilters = function() {
+
+      for (var filter in $scope.filters) {
+        if ($scope.filters.hasOwnProperty(filter)) {
+          $scope.filters[filter] = false;
+        }
+      }
+      $location.search('filters', serialize($scope.filters));
+    };
 
     $scope.searchSection = function(param) {
       if (param) {
