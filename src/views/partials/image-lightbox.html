@@ -16,8 +16,8 @@
         </div>
         <a href="{{Lightbox.imageUrl}}"><img lightbox-src={{Lightbox.imageUrl}}></a>
         <div class="row">
-            <a href="{{Lightbox.imageUrl}}" target=_blank title="Open in new tab" class="btn btn-success">Open in new tab</a>
-            <a href="{{Lightbox.image.parentUrl}}" target=_blank title="See on the website" class="btn btn-warning">See on the website</a>
+            <a href="{{Lightbox.imageUrl}}" target=_blank title="{{'OPEN_IN_NEW_TAB'|translate}}" class="btn btn-info">{{'OPEN_IN_NEW_TAB'|translate}}</a>
+            <a href="{{Lightbox.image.parentUrl}}" target=_blank title="{{'SEE_ORIGINAL_CONTEXT'|translate}}" class="btn bg-info">{{'SEE_ORIGINAL_CONTEXT'|translate}}</a>
         </div>
         <div class="row" ng-if="Lightbox.image['largePrecedingText_' + Lightbox.image.language]">
             {{ Lightbox.image['largePrecedingText_' + Lightbox.image.language] }}
