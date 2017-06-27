@@ -73,6 +73,12 @@
 }
 
 .results {
+  &.card {
+    @media (min-width: 992px) {
+      margin-right: -15px !important;
+    }
+  }
+
   &.minHeight {
     @media (min-width: 992px) {
       min-height: 700px;

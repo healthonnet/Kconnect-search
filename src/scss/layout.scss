@@ -33,13 +33,12 @@ body.grey {
     }
   }
   .search-details {
-    position: absolute;
-    right: 10px;
-    top: 0;
     height: inherit;
   }
   .sticky-card {
-    right: 25px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
   }
 }
 
