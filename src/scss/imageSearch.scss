@@ -17,4 +17,18 @@
   h1 {
     margin: 0;
   }
+  .lightbox-image-container {
+    .row {
+      .left {
+        position: absolute;
+        top:40%;
+        left: 10px;
+      }
+      .right {
+        position: absolute;
+        top: 40%;
+        right: 10px;
+      }
+    }
+  }
 }

@@ -4,17 +4,17 @@
             <h1>{{Lightbox.image.domain}}</h1>
         </div>
         <button class=close aria-hidden=true ng-click=$dismiss()>×</button>
-        <!--div class=btn-group ng-if="Lightbox.images.length > 1">
-            <a class="btn btn-xs btn-default" ng-click=Lightbox.prevImage()>‹ Previous</a>
-            <a ng-href={{Lightbox.imageUrl}} target=_blank class="btn btn-xs btn-default" title="Open in new tab">Open image in new tab</a>
-            <a class="btn btn-xs btn-default" ng-click=Lightbox.nextImage()>Next ›</a>
-        </div-->
     </div>
     <div class=lightbox-image-container>
         <div class=lightbox-image-caption>
             <span>{{Lightbox.image['alt_' + Lightbox.image.language]}}</span>
         </div>
-        <a href="{{Lightbox.imageUrl}}"><img lightbox-src={{Lightbox.imageUrl}}></a>
+        <div class="row">
+            <a class="btn btn-default left" ng-click=Lightbox.prevImage()>‹ {{'mobile-previous'|translate}}</a>
+            <a href="{{Lightbox.imageUrl}}"><img lightbox-src={{Lightbox.imageUrl}}></a>
+            <a class="btn btn-default right" ng-click=Lightbox.nextImage()>{{'mobile-next'|translate}} ›</a>
+
+        </div>
         <div class="row">
             <a href="{{Lightbox.imageUrl}}" target=_blank title="{{'OPEN_IN_NEW_TAB'|translate}}" class="btn btn-info">{{'OPEN_IN_NEW_TAB'|translate}}</a>
             <a href="{{Lightbox.image.parentUrl}}" target=_blank title="{{'SEE_ORIGINAL_CONTEXT'|translate}}" class="btn bg-info">{{'SEE_ORIGINAL_CONTEXT'|translate}}</a>
