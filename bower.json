@@ -40,6 +40,7 @@
     "angular-bootstrap-lightbox": "^0.12.0"
   },
   "resolutions": {
-    "angular": "^1.6.1"
+    "angular": "^1.6.1",
+    "angular-bootstrap": "^2.5.0"
   }
 }
