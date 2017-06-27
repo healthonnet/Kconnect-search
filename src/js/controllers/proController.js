@@ -14,6 +14,12 @@ app
     $scope.$emit('proActive');
     $scope.pageIcon = 'fa-user-md';
     $scope.pageTitleColor = 'text-dark-green';
+    $scope.clearField = function(idField) {
+      var element = document.getElementById(idField);
+      element.blur();
+      setTimeout(function() {
+        element.focus();},0);
+    };
     $scope.validateQuery = function(idNextStep) {
       if ($scope.form.subject && $scope.form.predicate && $scope.form.object) {
         $scope.submit();

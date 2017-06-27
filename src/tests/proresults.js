@@ -9,7 +9,7 @@ var ResultsPage = function() {
     if (!subject) {
       subject = 'Drug';
     }
-    element(by.model('form.subject')).clear().sendKeys(subject);
+    element(by.model('form.subject')).click().sendKeys(subject);
     return element(by.model('form.subject')).sendKeys(protractor.Key.ENTER);
   };
 
@@ -17,7 +17,7 @@ var ResultsPage = function() {
     if (!predicate) {
       predicate = 'has indication';
     }
-    element(by.model('form.predicate')).clear().sendKeys(predicate);
+    element(by.model('form.predicate')).click().sendKeys(predicate);
     return element(by.model('form.predicate')).sendKeys(protractor.Key.ENTER);
   };
 
@@ -25,7 +25,7 @@ var ResultsPage = function() {
     if (!object) {
       object = 'diabetes';
     }
-    element(by.model('form.object')).clear().sendKeys(object);
+    element(by.model('form.object')).click().sendKeys(object);
     return element(by.model('form.object')).sendKeys(protractor.Key.ENTER);
   };
 
@@ -43,7 +43,7 @@ var ResultsPage = function() {
   this.fillAndEdit = function() {
     this.fillSubject();
     this.fillPredicate();
-    element(by.model('form.object')).clear().sendKeys('diabetes');
+    element(by.model('form.object')).click().sendKeys('diabetes');
     return this.fillPredicate();
   };
 
