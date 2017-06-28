@@ -4,10 +4,8 @@ app
   .controller('ProController',
     ['$scope', '$location', '$sce', 'spanWordFilter',
       '$translate', 'SuggestionsService', 'ResultsService',
-      'ScreenshotService',
     function($scope, $location, $sce, spanWord,
-       $translate, suggestionsService, resultsService,
-       screenshotService) {
+       $translate, suggestionsService, resultsService) {
     $scope.pageTitle = 'Pro';
     $scope.form = {};
     $scope.results = {};
@@ -29,14 +27,12 @@ app
     };
     $scope.getObjects = function(q) {
       var array = [];
-      var subject = $scope.form.subject.uri.namespace +
-        $scope.form.subject.uri.localName;
-      var predicate = $scope.form.predicate.uri.namespace +
-        $scope.form.predicate.uri.localName;
+      var subject = $scope.form.subject.uri;
+      var predicate = $scope.form.predicate.uri;
       return suggestionsService.getObjects(q, subject, predicate)
         .then(function(res) {
-          if (res.data.results.length) {
-            array = array.concat(res.data.results);
+          if (res.length) {
+            array = array.concat(res);
           }
           return array;
         });
@@ -46,12 +42,11 @@ app
       $scope.fathead = undefined;
 
       var array = [];
-      var subject = $scope.form.subject.uri.namespace +
-        $scope.form.subject.uri.localName;
+      var subject = $scope.form.subject.uri;
       return suggestionsService.getPredicates(q, subject)
         .then(function(res) {
-          if (res.data.results.length) {
-            array = array.concat(res.data.results);
+          if (res.length) {
+            array = array.concat(res);
           }
           return array;
         });
@@ -66,8 +61,8 @@ app
 
       return suggestionsService.getSubjects(q)
         .then(function(res) {
-          if (res.data.results.length) {
-            array = array.concat(res.data.results);
+          if (res.length) {
+            array = array.concat(res);
           }
           return array;
         });
@@ -79,10 +74,7 @@ app
         !$scope.form.object) {
         return false;
       }
-      /* Prevent useless submit (same request)
-      if ($scope.form.param === $location.search().q) {
-        return;
-      }*/
+
       $location.search('form', JSON.stringify($scope.form));
     };
 
@@ -92,12 +84,9 @@ app
       $scope.form.predicate = $scope.semanticQuery.predicate;
       $scope.form.object = $scope.semanticQuery.object;
 
-      var subjectUri = $scope.semanticQuery.subject.uri.namespace +
-        $scope.semanticQuery.subject.uri.localName;
-      var predicateUri = $scope.semanticQuery.predicate.uri.namespace +
-        $scope.semanticQuery.predicate.uri.localName;
-      var objectUri = $scope.semanticQuery.object.uri.namespace +
-        $scope.semanticQuery.object.uri.localName;
+      var subjectUri = $scope.semanticQuery.subject.uri;
+      var predicateUri = $scope.semanticQuery.predicate.uri;
+      var objectUri = $scope.semanticQuery.object.uri;
 
       // Paginated results
       resultsService.getSemanticRequest({
