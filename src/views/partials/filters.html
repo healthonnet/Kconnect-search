@@ -1,4 +1,4 @@
-<div class="col-sm-12" class="filters">
+<div class="col-sm-12 filters">
   <button class="btn" ng-class="{ 'btn-info': filters.seniors, 'btn-default': !filters.seniors }" ng-click="activateFilter('seniors')">{{ 'FIL_SENIOR' | translate }}</button>
   <button class="btn" ng-class="{ 'btn-info': filters.men, 'btn-default': !filters.men }" ng-click="activateFilter('men')">{{ 'FIL_MAN' | translate }}</button>
   <button class="btn" ng-class="{ 'btn-info': filters.women, 'btn-default': !filters.women }" ng-click="activateFilter('women')">{{ 'FIL_WOMAN' | translate }}</button>
@@ -11,4 +11,5 @@
   <button class="btn" ng-class="{ 'btn-info': filters.video, 'btn-default': !filters.video }" ng-click="activateFilter('video')">{{ 'FIL_VID' | translate }}</button>
   <button class="btn" ng-class="{ 'btn-info': filters.services, 'btn-default': !filters.services }" ng-click="activateFilter('services')">{{ 'FIL_PRODUCTS_AND_SERVICES' | translate }}</button>
   <button class="btn" ng-class="{ 'btn-info': filters.research, 'btn-default': !filters.researcg }" ng-click="activateFilter('research')">{{ 'FIL_RESEARCH' | translate }}</button>
+  <button class="btn" ng-class="{ 'btn-info': filters.all, 'btn-default': !filters.all }" ng-click="resetFilters()">{{ 'FIL_ALL_NO_EXCEPTIONS' | translate }}</button>
 </div>
