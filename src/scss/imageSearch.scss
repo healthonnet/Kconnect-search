@@ -6,3 +6,29 @@
 .v-fill {
   height: 100%;
 }
+.lightbox-nav {
+  height: auto !important;
+}
+.modal-content {
+  .row {
+    padding: 10px;
+  }
+  height: auto !important;
+  h1 {
+    margin: 0;
+  }
+  .lightbox-image-container {
+    .row {
+      .left {
+        position: absolute;
+        top:40%;
+        left: 10px;
+      }
+      .right {
+        position: absolute;
+        top: 40%;
+        right: 10px;
+      }
+    }
+  }
+}

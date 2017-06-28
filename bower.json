@@ -36,9 +36,11 @@
     "moment": "^2.17.1",
     "angular-local-storage": "^0.5.2",
     "angular-marked": "^1.2.2",
+    "angular-bootstrap-lightbox": "^0.12.0",
     "Stickyfill": "^1.1.4"
   },
   "resolutions": {
-    "angular": "^1.6.1"
+    "angular": "^1.6.1",
+    "angular-bootstrap": "^2.5.0"
   }
 }

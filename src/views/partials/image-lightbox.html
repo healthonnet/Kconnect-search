@@ -1,0 +1,26 @@
+<div class=modal-body ng-swipe-left=Lightbox.nextImage() ng-swipe-right=Lightbox.prevImage()>
+    <div class=lightbox-nav>
+        <div>
+            <h1>{{Lightbox.image.domain}}</h1>
+        </div>
+        <button class=close aria-hidden=true ng-click=$dismiss()>×</button>
+    </div>
+    <div class=lightbox-image-container>
+        <div class=lightbox-image-caption>
+            <span>{{Lightbox.image['alt_' + Lightbox.image.language]}}</span>
+        </div>
+        <div class="row">
+            <a class="btn btn-default left" ng-click=Lightbox.prevImage()>‹ {{'mobile-previous'|translate}}</a>
+            <a href="{{Lightbox.imageUrl}}"><img lightbox-src={{Lightbox.imageUrl}}></a>
+            <a class="btn btn-default right" ng-click=Lightbox.nextImage()>{{'mobile-next'|translate}} ›</a>
+
+        </div>
+        <div class="row">
+            <a href="{{Lightbox.imageUrl}}" target=_blank title="{{'OPEN_IN_NEW_TAB'|translate}}" class="btn btn-info">{{'OPEN_IN_NEW_TAB'|translate}}</a>
+            <a href="{{Lightbox.image.parentUrl}}" target=_blank title="{{'SEE_ORIGINAL_CONTEXT'|translate}}" class="btn bg-info">{{'SEE_ORIGINAL_CONTEXT'|translate}}</a>
+        </div>
+        <div class="row" ng-if="Lightbox.image['largePrecedingText_' + Lightbox.image.language]">
+            {{ Lightbox.image['largePrecedingText_' + Lightbox.image.language] }}
+        </div>
+    </div>
+</div>
