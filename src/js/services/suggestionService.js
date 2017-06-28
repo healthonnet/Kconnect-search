@@ -167,6 +167,8 @@ app.factory('SuggestionsService',
         params: {
           q: query,
         },
+      }).then(function(res) {
+        return parseSuggestions(res.data.results);
       });
     },
 
@@ -181,6 +183,8 @@ app.factory('SuggestionsService',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
+      }).then(function(res) {
+        return parseSuggestions(res.data.results);
       });
     },
 
@@ -193,6 +197,8 @@ app.factory('SuggestionsService',
           predicate: predicateUrl,
           q: query,
         },
+      }).then(function(res) {
+        return parseSuggestions(res.data.results);
       });
     },
 
@@ -260,4 +266,14 @@ function serializeArray(value, param) {
       encodeUriQuery(serializeValue(v)));
   });
   return parts;
+}
+
+function parseSuggestions(fields) {
+  return fields.map(function(field) {
+    return {
+      uri: field.uri.namespace +
+      field.uri.localName,
+      label: field.label,
+    };
+  });
 }
