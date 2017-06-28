@@ -71,8 +71,8 @@ app.factory('SuggestionsService',
       if (length === 0) {
         return {};
       }
-      length = length > 5 ? 5 : length;
-      for (var i = 0; i < 4; i++) {
+      length = length > 5 ? 4 : length;
+      for (var i = 0; i < length; i++) {
         array.push(res.spellcheck.suggestions[i][1][0][1].replace(
           /spellcheck_\w\w:"([^\"]+)"/gi,'$1'
         ));
