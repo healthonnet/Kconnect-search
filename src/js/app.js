@@ -15,7 +15,6 @@ var app = angular.module('App', [
   'LocalStorageModule',
   'bootstrapLightbox',
   'hc.marked',
-  'sticky',
 ])
   .directive('hideUntilGood', function() {
     return {
