@@ -60,12 +60,13 @@ app.constant('LANGUAGES', {
     name: 'English',
     flag: 'gb',
     key: 'en',
-    translatableTargets: ['cs', 'de', 'fr'],
+    translatableTargets: ['cs', 'de', 'fr', 'sv', 'es'],
   },
   es: {
     name: 'español',
     flag: 'es',
     key: 'es',
+    translatableTargets: ['en'],
   },
   hr: {
     name: 'hrvatski',
@@ -142,6 +143,7 @@ app.constant('LANGUAGES', {
     name: 'svenska',
     flag: 'se',
     key: 'sv',
+    translatableTargets: ['en'],
   },
 });
 app.constant('COOKIESCALE', {
