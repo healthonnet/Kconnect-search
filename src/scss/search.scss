@@ -243,9 +243,9 @@
   margin-bottom: 10px;
 }
 
-@media (min-width: '1200px') {
+@media (min-width: 1200px) {
   .screenshot-card {
-    width: 159px !important;
+    max-width: 159px;
     margin: 0 auto;
     display: block;
   }
