@@ -89,6 +89,52 @@ app.controller('SearchController',
         screenshotService.getScreenSrcFromUrl($scope.screenshot.url);
     };
 
+    $scope.treatDefinition = function(originalQuery, query) {
+      var request = query ? query : originalQuery;
+
+      disambiguatorService.getFatheadContent(request)
+        .then(function(res) {
+          if (!res.data.results[0]) {
+            throw new Error('No fathead');
+          }
+          $scope.fathead = extractDefinitionFromDisambiguator(originalQuery,
+            res.data, query);
+
+          // Check if result is misspelt
+          if (!$scope.fathead) {
+            throw new Error('No fathead');
+          }
+
+          // Translate fathead to User language
+          if ($scope.kConfig.lang !== 'en') {
+            translationService.translate(
+              $scope.fathead.content, 'en', $scope.kConfig.lang)
+              .then(function(data) {
+                $scope.fathead.content =
+                  data.translation;
+              });
+          }
+
+          if ($scope.fathead.content.length > 600) {
+            $scope.isDefinitionCollapsed = true;
+          }
+        })
+        .catch(err => {
+          suggestionsService.getAutocorrect(q, $scope.kConfig.lang)
+            .then(function(res) {
+              var results =
+                suggestionsService.cureAutocorrect(q, res.data);
+              if (results) {
+                $scope.fathead = {
+                  type: 'views/fatheads/suggestions.html',
+                  content: results,
+                };
+              }
+              return;
+            });
+        });
+    };
+
     $scope.getSuggestion = function(val, lang) {
       if (!lang) {
         lang = $scope.kConfig.lang;
@@ -111,10 +157,6 @@ app.controller('SearchController',
           array = array.concat(res.data);
           return array;
         });
-    };
-
-    $scope.handleResults = function() {
-
     };
 
     var q = $location.search().q;
@@ -142,49 +184,17 @@ app.controller('SearchController',
               var translation =
                 langTargetResponse.translation;
               $scope.translatedQueries[key] = translation;
+
+              if (key === 'en') {
+                $scope.treatDefinition(q, translation);
+              }
             });
           });
       }
 
-      disambiguatorService.getFatheadContent(q)
-        .then(function(res) {
-          if (!res.data.results[0]) {
-            throw new Error('No fathead');
-          }
-          $scope.fathead = extractDefinitionFromDisambiguator(q, res.data);
-
-          // Check if result is misspelt
-          if (!$scope.fathead) {
-            throw new Error('No fathead');
-          }
-
-          // Translate fathead to User language
-          if ($scope.kConfig.lang !== 'en') {
-            translationService.translate(
-              $scope.fathead.content, 'en', $scope.kConfig.lang)
-              .then(function(data) {
-                $scope.fathead.content =
-                    data.translation;
-              });
-          }
-
-          if ($scope.fathead.content.length > 600) {
-            $scope.isDefinitionCollapsed = true;
-          }
-        })
-        .catch(err => {
-          suggestionsService.getAutocorrect(q, $scope.kConfig.lang)
-            .then(function(res) {
-              var results = suggestionsService.cureAutocorrect(q, res.data);
-              if (results) {
-                $scope.fathead = {
-                  type: 'views/fatheads/suggestions.html',
-                  content: results,
-                };
-              }
-              return;
-            });
-        });
+      if (queryLanguage === 'en') {
+        $scope.treatDefinition(q);
+      }
 
       // Translated content request
       if (allowTranslate) {
@@ -356,9 +366,13 @@ var getColor = function(normalizedValue) {
   return '#00dd00';
 };
 
-var extractDefinitionFromDisambiguator = function(query, data) {
+var extractDefinitionFromDisambiguator = function(originalQuery, data, query) {
   if (!data || !data.results) {
     return null;
+  }
+
+  if (!query) {
+    query = originalQuery;
   }
 
   for (var i = 0; i < data.results.length; i++) {
@@ -379,7 +393,8 @@ var extractDefinitionFromDisambiguator = function(query, data) {
       }
     }
     if (foundExactLabel && definition && url && foundExactLabel) {
-      var cleanedQuery = query.replace(/^./, query.charAt(0).toUpperCase());
+      var cleanedQuery =
+        originalQuery.replace(/^./, originalQuery.charAt(0).toUpperCase());
       var list = definition.split(/[A-Z]+:/);
       var def = list[1] ? list[1] : list[0];
       def = def.replace(/,$/, '').toLowerCase();
