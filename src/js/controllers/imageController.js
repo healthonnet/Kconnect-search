@@ -2,9 +2,9 @@
 
 app
   .controller('ImageController',
-  ['$scope', '$location', 'ImageService',
+  ['$scope', '$location', 'ImageService', 'SuggestionsService',
     'angularGridInstance', '$translate', 'Lightbox',
-  function($scope, $location, $imageService,
+  function($scope, $location, $imageService, suggestionsService,
            angularGridInstance, $translate, Lightbox) {
     $scope.$emit('picturesActive');
     $scope.pageIcon = 'fa-picture-o';
@@ -64,6 +64,19 @@ app
       $scope.param = q;
       $scope.form.param = q;
       $scope.loadImages();
+
+      suggestionsService.getAutocorrect(q, $scope.kConfig.lang)
+        .then(function(res) {
+          var results = suggestionsService.cureAutocorrect(q, res.data);
+          if (results) {
+            $scope.fathead = {
+              type: 'views/fatheads/suggestions.html',
+              content: results,
+              customTarget: 'images',
+            };
+          }
+          return;
+        });
     } else {
       $scope.card = 'views/partials/card.html';
       $translate('IMAGE_CARD').then(function(res) {
