@@ -2,10 +2,10 @@
 
 app.controller('AppController',
   ['$scope', '$translate', 'LANGUAGES', 'VERSION',
-      'DEFAULT_PREFERENCES', '$location',
+      'DEFAULT_PREFERENCES', '$location', 'SuggestionsService',
       'localStorageService', 'ProvisuService',
   function($scope, $translate, lang, version,
-           defaultPreferences, $location,
+           defaultPreferences, $location, suggestionsService,
            localStorageService, provisuService) {
     $scope.init = function() {
       // Filters
@@ -39,6 +39,30 @@ app.controller('AppController',
         $scope.initProvisu();
       };
 
+    };
+
+    $scope.getSuggestion = function(val, lang) {
+      if (!lang) {
+        lang = $scope.kConfig.lang;
+      }
+
+      var array = [];
+      return suggestionsService.getSpellcheck(val, lang)
+        .then(function(res) {
+          var results = suggestionsService.cureSpellcheck(res.data);
+          if (results.length) {
+            array = array.concat(results);
+          }
+          return suggestionsService.getSuggestions(val, lang);
+        })
+        .then(function(res) {
+          array = array.concat(res.data.suggestions);
+          return suggestionsService.getQuestions(val, lang);
+        })
+        .then(function(res) {
+          array = array.concat(res.data);
+          return array;
+        });
     };
 
     // Private functions & Utils

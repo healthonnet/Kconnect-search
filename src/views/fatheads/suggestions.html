@@ -3,8 +3,9 @@
    <div class="container-fluid">
      <p class="fathead-suggestions">
        {{ 'DID_YOU_MEAN' | translate }}
-       <a href="/?q={{fathead.content}}">{{fathead.content}}</a>
+       <a href="/{{fathead.customTarget}}?q={{fathead.content}}">{{fathead.content}}</a>
        ?
      </p>
    </div>
  </div>
+</div>
