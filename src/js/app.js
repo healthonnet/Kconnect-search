@@ -83,10 +83,12 @@ var app = angular.module('App', [
         templateUrl: 'views/prosearch.html',
         controller: 'ProController',
       })
+      /*
+       Disable settings view
       .when('/settings', {
         templateUrl: 'views/settings.html',
         controller: 'SettingsController',
-      })
+      })*/
       .when('/language', {
         templateUrl: 'views/language.html',
         controller: 'LanguageController',
