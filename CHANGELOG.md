@@ -1,6 +1,21 @@
 Kconnect-search Changelog
 =========================
 
+v0.1.2 / 2017-07-24
+-------------------
+
+* feat: cookies informations
+* feat: search pro
+* feat: images informations
+* feat: suggestions on other services
+* fix:  improve accessibility
+* fix:  improve translation service
+* fix:  design improvements 
+* fix:  improve definition service
+* fix:  improve UX
+* chore: edit legal-notice
+* [More info here](https://github.com/healthonnet/Kconnect-search/issues?q=is%3Aissue+is%3Aclosed+milestone%3Av0.1.2)
+
 v0.1.1 / 2017-02-22
 -------------------
 
