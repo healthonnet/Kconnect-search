@@ -5,7 +5,8 @@
   <div class="col-xs-9 col-xs-offset-2">
     <div class="row">
       <div class="col-md-4 col-sm-6" ng-repeat="app in apps">
-        <div class="app" ng-class="{'bg-info': app.pro}">
+        <div class="app bg-info">
+          <i ng-if="app.pro == true" class="doctor-label fa fa-stethoscope"></i>
           <div class="icon-wrapper" ng-mouseleave="app.showModal = false" >
             <div class="img-wrapper">
             <img class="img-responsive" ng-src="{{app.icon}}"
