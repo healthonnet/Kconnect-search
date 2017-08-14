@@ -7,8 +7,10 @@
       <div class="col-md-4 col-sm-6" ng-repeat="app in apps">
         <div class="app" ng-class="{'bg-info': app.pro}">
           <div class="icon-wrapper" ng-mouseleave="app.showModal = false" >
+            <div class="img-wrapper">
             <img class="img-responsive" ng-src="{{app.icon}}"
                  ng-mouseover="app.showModal = true" alt="{{app.title}}" title="{{app.title}}">
+            </div>
             <div class="icon-modal" ng-show="app.showModal">
               {{app.description}}
             </div>
