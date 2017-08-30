@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ApplicationsController', function($scope) {
+app.controller('ApplicationsController', function($http, $scope) {
   $scope.$emit('appsActive');
   $scope.pageIcon = 'fa-mobile';
   $scope.pageTitleColor = 'text-dark-red';
@@ -10,6 +10,10 @@ app.controller('ApplicationsController', function($scope) {
   $scope.apps = mockApps;
 
   $scope.card = mockAppsCard;
+
+  $http.get('images/mock-app/apps.json').then(function(data) {
+    $scope.apps = data.data;
+  });
 });
 
 var mockApps = [{

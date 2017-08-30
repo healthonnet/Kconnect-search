@@ -5,8 +5,34 @@
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
+    .doctor-label {
+      position: absolute;
+      top:10px;
+      left: 24px;
+      padding: 5px;
+      background-color: red;
+      font-size: 1.5em;
+      z-index:2;
+      color: white;
+      border-radius: 10px 0 0;
+
+    }
     .icon-wrapper {
       position: relative;
+      .img-wrapper{
+        width: 100%;
+        padding-bottom: 100%; /* your aspect ratio here! */
+        position: relative;
+        img{
+          max-width: 100%;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          max-height: 100%;
+        }
+      }
       .icon-modal {
         position: absolute;
         top: 0;
@@ -29,6 +55,7 @@
     }
     h5 {
       text-align: center;
+      min-height:2.5em;
     }
     .col-xs-6 {
       text-align: center;
