@@ -97,6 +97,9 @@ var app = angular.module('App', [
         templateUrl: 'views/apps.html',
         controller: 'ApplicationsController',
       })
+      .when('/extension', {
+        templateUrl: 'views/about.html',
+      })
       .otherwise({
         redirectTo: function() {
           return '/' + location.search;
