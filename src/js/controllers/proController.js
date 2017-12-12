@@ -12,6 +12,11 @@ app
     $scope.$emit('proActive');
     $scope.pageIcon = 'fa-user-md';
     $scope.pageTitleColor = 'text-dark-green';
+
+    angular.element(document).ready(function() {
+      document.getElementById('proSubject').focus();
+    });
+
     $scope.clearField = function(idField) {
       var element = document.getElementById(idField);
       element.blur();

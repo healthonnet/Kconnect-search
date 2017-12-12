@@ -11,6 +11,10 @@ app
     $scope.pageTitleColor = 'text-dark-purple';
     $scope.showFilters = false;
 
+    angular.element(document).ready(function() {
+      document.getElementById('middlesearchinput').focus();
+    });
+
     function parseImageResults(res) {
       res.data.grouped.contentMD5.groups.forEach(function(group) {
         group.doclist.docs[0].actualHeight  = group.doclist.docs[0].height;

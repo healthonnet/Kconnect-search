@@ -10,7 +10,9 @@ app
     $scope.pageTitleColor = 'text-dark-orange';
     $scope.form = {};
     $scope.showFilters = false;
-
+    angular.element(document).ready(function() {
+      document.getElementById('middlesearchinput').focus();
+    });
     $scope.submit = function() {
       if ($scope.form.param !== undefined) {
         // Prevent useless submit (same request)
