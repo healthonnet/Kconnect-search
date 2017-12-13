@@ -31,6 +31,10 @@ app.controller('SearchController',
       }
     });
 
+    angular.element(document).ready(function() {
+      document.getElementById('middlesearchinput').focus();
+    });
+
     $scope.submit = function(targetlang) {
       if ($scope.form.param !== undefined) {
         // Prevent useless submit (same request)
