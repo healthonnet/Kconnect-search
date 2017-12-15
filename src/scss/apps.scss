@@ -1,5 +1,13 @@
 .apps {
   margin-top: 50px;
+  @media screen and (max-width:399px) {
+    .col-xs-6 {
+      width: 100%;
+      span {
+        display: inline!important;
+      }
+    }
+  }
   .app {
     border: solid silver 1px;
     border-radius: 10px;
