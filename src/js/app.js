@@ -75,10 +75,11 @@ var app = angular.module('App', [
         templateUrl: 'views/image.html',
         controller: 'ImageController',
       })
+      /* Temporary disabled
       .when('/news', {
         templateUrl: 'views/news.html',
         controller: 'NewsController',
-      })
+      }) */
       .when('/pro', {
         templateUrl: 'views/prosearch.html',
         controller: 'ProController',

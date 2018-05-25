@@ -12,7 +12,7 @@ app.constant('AUTOCORRECT_SERVICE_URL', '/hon-search/spell');
 app.constant('QUESTIONS_SERVICE_URL', '/people-also-ask/questions');
 app.constant('SCREENSHOT_SERVICE_URL', 'http://everyone.khresmoi.eu:3000');
 app.constant('MAXIMUM_FREQUENCY_RATIO', 0.01);
-app.constant('VERSION', 'rel-0.1.4');
+app.constant('VERSION', 'rel-0.1.5');
 app.constant('FONT_SIZE_SPAN', 4);
 app.constant('DEFAULT_FONT_SIZE', 14);
 app.constant('DEFAULT_PREFERENCES', {
