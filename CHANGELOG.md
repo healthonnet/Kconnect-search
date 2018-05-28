@@ -1,6 +1,20 @@
 Kconnect-search Changelog
 =========================
 
+v0.1.5 / 2018-05-28
+-------------------
+
+- chore: hide news part
+- chore: edit legal-notice
+- chore: edit privacy-policy 
+- fix: relative links
+
+v0.1.4 / 2018-01-10
+-------------------
+- chore: content typos
+- feat: input auto-focus
+- fix: some css issues
+
 
 v0.1.3 / 2017-08-30
 -------------------
