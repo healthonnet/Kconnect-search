@@ -1,6 +1,6 @@
 {
   "name": "Kconnect-search",
-  "version": "0.1.2",
+  "version": "0.1.6",
   "description": "Kconnect-search engine front-end",
   "main": "index.js",
   "scripts": {
