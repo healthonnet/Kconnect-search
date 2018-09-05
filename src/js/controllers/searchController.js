@@ -229,11 +229,9 @@ app.controller('SearchController',
       $scope.translateCard();
     }
 
-    $scope.$on('switchLang', function(event, args) {
+    $scope.$on('switchLang', function() {
       $scope.translateCard();
     });
-
-
 
     $scope.changePage = function() {
       var queryLanguage = $scope.targetLang || $scope.kConfig.lang;
