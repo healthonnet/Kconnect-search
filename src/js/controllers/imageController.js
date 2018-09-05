@@ -15,6 +15,10 @@ app
       document.getElementById('middlesearchinput').focus();
     });
 
+    $scope.$on('switchLang', function() {
+      $scope.translateCard();
+    });
+
     function parseImageResults(res) {
       res.data.grouped.contentMD5.groups.forEach(function(group) {
         group.doclist.docs[0].actualHeight  = group.doclist.docs[0].height;
@@ -35,6 +39,12 @@ app
           parseImageResults(res);
           $scope.page++;
         });
+    };
+
+    $scope.translateCard = function() {
+      $translate('IMAGE_CARD').then(function(res) {
+        $scope.cardcontent = res;
+      });
     };
 
     $scope.angularGridOptions = {
@@ -83,8 +93,6 @@ app
         });
     } else {
       $scope.card = 'views/partials/card.html';
-      $translate('IMAGE_CARD').then(function(res) {
-        $scope.cardcontent = res;
-      });
+      $scope.translateCard();
     }
   },]);

@@ -1,6 +1,6 @@
 {
   "name": "Kconnect-search",
-  "version": "0.1.2",
+  "version": "0.1.6",
   "description": "Kconnect-search engine front-end",
   "main": "index.js",
   "scripts": {
@@ -12,41 +12,41 @@
   "author": "Health On the Net",
   "license": "MIT",
   "dependencies": {
-    "babel-core": "^6.21.0",
+    "babel-core": "^6.26.3",
     "babel-preset-es2015": "^6.18.0",
-    "bower": "^1.8.0",
-    "browser-sync": "^2.18.6",
+    "bower": "^1.8.4",
+    "browser-sync": "^2.24.7",
     "del": "^2.2.2",
-    "express": "^4.14.1",
+    "express": "^4.16.3",
     "gulp": "^3.9.1",
     "gulp-batch": "^1.0.5",
     "gulp-bower": "0.0.13",
     "gulp-cache": "^0.4.5",
-    "gulp-connect": "^5.0.0",
-    "gulp-decompress": "^2.0.1",
+    "gulp-connect": "^5.6.1",
+    "gulp-decompress": "^2.0.2",
     "gulp-download": "0.0.1",
     "gulp-html-replace": "^1.6.2",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.1.1",
-    "gulp-jscs": "^4.0.0",
-    "gulp-jshint": "^2.0.4",
+    "gulp-jscs": "^4.1.0",
+    "gulp-jshint": "^2.1.0",
     "gulp-live-server": "0.0.30",
     "gulp-load-plugins": "^1.4.0",
     "gulp-minify-css": "^1.2.4",
     "gulp-replace": "^0.5.4",
-    "gulp-sass": "^3.0.0",
+    "gulp-sass": "^3.2.1",
     "gulp-serve": "^1.4.0",
-    "gulp-sourcemaps": "^2.2.3",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^2.0.0",
-    "gulp-useref": "^3.1.2",
+    "gulp-useref": "^3.1.5",
     "gulp-util": "^3.0.8",
     "gulp-war": "^0.1.4",
     "gulp-watch": "^4.3.11",
-    "gulp-zip": "^4.0.0",
+    "gulp-zip": "^4.2.0",
     "http-proxy-middleware": "^0.17.3",
-    "jshint": "^2.9.4"
+    "jshint": "^2.9.6"
   },
   "devDependencies": {
-    "protractor": "^5.1.1"
+    "protractor": "^5.4.0"
   }
 }

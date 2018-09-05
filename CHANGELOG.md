@@ -1,6 +1,13 @@
 Kconnect-search Changelog
 =========================
 
+v0.1.6 / 2018-09-05
+-------------------
+
+- fix: clean translation keys
+- fix: card translations
+- feat: extend switchLang event
+
 v0.1.5 / 2018-05-28
 -------------------
 

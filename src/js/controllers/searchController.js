@@ -163,6 +163,12 @@ app.controller('SearchController',
         });
     };
 
+    $scope.translateCard = function() {
+      $translate('SEARCH_CARD').then(function(res) {
+        $scope.cardcontent = res;
+      });
+    };
+
     var q = $location.search().q;
     var section = $location.search().section;
     var filters = $location.search().filters;
@@ -220,10 +226,12 @@ app.controller('SearchController',
       });
     } else {
       $scope.card = 'views/partials/card.html';
-      $translate('SEARCH_CARD').then(function(res) {
-        $scope.cardcontent = res;
-      });
+      $scope.translateCard();
     }
+
+    $scope.$on('switchLang', function() {
+      $scope.translateCard();
+    });
 
     $scope.changePage = function() {
       var queryLanguage = $scope.targetLang || $scope.kConfig.lang;
