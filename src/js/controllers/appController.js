@@ -70,6 +70,10 @@ app.controller('AppController',
       $translate.use(newlang);
       $scope.lang = lang[newlang];
       $scope.kConfig.lang = $scope.lang.key;
+
+      // Extend Switch lang event
+      $scope.$emit('switchLang');
+
     };
 
     function registerEvents() {
