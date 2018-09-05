@@ -9,8 +9,6 @@ app.controller('ApplicationsController', function($http, $scope) {
 
   $scope.apps = mockApps;
 
-  $scope.card = mockAppsCard;
-
   $http.get('images/mock-app/apps.json').then(function(data) {
     $scope.apps = data.data;
   });
@@ -116,9 +114,3 @@ var mockApps = [{
   description: 'soon',
   pro: false,
 },];
-
-var mockAppsCard = {
-  url: 'views/partials/card.html',
-  title: 'Coming soon',
-  text: '<p>Search for medical apps</p>',
-};
